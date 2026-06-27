@@ -64,6 +64,8 @@
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2000; justify-content: center; align-items: center; }
         .modal .modal-box { background: white; padding: 25px; border-radius: 15px; max-width: 500px; width: 90%; max-height: 90vh; overflow-y: auto; }
         .modal h3 { margin-bottom: 15px; color: #1e3c72; }
+        .connection-status { display: inline-block; padding: 4px 14px; border-radius: 30px; font-size: 13px; font-weight: 600; background: #e8f0e8; color: #2d6a2d; white-space: nowrap; }
+        .connection-status.offline { background: #f0e8e8; color: #8a2d2d; }
     </style>
 </head>
 <body>
@@ -77,6 +79,7 @@
                 <p><i class="fas fa-users"></i> إدارة العملاء والديون | <span id="totalCustomers">0</span> عميل</p>
             </div>
             <div style="display: flex; gap: 10px; align-items: center;">
+                <span id="statusBadge" class="connection-status">🔄 جاري الاتصال...</span>
                 <span id="unsavedIndicator" class="badge-unsaved"><i class="fas fa-exclamation-triangle"></i> تغييرات غير محفوظة</span>
                 <button class="btn-save-all" id="saveAllBtn" onclick="saveAllChanges()"><i class="fas fa-save"></i> حفظ الآن</button>
             </div>
@@ -159,19 +162,22 @@
             <h3><i class="fas fa-cog"></i> إعدادات التطبيق</h3>
             <div class="form-group">
                 <label><i class="fas fa-key"></i> رمز GitHub (Token)</label>
-                <input type="text" id="settingsToken" value="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" dir="ltr">
+                <input type="text" id="settingsToken" dir="ltr">
             </div>
             <div class="form-group">
-                <label><i class="fas fa-folder"></i> المستودع</label>
-                <input type="text" id="settingsRepo" value="raedalzubaidi21-source/my-debt-app">
+                <label><i class="fas fa-folder"></i> المستودع (صاحب/اسم)</label>
+                <input type="text" id="settingsRepo" dir="ltr" placeholder="username/repo">
             </div>
             <div class="form-group">
                 <label><i class="fas fa-file"></i> اسم الملف</label>
-                <input type="text" id="settingsFile" value="data.json">
+                <input type="text" id="settingsFile" dir="ltr" placeholder="data.json">
             </div>
             <button class="btn btn-primary" onclick="updateSettings()"><i class="fas fa-save"></i> تحديث الإعدادات</button>
             <hr style="margin: 25px 0;">
-            <button class="btn btn-danger" onclick="if(confirm('مسح جميع البيانات محلياً؟')){localStorage.clear();location.reload();}"><i class="fas fa-trash"></i> مسح البيانات المحلية</button>
+            <button class="btn btn-danger" onclick="if(confirm('مسح جميع البيانات المحلية؟')){localStorage.clear();location.reload();}"><i class="fas fa-trash"></i> مسح البيانات المحلية</button>
+            <button class="btn btn-secondary" onclick="exportBackup()"><i class="fas fa-download"></i> تحميل نسخة احتياطية</button>
+            <button class="btn btn-secondary" onclick="document.getElementById('fileInput').click()"><i class="fas fa-upload"></i> استعادة نسخة</button>
+            <input type="file" id="fileInput" accept=".json" style="display:none;" onchange="importBackup(event)">
         </div>
     </div>
 </div>
@@ -265,15 +271,15 @@
 
 <script>
     // ================================================================
-    // 🔐 إعدادات GitHub
+    // 🔐 إعدادات GitHub (افتراضية، ستُقرأ من localStorage)
     // ================================================================
     const DEFAULT_TOKEN = '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';
     const DEFAULT_REPO = 'raedalzubaidi21-source/my-debt-app';
     const DEFAULT_FILE = 'data.json';
 
     let GITHUB_TOKEN = localStorage.getItem('debt_token') || DEFAULT_TOKEN;
-    let REPO_OWNER = localStorage.getItem('debt_repo') || DEFAULT_REPO.split('/')[0];
-    let REPO_NAME = localStorage.getItem('debt_repo') || DEFAULT_REPO.split('/')[1];
+    let REPO_OWNER = localStorage.getItem('debt_repo') ? localStorage.getItem('debt_repo').split('/')[0] : DEFAULT_REPO.split('/')[0];
+    let REPO_NAME = localStorage.getItem('debt_repo') ? localStorage.getItem('debt_repo').split('/')[1] : DEFAULT_REPO.split('/')[1];
     let DATA_FILE = localStorage.getItem('debt_file') || DEFAULT_FILE;
 
     // ================================================================
@@ -290,7 +296,7 @@
     let quickDebtClientId = null;
 
     // ================================================================
-    // دوال GitHub API
+    // دوال GitHub API (المعدلة)
     // ================================================================
 
     async function loadFromGitHub() {
@@ -304,6 +310,7 @@
             });
 
             if (response.status === 404) {
+                // الملف غير موجود، نعيد بيانات فارغة
                 return { customers: [], debts: [] };
             }
 
@@ -321,45 +328,59 @@
         }
     }
 
+    // دالة مساعدة لتشفير النص إلى Base64 بطريقة آمنة
+    function encodeToBase64(str) {
+        const encoder = new TextEncoder();
+        const dataBytes = encoder.encode(str);
+        let binary = '';
+        for (let i = 0; i < dataBytes.length; i++) {
+            binary += String.fromCharCode(dataBytes[i]);
+        }
+        return btoa(binary);
+    }
+
     async function saveToGitHub(dataToSave) {
         if (isSaving) return false;
         isSaving = true;
         document.getElementById('saveAllBtn').disabled = true;
+        document.getElementById('saveAllBtn').innerHTML = '<span class="spinner"></span> جاري الحفظ...';
 
         try {
             const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${DATA_FILE}`;
+            
+            // 1. جلب sha الحالي (إذا كان الملف موجوداً)
             let sha = currentSha;
-
             if (!sha) {
-                const getResponse = await fetch(url, {
+                const getRes = await fetch(url, {
                     headers: {
                         'Authorization': `token ${GITHUB_TOKEN}`,
                         'Accept': 'application/vnd.github.v3+json'
                     }
                 });
-                if (getResponse.ok) {
-                    const result = await getResponse.json();
+                if (getRes.ok) {
+                    const result = await getRes.json();
                     sha = result.sha;
                     currentSha = sha;
+                } else if (getRes.status === 404) {
+                    // الملف غير موجود، sha غير مطلوب
+                    sha = undefined;
+                } else {
+                    throw new Error(`فشل جلب الملف: ${getRes.status}`);
                 }
             }
 
+            // 2. تحويل البيانات إلى JSON ثم Base64
             const jsonString = JSON.stringify(dataToSave, null, 2);
-            const encoder = new TextEncoder();
-            const dataBytes = encoder.encode(jsonString);
-            let binary = '';
-            for (let i = 0; i < dataBytes.length; i++) {
-                binary += String.fromCharCode(dataBytes[i]);
-            }
-            const content = btoa(binary);
+            const content = encodeToBase64(jsonString);
 
+            // 3. إرسال طلب PUT
             const payload = {
                 message: `تحديث البيانات - ${new Date().toLocaleString('ar-EG')}`,
-                content: content,
-                sha: sha || undefined
+                content: content
             };
+            if (sha) payload.sha = sha;
 
-            const putResponse = await fetch(url, {
+            const putRes = await fetch(url, {
                 method: 'PUT',
                 headers: {
                     'Authorization': `token ${GITHUB_TOKEN}`,
@@ -369,44 +390,38 @@
                 body: JSON.stringify(payload)
             });
 
-            if (!putResponse.ok) {
-                const errorData = await putResponse.json();
-                throw new Error(errorData.message || `HTTP ${putResponse.status}`);
+            if (!putRes.ok) {
+                const errData = await putRes.json();
+                throw new Error(errData.message || `HTTP ${putRes.status}`);
             }
 
-            const result = await putResponse.json();
+            const result = await putRes.json();
             currentSha = result.content.sha;
             isOnline = true;
             hasUnsaved = false;
             document.getElementById('unsavedIndicator').style.display = 'none';
             updateStatusBadge();
-            console.log('✅ تم حفظ البيانات على GitHub بنجاح!');
             showStatus('✅ تم حفظ البيانات على GitHub', 'success');
+            console.log('✅ تم الحفظ بنجاح، SHA الجديد:', currentSha);
             return true;
 
         } catch (error) {
-            console.error('❌ فشل الحفظ على GitHub:', error.message);
+            console.error('❌ فشل الحفظ:', error.message);
             isOnline = false;
             updateStatusBadge();
+            // حفظ نسخة احتياطية محلياً
             localStorage.setItem('github_backup', JSON.stringify(dataToSave));
-            showStatus('⚠️ فشل الحفظ على GitHub: ' + error.message, 'error');
+            showStatus('⚠️ فشل الحفظ: ' + error.message, 'error');
             return false;
         } finally {
             isSaving = false;
             document.getElementById('saveAllBtn').disabled = false;
+            document.getElementById('saveAllBtn').innerHTML = '<i class="fas fa-save"></i> حفظ الآن';
         }
-    }
-
-    async function saveAllChanges() {
-        if (!hasUnsaved) {
-            showStatus('ℹ️ لا توجد تغييرات للحفظ', 'info');
-            return;
-        }
-        await saveToGitHub(data);
     }
 
     // ================================================================
-    // دوال التخزين المحلي
+    // دوال التخزين المحلي والنسخ الاحتياطي
     // ================================================================
 
     function saveLocal() {
@@ -426,18 +441,25 @@
         document.getElementById('unsavedIndicator').style.display = 'inline-block';
     }
 
+    async function saveAllChanges() {
+        if (!hasUnsaved) {
+            showStatus('ℹ️ لا توجد تغييرات للحفظ', 'info');
+            return;
+        }
+        await saveToGitHub(data);
+    }
+
     // ================================================================
     // حالة الاتصال
     // ================================================================
 
     function updateStatusBadge() {
         const badge = document.getElementById('statusBadge');
-        if (!badge) return;
         if (isOnline) {
             badge.innerHTML = '🟢 متصل';
             badge.className = 'connection-status';
         } else {
-            badge.innerHTML = '🔴 غير متصل';
+            badge.innerHTML = '🔴 غير متصل (حفظ محلي)';
             badge.className = 'connection-status offline';
         }
     }
@@ -492,7 +514,6 @@
             return;
         }
 
-        // تحديث الإحصائيات
         const totalBalance = filtered.reduce((sum, c) => sum + getCustomerBalance(c.id), 0);
         document.getElementById('clientsStats').innerHTML = 
             `📊 ${filtered.length} عميل - إجمالي الرصيد: ${formatCurrency(totalBalance)}`;
@@ -530,7 +551,7 @@
         document.getElementById('newClientName').focus();
     }
 
-    function addClient() {
+    async function addClient() {
         const name = document.getElementById('newClientName').value.trim();
         if (!name) {
             showStatus('❌ أدخل اسم العميل', 'error');
@@ -548,7 +569,7 @@
         markUnsaved();
         refreshAll();
         showStatus(`✅ تم إضافة العميل "${name}"`, 'success');
-        saveAllChanges();
+        await saveToGitHub(data);
     }
 
     function editClient(id) {
@@ -560,7 +581,7 @@
         document.getElementById('editClientModal').style.display = 'flex';
     }
 
-    function confirmEditClient() {
+    async function confirmEditClient() {
         const name = document.getElementById('editClientName').value.trim();
         if (!name) {
             showStatus('❌ أدخل اسم العميل', 'error');
@@ -573,7 +594,7 @@
             markUnsaved();
             refreshAll();
             showStatus('✅ تم تحديث العميل', 'success');
-            saveAllChanges();
+            await saveToGitHub(data);
         }
         document.getElementById('editClientModal').style.display = 'none';
         editingClientId = null;
@@ -590,7 +611,7 @@
         document.getElementById('deleteClientModal').style.display = 'flex';
     }
 
-    function confirmDeleteClient() {
+    async function confirmDeleteClient() {
         if (!deletingClientId) return;
         data.customers = data.customers.filter(c => c.id !== deletingClientId);
         data.debts = data.debts.filter(d => d.customerId !== deletingClientId);
@@ -599,14 +620,14 @@
         markUnsaved();
         refreshAll();
         showStatus('✅ تم حذف العميل وجميع ديونه', 'success');
-        saveAllChanges();
+        await saveToGitHub(data);
     }
 
     // ================================================================
     // إدارة الديون
     // ================================================================
 
-    function addDebt() {
+    async function addDebt() {
         const customerId = document.getElementById('debtCustomerSelect').value;
         if (!customerId) {
             showStatus('❌ اختر العميل', 'error');
@@ -638,7 +659,7 @@
         markUnsaved();
         refreshAll();
         showStatus('✅ تم تسجيل الدين', 'success');
-        saveAllChanges();
+        await saveToGitHub(data);
     }
 
     function openQuickDebt(clientId) {
@@ -651,7 +672,7 @@
         document.getElementById('quickDebtAmount').focus();
     }
 
-    function confirmQuickDebt() {
+    async function confirmQuickDebt() {
         if (!quickDebtClientId) return;
         const amount = parseFloat(document.getElementById('quickDebtAmount').value);
         if (!amount || amount <= 0) {
@@ -676,7 +697,7 @@
         markUnsaved();
         refreshAll();
         showStatus('✅ تم تسجيل الدين', 'success');
-        saveAllChanges();
+        await saveToGitHub(data);
     }
 
     // ================================================================
@@ -742,7 +763,7 @@
         document.getElementById('payModal').style.display = 'flex';
     }
 
-    function confirmPay() {
+    async function confirmPay() {
         if (!payingDebtId) return;
         const debt = data.debts.find(d => d.id === payingDebtId);
         if (debt) {
@@ -750,19 +771,67 @@
             markUnsaved();
             refreshAll();
             showStatus('✅ تم تسجيل الدين كمدفوع', 'success');
-            saveAllChanges();
+            await saveToGitHub(data);
         }
         document.getElementById('payModal').style.display = 'none';
         payingDebtId = null;
     }
 
-    function deleteDebt(id) {
+    async function deleteDebt(id) {
         if (!confirm('هل أنت متأكد من حذف هذا الدين؟')) return;
         data.debts = data.debts.filter(d => d.id !== id);
         markUnsaved();
         refreshAll();
         showStatus('✅ تم حذف الدين', 'success');
-        saveAllChanges();
+        await saveToGitHub(data);
+    }
+
+    // ================================================================
+    // النسخ الاحتياطي والاستعادة
+    // ================================================================
+
+    function exportBackup() {
+        const json = JSON.stringify(data, null, 2);
+        const blob = new Blob([json], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        const now = new Date();
+        const dateStr = now.getFullYear() + '-' + String(now.getMonth()+1).padStart(2,'0') + '-' + String(now.getDate()).padStart(2,'0');
+        a.download = `debt_backup_${dateStr}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        showStatus('✅ تم تحميل النسخة الاحتياطية', 'success');
+    }
+
+    function importBackup(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = async function(e) {
+            try {
+                const imported = JSON.parse(e.target.result);
+                if (imported.customers && imported.debts) {
+                    if (confirm('سيتم استبدال جميع البيانات الحالية. هل أنت متأكد؟')) {
+                        data.customers = imported.customers;
+                        data.debts = imported.debts;
+                        saveLocal();
+                        markUnsaved();
+                        refreshAll();
+                        showStatus('✅ تم استعادة البيانات', 'success');
+                        await saveToGitHub(data);
+                    }
+                } else {
+                    showStatus('❌ هذا الملف غير صالح', 'error');
+                }
+            } catch (error) {
+                showStatus('❌ حدث خطأ في قراءة الملف', 'error');
+            }
+        };
+        reader.readAsText(file);
+        event.target.value = '';
     }
 
     // ================================================================
@@ -770,10 +839,7 @@
     // ================================================================
 
     function refreshAll() {
-        // تحديث قائمة العملاء
         renderClients();
-
-        // تحديث قائمة العملاء في إضافة الدين
         const debtSelect = document.getElementById('debtCustomerSelect');
         if (debtSelect) {
             const val = debtSelect.value;
@@ -783,14 +849,8 @@
             });
             debtSelect.value = val;
         }
-
-        // تحديث جميع الديون
         renderAllDebts();
-
-        // تحديث عدد العملاء
         document.getElementById('totalCustomers').innerText = data.customers.length;
-
-        // تحديث حالة الاتصال
         updateStatusBadge();
     }
 
@@ -873,10 +933,10 @@
 
     async function init() {
         // تحميل الإعدادات من localStorage
-        GITHUB_TOKEN = localStorage.getItem('debt_token') || DEFAULT_TOKEN;
         const repo = localStorage.getItem('debt_repo') || DEFAULT_REPO;
         REPO_OWNER = repo.split('/')[0];
         REPO_NAME = repo.split('/')[1];
+        GITHUB_TOKEN = localStorage.getItem('debt_token') || DEFAULT_TOKEN;
         DATA_FILE = localStorage.getItem('debt_file') || DEFAULT_FILE;
 
         // تعبئة حقول الإعدادات
@@ -894,7 +954,7 @@
             } else {
                 loadLocal();
                 isOnline = false;
-                // إذا كانت البيانات فارغة، أضف بعض العملاء الافتراضيين (من القائمة القديمة)
+                // إذا كانت البيانات فارغة، أضف بعض العملاء الافتراضيين
                 if (data.customers.length === 0) {
                     const defaultNames = [
                         "اخو حسنين", "شيخ عباس الطيب", "عباس رخيت", "عبدالله الحلاق",
@@ -907,19 +967,14 @@
                             phone: ''
                         });
                     });
-                    markUnsaved();
+                    saveLocal();
+                    // محاولة رفع العملاء الافتراضيين إلى GitHub
                     await saveToGitHub(data);
                 }
             }
         } catch (e) {
             loadLocal();
             isOnline = false;
-        }
-
-        // حفظ محلياً ورفع إذا كانت هناك تغييرات غير محفوظة
-        saveLocal();
-        if (hasUnsaved) {
-            await saveToGitHub(data);
         }
 
         // تحديث الواجهة
@@ -939,7 +994,7 @@
     // بدء التطبيق
     init();
 
-    // إضافة مستمع لحفظ تلقائي عند الإغلاق
+    // حفظ تلقائي عند إغلاق الصفحة
     window.addEventListener('beforeunload', function() {
         if (hasUnsaved) {
             saveToGitHub(data);
