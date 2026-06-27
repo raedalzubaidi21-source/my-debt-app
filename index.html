@@ -6,6 +6,7 @@
     <title>دفتر الديون - مع الحفظ التلقائي على GitHub</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        /* جميع الأنماط كما هي، لم تتغير */
         * {
             margin: 0;
             padding: 0;
@@ -543,7 +544,7 @@
     let syncInProgress = false;
 
     // ================================================================
-    // دوال GitHub API
+    // دوال GitHub API (مع تجنب استخدام unescape لتجاوز مشكلة CSP)
     // ================================================================
 
     async function loadFromGitHub() {
@@ -566,6 +567,7 @@
 
             const result = await response.json();
             currentSha = result.sha;
+            // فك تشفير المحتوى (Base64) بشكل آمن
             const content = atob(result.content);
             return JSON.parse(content);
         } catch (error) {
@@ -597,7 +599,16 @@
                 }
             }
 
-            const content = btoa(unescape(encodeURIComponent(JSON.stringify(dataToSave, null, 2))));
+            // تحويل النص إلى Base64 بشكل آمن (بدون unescape أو encodeURIComponent التي قد تسبب مشاكل CSP)
+            const jsonString = JSON.stringify(dataToSave, null, 2);
+            // استخدام TextEncoder لتحويل النص إلى Uint8Array ثم إلى Base64
+            const encoder = new TextEncoder();
+            const dataBytes = encoder.encode(jsonString);
+            let binaryString = '';
+            for (let i = 0; i < dataBytes.length; i++) {
+                binaryString += String.fromCharCode(dataBytes[i]);
+            }
+            const content = btoa(binaryString);
 
             const payload = {
                 message: `تحديث البيانات - ${new Date().toLocaleString('ar-EG')}`,
@@ -708,7 +719,7 @@
     }
 
     // ================================================================
-    // دوال التطبيق الأساسية
+    // دوال التطبيق الأساسية (جميعها كما هي)
     // ================================================================
 
     function getCustomerName(id) {
