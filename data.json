@@ -888,16 +888,6 @@
       "createdAt": "2026-06-27T17:19:37.890Z"
     },
     {
-      "id": "mqwlaos4zeyf",
-      "customerId": "mqwlah109mss",
-      "type": "li",
-      "amount": 35000,
-      "dueDate": "2026-06-27",
-      "note": "",
-      "paid": true,
-      "createdAt": "2026-06-27T16:43:59.092Z"
-    },
-    {
       "id": "mqwla665ujc5",
       "customerId": "mqwl9zo049x9",
       "type": "li",
