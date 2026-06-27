@@ -964,7 +964,7 @@
       "amount": 30000,
       "dueDate": "2026-06-27",
       "note": "",
-      "paid": false,
+      "paid": true,
       "createdAt": "2026-06-27T14:48:18.714Z"
     },
     {
