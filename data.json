@@ -806,5 +806,16 @@
       "phone": ""
     }
   ],
-  "debts": []
+  "debts": [
+    {
+      "id": "mqwdyazhblds",
+      "customerId": "mqwdxmqlkibn",
+      "type": "li",
+      "amount": 35000,
+      "dueDate": "2026-06-27",
+      "note": "",
+      "paid": false,
+      "createdAt": "2026-06-27T13:18:24.038Z"
+    }
+  ]
 }
