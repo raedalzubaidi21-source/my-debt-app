@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دفتر الديون - الإدارة المتكاملة</title>
+    <title>دفتر الديون</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -14,190 +14,135 @@
         .header h1 { font-size: 28px; display: flex; align-items: center; gap: 10px; }
         .header h1 i { color: #FFD700; }
         .header .sub { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
-        .header .sub p { font-size: 14px; opacity: 0.9; }
         .badge-unsaved { background: #ffc107; color: #333; padding: 4px 14px; border-radius: 20px; font-size: 14px; font-weight: bold; display: none; }
-        .btn-save-all { background: #28a745; color: white; padding: 10px 25px; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; }
-        .btn-save-all:hover { background: #218838; }
-        .btn-save-all:disabled { opacity: 0.6; cursor: not-allowed; }
+        .btn-save-all { background: #28a745; color: white; padding: 10px 25px; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; }
+        .btn-save-all:disabled { opacity: 0.6; }
         .tabs { display: flex; gap: 10px; margin-bottom: 25px; flex-wrap: wrap; }
-        .tab-btn { background: white; border: none; padding: 12px 25px; border-radius: 10px; cursor: pointer; font-weight: 600; display: flex; align-items: center; gap: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-        .tab-btn.active { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: white; }
+        .tab-btn { background: white; border: none; padding: 12px 25px; border-radius: 10px; cursor: pointer; font-weight: 600; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .tab-btn.active { background: #1e3c72; color: white; }
         .tab-content { display: none; }
         .tab-content.active { display: block; }
         .card { background: white; border-radius: 15px; padding: 25px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); margin-bottom: 25px; }
         .card h3 { margin-bottom: 20px; color: #1e3c72; border-right: 4px solid #FFD700; padding-right: 15px; }
         .form-group { margin-bottom: 18px; }
-        label { display: block; margin-bottom: 8px; font-weight: 600; color: #333; }
-        label i { margin-left: 8px; color: #FFD700; }
+        label { display: block; margin-bottom: 8px; font-weight: 600; }
         input, select { width: 100%; padding: 10px 12px; border: 1px solid #ddd; border-radius: 8px; font-family: 'Cairo', sans-serif; }
-        input:focus, select:focus { outline: none; border-color: #2a5298; }
-        .btn { padding: 10px 20px; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; font-family: 'Cairo', sans-serif; }
-        .btn-primary { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: white; }
+        .btn { padding: 10px 20px; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; }
         .btn-success { background: #28a745; color: white; }
         .btn-danger { background: #dc3545; color: white; }
         .btn-warning { background: #ffc107; color: #333; }
         .btn-secondary { background: #6c757d; color: white; }
         .btn-info { background: #17a2b8; color: white; }
         .btn-sm { padding: 4px 10px; font-size: 13px; }
-        .list-container { max-height: 500px; overflow-y: auto; margin-top: 15px; }
         .item { background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 10px; padding: 12px 15px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
-        .item:hover { background: #e9ecef; }
-        .item .info { flex: 1; min-width: 150px; }
         .item .name { font-weight: 700; color: #1e3c72; }
-        .item .detail { font-size: 13px; color: #6c757d; }
-        .item .actions { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
-        .stats-box { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: white; padding: 10px 15px; border-radius: 10px; margin-bottom: 20px; text-align: center; font-weight: 600; }
+        .balance-positive { color: #28a745; font-weight: bold; }
+        .balance-negative { color: #dc3545; font-weight: bold; }
+        .stats-box { background: #1e3c72; color: white; padding: 10px; border-radius: 10px; text-align: center; margin-bottom: 20px; }
+        .status-message { position: fixed; bottom: 20px; left: 20px; right: 20px; max-width: 450px; margin: auto; padding: 12px 20px; background: white; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 1000; }
+        .status-message.success { border-right: 4px solid #28a745; }
+        .status-message.error { border-right: 4px solid #dc3545; }
+        .connection-status { display: inline-block; padding: 4px 14px; border-radius: 30px; font-size: 13px; font-weight: 600; background: #e8f0e8; color: #2d6a2d; }
+        .connection-status.offline { background: #f0e8e8; color: #8a2d2d; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2000; justify-content: center; align-items: center; }
+        .modal .modal-box { background: white; padding: 25px; border-radius: 15px; max-width: 500px; width: 90%; }
+        .row-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
         .search-box { position: relative; margin-bottom: 20px; }
         .search-box i { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: #999; }
         .search-box input { padding-right: 35px; }
-        .status-message { position: fixed; bottom: 20px; left: 20px; right: 20px; max-width: 450px; margin: auto; padding: 12px 20px; background: white; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); display: flex; align-items: center; gap: 10px; z-index: 1000; animation: slideIn 0.3s ease; }
-        @keyframes slideIn { from { opacity: 0; transform: translateX(100px); } to { opacity: 1; transform: translateX(0); } }
-        .status-message.success { border-right: 4px solid #28a745; }
-        .status-message.error { border-right: 4px solid #dc3545; }
-        .status-message.info { border-right: 4px solid #17a2b8; }
-        .spinner { display: inline-block; width: 20px; height: 20px; border: 3px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: #fff; animation: spin 0.8s linear infinite; }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        .balance-positive { color: #28a745; }
-        .balance-negative { color: #dc3545; }
-        .row-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        @media (max-width: 768px) { .row-grid { grid-template-columns: 1fr; } .header h1 { font-size: 22px; } .tab-btn { padding: 8px 15px; font-size: 12px; } }
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2000; justify-content: center; align-items: center; }
-        .modal .modal-box { background: white; padding: 25px; border-radius: 15px; max-width: 500px; width: 90%; max-height: 90vh; overflow-y: auto; }
-        .modal h3 { margin-bottom: 15px; color: #1e3c72; }
-        .connection-status { display: inline-block; padding: 4px 14px; border-radius: 30px; font-size: 13px; font-weight: 600; background: #e8f0e8; color: #2d6a2d; white-space: nowrap; }
-        .connection-status.offline { background: #f0e8e8; color: #8a2d2d; }
+        @media (max-width: 768px) { .row-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
-
 <div class="container">
-    <!-- الهيدر -->
     <div class="header">
         <div class="sub">
-            <div>
-                <h1><i class="fas fa-scale-balanced"></i> دفتر الديون</h1>
-                <p><i class="fas fa-users"></i> إدارة العملاء والديون | <span id="totalCustomers">0</span> عميل</p>
-            </div>
+            <div><h1><i class="fas fa-scale-balanced"></i> دفتر الديون</h1>
+            <p><i class="fas fa-users"></i> إدارة العملاء والديون | <span id="totalCustomers">0</span> عميل</p></div>
             <div style="display: flex; gap: 10px; align-items: center;">
                 <span id="statusBadge" class="connection-status">🔄 جاري الاتصال...</span>
-                <span id="unsavedIndicator" class="badge-unsaved"><i class="fas fa-exclamation-triangle"></i> تغييرات غير محفوظة</span>
-                <button class="btn-save-all" id="saveAllBtn" onclick="saveAllChanges()"><i class="fas fa-save"></i> حفظ الآن</button>
+                <span id="unsavedIndicator" class="badge-unsaved"><i class="fas fa-exclamation-triangle"></i> تغييرات</span>
+                <button class="btn-save-all" id="saveAllBtn" onclick="saveAllChanges()"><i class="fas fa-save"></i> حفظ</button>
             </div>
         </div>
     </div>
 
-    <!-- علامات التبويب -->
     <div class="tabs">
         <button class="tab-btn active" onclick="switchTab('clients')"><i class="fas fa-users"></i> العملاء</button>
         <button class="tab-btn" onclick="switchTab('addDebt')"><i class="fas fa-plus-circle"></i> إضافة دين</button>
         <button class="tab-btn" onclick="switchTab('debts')"><i class="fas fa-list"></i> كل الديون</button>
-        <button class="tab-btn" onclick="switchTab('settings')"><i class="fas fa-cog"></i> إعدادات</button>
     </div>
 
-    <!-- تبويب: العملاء -->
     <div id="clientsTab" class="tab-content active">
         <div class="card">
             <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 20px;">
-                <h3><i class="fas fa-user-plus"></i> إدارة العملاء</h3>
-                <button class="btn btn-primary" onclick="showAddClient()"><i class="fas fa-plus"></i> عميل جديد</button>
+                <h3><i class="fas fa-user-plus"></i> العملاء</h3>
+                <button class="btn btn-success" onclick="showAddClient()"><i class="fas fa-plus"></i> عميل جديد</button>
             </div>
-            <div class="stats-box" id="clientsStats">📊 0 عميل - إجمالي المستحق: 0 د.ع</div>
-            <div class="search-box">
-                <i class="fas fa-search"></i>
-                <input type="text" id="searchClient" placeholder="ابحث عن عميل..." oninput="renderClients()">
-            </div>
-            <div id="clientsList" class="list-container"></div>
+            <div class="stats-box" id="clientsStats">📊 0 عميل</div>
+            <div class="search-box"><i class="fas fa-search"></i><input type="text" id="searchClient" placeholder="بحث..." oninput="renderClients()"></div>
+            <div id="clientsList"></div>
         </div>
     </div>
 
-    <!-- تبويب: إضافة دين -->
     <div id="addDebtTab" class="tab-content">
         <div class="card">
-            <h3><i class="fas fa-hand-holding-usd"></i> إضافة دين جديد</h3>
-            <div class="form-group">
-                <label><i class="fas fa-user"></i> العميل</label>
-                <select id="debtCustomerSelect"></select>
-            </div>
+            <h3><i class="fas fa-hand-holding-usd"></i> إضافة دين</h3>
+            <div class="form-group"><label>العميل</label><select id="debtCustomerSelect"></select></div>
             <div class="row-grid">
-                <div class="form-group">
-                    <label><i class="fas fa-money-bill-wave"></i> المبلغ</label>
-                    <input type="number" id="debtAmount" placeholder="0">
-                </div>
-                <div class="form-group">
-                    <label><i class="fas fa-arrow-left"></i> النوع</label>
-                    <select id="debtType">
-                        <option value="li">لي (الدائن)</option>
-                        <option value="ale">عليّ (المدين)</option>
-                    </select>
-                </div>
+                <div class="form-group"><label>المبلغ</label><input type="number" id="debtAmount" placeholder="0"></div>
+                <div class="form-group"><label>النوع</label><select id="debtType"><option value="li">لي</option><option value="ale">عليّ</option></select></div>
             </div>
-            <div class="form-group">
-                <label><i class="fas fa-calendar-alt"></i> تاريخ الاستحقاق</label>
-                <input type="date" id="debtDueDate">
-            </div>
-            <div class="form-group">
-                <label><i class="fas fa-sticky-note"></i> ملاحظات</label>
-                <input type="text" id="debtNote" placeholder="اختياري">
-            </div>
-            <button class="btn btn-success" onclick="addDebt()" style="width:100%;"><i class="fas fa-save"></i> تسجيل الدين</button>
+            <div class="form-group"><label>التاريخ</label><input type="date" id="debtDueDate"></div>
+            <div class="form-group"><label>ملاحظات</label><input type="text" id="debtNote"></div>
+            <button class="btn btn-success" onclick="addDebt()" style="width:100%;"><i class="fas fa-save"></i> تسجيل</button>
         </div>
     </div>
 
-    <!-- تبويب: كل الديون -->
     <div id="debtsTab" class="tab-content">
         <div class="card">
             <h3><i class="fas fa-list"></i> جميع الديون</h3>
-            <div class="stats-box" id="debtsStats">📊 إجمالي الديون: 0 | مستحق لي: 0 | مستحق عليّ: 0</div>
-            <div class="search-box">
-                <i class="fas fa-search"></i>
-                <input type="text" id="searchDebt" placeholder="ابحث عن دين..." oninput="renderAllDebts()">
-            </div>
-            <div id="allDebtsList" class="list-container"></div>
-        </div>
-    </div>
-
-    <!-- تبويب: الإعدادات -->
-    <div id="settingsTab" class="tab-content">
-        <div class="card">
-            <h3><i class="fas fa-cog"></i> إعدادات التطبيق</h3>
-            <div class="form-group">
-                <label><i class="fas fa-key"></i> رمز GitHub (Token)</label>
-                <input type="text" id="settingsToken" dir="ltr">
-            </div>
-            <div class="form-group">
-                <label><i class="fas fa-folder"></i> المستودع (صاحب/اسم)</label>
-                <input type="text" id="settingsRepo" dir="ltr" placeholder="username/repo">
-            </div>
-            <div class="form-group">
-                <label><i class="fas fa-file"></i> اسم الملف</label>
-                <input type="text" id="settingsFile" dir="ltr" placeholder="data.json">
-            </div>
-            <button class="btn btn-primary" onclick="updateSettings()"><i class="fas fa-save"></i> تحديث الإعدادات</button>
-            <hr style="margin: 25px 0;">
-            <button class="btn btn-danger" onclick="if(confirm('مسح جميع البيانات المحلية؟')){localStorage.clear();location.reload();}"><i class="fas fa-trash"></i> مسح البيانات المحلية</button>
-            <button class="btn btn-secondary" onclick="exportBackup()"><i class="fas fa-download"></i> تحميل نسخة احتياطية</button>
-            <button class="btn btn-secondary" onclick="document.getElementById('fileInput').click()"><i class="fas fa-upload"></i> استعادة نسخة</button>
-            <input type="file" id="fileInput" accept=".json" style="display:none;" onchange="importBackup(event)">
+            <div class="stats-box" id="debtsStats">📊 0 دين</div>
+            <div id="allDebtsList"></div>
         </div>
     </div>
 </div>
 
-<!-- مودالات... (محذوفة للاختصار، لكنها نفس الهيكل السابق) -->
+<!-- مودالات بسيطة -->
+<div id="addClientModal" class="modal"><div class="modal-box"><h3>إضافة عميل</h3>
+    <div class="form-group"><label>الاسم</label><input type="text" id="newClientName"></div>
+    <div class="form-group"><label>الهاتف</label><input type="text" id="newClientPhone"></div>
+    <button class="btn btn-success" onclick="addClient()">إضافة</button>
+    <button class="btn btn-secondary" onclick="document.getElementById('addClientModal').style.display='none'">إلغاء</button>
+</div></div>
+
+<div id="payModal" class="modal"><div class="modal-box"><h3>تسديد دين</h3><p id="payModalInfo"></p>
+    <button class="btn btn-success" onclick="confirmPay()">تسديد</button>
+    <button class="btn btn-secondary" onclick="document.getElementById('payModal').style.display='none'">إلغاء</button>
+</div></div>
+
+<div id="deleteClientModal" class="modal"><div class="modal-box"><h3>حذف عميل</h3><p id="deleteClientInfo"></p>
+    <button class="btn btn-danger" onclick="confirmDeleteClient()">حذف</button>
+    <button class="btn btn-secondary" onclick="document.getElementById('deleteClientModal').style.display='none'">إلغاء</button>
+</div></div>
+
+<div id="quickDebtModal" class="modal"><div class="modal-box"><h3>إضافة دين سريع</h3><p id="quickDebtClient"></p>
+    <div class="form-group"><label>المبلغ</label><input type="number" id="quickDebtAmount"></div>
+    <div class="form-group"><label>النوع</label><select id="quickDebtType"><option value="li">لي</option><option value="ale">عليّ</option></select></div>
+    <button class="btn btn-success" onclick="confirmQuickDebt()">إضافة</button>
+    <button class="btn btn-secondary" onclick="document.getElementById('quickDebtModal').style.display='none'">إلغاء</button>
+</div></div>
 
 <div id="status"></div>
 
 <script>
     // ================================================================
-    // 🔐 إعدادات GitHub - التوكن الجديد
+    // 🔥 الثوابت الثابتة (ضع التوكن هنا مرة واحدة وإلى الأبد)
     // ================================================================
-    const DEFAULT_TOKEN = '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';
-    const DEFAULT_REPO = 'raedalzubaidi21-source/my-debt-app';
-    const DEFAULT_FILE = 'data.json';
-
-    let GITHUB_TOKEN = localStorage.getItem('debt_token') || DEFAULT_TOKEN;
-    let REPO_OWNER = localStorage.getItem('debt_repo') ? localStorage.getItem('debt_repo').split('/')[0] : DEFAULT_REPO.split('/')[0];
-    let REPO_NAME = localStorage.getItem('debt_repo') ? localStorage.getItem('debt_repo').split('/')[1] : DEFAULT_REPO.split('/')[1];
-    let DATA_FILE = localStorage.getItem('debt_file') || DEFAULT_FILE;
+    const GITHUB_TOKEN = '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';
+    const REPO_OWNER = 'raedalzubaidi21-source';
+    const REPO_NAME = 'my-debt-app';
+    const DATA_FILE = 'data.json';
 
     // ================================================================
     // المتغيرات العامة
@@ -207,649 +152,259 @@
     let isOnline = false;
     let isSaving = false;
     let hasUnsaved = false;
-    let editingClientId = null;
-    let deletingClientId = null;
     let payingDebtId = null;
     let quickDebtClientId = null;
+    let deletingClientId = null;
 
     // ================================================================
-    // دوال الترميز الآمنة (لحل مشكلة الأسماء العربية)
+    // دوال الترميز الآمنة
     // ================================================================
-
-    /**
-     * تحويل نص UTF-8 إلى Base64
-     */
     function utf8ToBase64(str) {
-        // 1. تحويل النص إلى Uint8Array باستخدام TextEncoder
         const encoder = new TextEncoder();
         const bytes = encoder.encode(str);
-        // 2. تحويل Uint8Array إلى سلسلة ثنائية
         let binary = '';
-        for (let i = 0; i < bytes.length; i++) {
-            binary += String.fromCharCode(bytes[i]);
-        }
-        // 3. تشفير السلسلة الثنائية إلى Base64
+        for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
         return btoa(binary);
     }
-
-    /**
-     * تحويل Base64 إلى نص UTF-8
-     */
     function base64ToUtf8(base64) {
-        // 1. فك تشفير Base64 إلى سلسلة ثنائية
         const binary = atob(base64);
-        // 2. تحويل السلسلة الثنائية إلى Uint8Array
         const bytes = new Uint8Array(binary.length);
-        for (let i = 0; i < binary.length; i++) {
-            bytes[i] = binary.charCodeAt(i);
-        }
-        // 3. تحويل Uint8Array إلى نص باستخدام TextDecoder
-        const decoder = new TextDecoder('utf-8');
-        return decoder.decode(bytes);
+        for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+        return new TextDecoder('utf-8').decode(bytes);
     }
 
     // ================================================================
-    // دوال GitHub API (مع دعم UTF-8)
+    // دوال GitHub API
     // ================================================================
-
     async function loadFromGitHub() {
         try {
             const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${DATA_FILE}`;
-            const response = await fetch(url, {
-                headers: {
-                    'Authorization': `token ${GITHUB_TOKEN}`,
-                    'Accept': 'application/vnd.github.v3+json'
-                }
-            });
-
-            if (response.status === 404) {
-                return { customers: [], debts: [] };
-            }
-
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status}`);
-            }
-
-            const result = await response.json();
+            const res = await fetch(url, { headers: { 'Authorization': `token ${GITHUB_TOKEN}`, 'Accept': 'application/vnd.github.v3+json' } });
+            if (res.status === 404) return { customers: [], debts: [] };
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            const result = await res.json();
             currentSha = result.sha;
-            // فك تشفير المحتوى باستخدام الدالة الآمنة
             const content = base64ToUtf8(result.content);
             return JSON.parse(content);
-        } catch (error) {
-            console.warn('⚠️ فشل التحميل من GitHub:', error.message);
-            return null;
-        }
+        } catch (e) { console.warn('⚠️ فشل التحميل:', e.message); return null; }
     }
 
     async function saveToGitHub(dataToSave) {
         if (isSaving) return false;
         isSaving = true;
         document.getElementById('saveAllBtn').disabled = true;
-        document.getElementById('saveAllBtn').innerHTML = '<span class="spinner"></span> جاري الحفظ...';
-
+        document.getElementById('saveAllBtn').innerHTML = '⏳ جاري...';
         try {
             const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${DATA_FILE}`;
-            
-            // 1. جلب sha الحالي (إذا كان الملف موجوداً)
             let sha = currentSha;
             if (!sha) {
-                const getRes = await fetch(url, {
-                    headers: {
-                        'Authorization': `token ${GITHUB_TOKEN}`,
-                        'Accept': 'application/vnd.github.v3+json'
-                    }
-                });
-                if (getRes.ok) {
-                    const result = await getRes.json();
-                    sha = result.sha;
-                    currentSha = sha;
-                } else if (getRes.status === 404) {
-                    sha = undefined;
-                } else {
-                    throw new Error(`فشل جلب الملف: ${getRes.status}`);
-                }
+                const getRes = await fetch(url, { headers: { 'Authorization': `token ${GITHUB_TOKEN}` } });
+                if (getRes.ok) { const r = await getRes.json(); sha = r.sha; currentSha = sha; }
+                else if (getRes.status !== 404) throw new Error(`جلب الملف: ${getRes.status}`);
             }
-
-            // 2. تحويل البيانات إلى JSON ثم إلى Base64 باستخدام الدالة الآمنة
-            const jsonString = JSON.stringify(dataToSave, null, 2);
-            const content = utf8ToBase64(jsonString);
-
-            // 3. إرسال طلب PUT
-            const payload = {
-                message: `تحديث البيانات - ${new Date().toLocaleString('ar-EG')}`,
-                content: content
-            };
+            const content = utf8ToBase64(JSON.stringify(dataToSave, null, 2));
+            const payload = { message: `تحديث ${new Date().toLocaleString('ar-EG')}`, content: content };
             if (sha) payload.sha = sha;
-
             const putRes = await fetch(url, {
                 method: 'PUT',
-                headers: {
-                    'Authorization': `token ${GITHUB_TOKEN}`,
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/vnd.github.v3+json'
-                },
+                headers: { 'Authorization': `token ${GITHUB_TOKEN}`, 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
             });
-
-            if (!putRes.ok) {
-                const errData = await putRes.json();
-                throw new Error(errData.message || `HTTP ${putRes.status}`);
-            }
-
+            if (!putRes.ok) { const err = await putRes.json(); throw new Error(err.message || putRes.status); }
             const result = await putRes.json();
             currentSha = result.content.sha;
-            isOnline = true;
-            hasUnsaved = false;
+            isOnline = true; hasUnsaved = false;
             document.getElementById('unsavedIndicator').style.display = 'none';
-            updateStatusBadge();
-            showStatus('✅ تم حفظ البيانات على GitHub', 'success');
-            console.log('✅ تم الحفظ بنجاح، SHA الجديد:', currentSha);
+            updateStatus();
+            showStatus('✅ تم الحفظ', 'success');
             return true;
-
-        } catch (error) {
-            console.error('❌ فشل الحفظ:', error.message);
-            isOnline = false;
-            updateStatusBadge();
-            localStorage.setItem('github_backup', JSON.stringify(dataToSave));
-            showStatus('⚠️ فشل الحفظ: ' + error.message, 'error');
+        } catch (e) {
+            isOnline = false; updateStatus();
+            showStatus('❌ فشل الحفظ: ' + e.message, 'error');
             return false;
         } finally {
             isSaving = false;
             document.getElementById('saveAllBtn').disabled = false;
-            document.getElementById('saveAllBtn').innerHTML = '<i class="fas fa-save"></i> حفظ الآن';
+            document.getElementById('saveAllBtn').innerHTML = '<i class="fas fa-save"></i> حفظ';
         }
     }
 
-    // ================================================================
-    // دوال التخزين المحلي والنسخ الاحتياطي
-    // ================================================================
+    async function saveAllChanges() {
+        if (!hasUnsaved) { showStatus('ℹ️ لا توجد تغييرات', 'info'); return; }
+        await saveToGitHub(data);
+    }
 
+    // ================================================================
+    // التخزين المحلي (نسخة احتياطية فقط)
+    // ================================================================
     function saveLocal() {
         localStorage.setItem('debt_customers', JSON.stringify(data.customers));
         localStorage.setItem('debts_list', JSON.stringify(data.debts));
     }
-
     function loadLocal() {
-        const customers = JSON.parse(localStorage.getItem('debt_customers') || 'null');
-        const debts = JSON.parse(localStorage.getItem('debts_list') || 'null');
-        if (customers) data.customers = customers;
-        if (debts) data.debts = debts;
+        const c = JSON.parse(localStorage.getItem('debt_customers') || 'null');
+        const d = JSON.parse(localStorage.getItem('debts_list') || 'null');
+        if (c) data.customers = c;
+        if (d) data.debts = d;
     }
-
     function markUnsaved() {
         hasUnsaved = true;
         document.getElementById('unsavedIndicator').style.display = 'inline-block';
     }
 
-    async function saveAllChanges() {
-        if (!hasUnsaved) {
-            showStatus('ℹ️ لا توجد تغييرات للحفظ', 'info');
-            return;
-        }
-        await saveToGitHub(data);
-    }
-
     // ================================================================
-    // حالة الاتصال
+    // دوال التطبيق
     // ================================================================
-
-    function updateStatusBadge() {
-        const badge = document.getElementById('statusBadge');
-        if (isOnline) {
-            badge.innerHTML = '🟢 متصل';
-            badge.className = 'connection-status';
-        } else {
-            badge.innerHTML = '🔴 غير متصل (حفظ محلي)';
-            badge.className = 'connection-status offline';
-        }
+    function getCustomerName(id) { const c = data.customers.find(c => c.id === id); return c ? c.name : 'غير معروف'; }
+    function formatCurrency(amount) { return Number(amount).toFixed(0) + ' د.ع'; }
+    function getCustomerBalance(id) {
+        const li = data.debts.filter(d => d.customerId === id && d.type === 'li' && !d.paid).reduce((s, d) => s + Number(d.amount), 0);
+        const ale = data.debts.filter(d => d.customerId === id && d.type === 'ale' && !d.paid).reduce((s, d) => s + Number(d.amount), 0);
+        return li - ale;
     }
-
-    // ================================================================
-    // دوال التطبيق الأساسية (لم تتغير)
-    // ================================================================
-
-    function getCustomerName(id) {
-        const c = data.customers.find(c => c.id === id);
-        return c ? c.name : 'غير معروف';
-    }
-
-    function getCustomerPhone(id) {
-        const c = data.customers.find(c => c.id === id);
-        return c ? c.phone || '' : '';
-    }
-
-    function formatCurrency(amount) {
-        return Number(amount).toFixed(0) + ' د.ع';
-    }
-
-    function getTotal(type) {
-        return data.debts.filter(d => d.type === type && !d.paid).reduce((sum, d) => sum + Number(d.amount), 0);
-    }
-
-    function getCustomerBalance(customerId) {
-        const totalLi = data.debts.filter(d => d.customerId === customerId && d.type === 'li' && !d.paid).reduce((s, d) => s + Number(d.amount), 0);
-        const totalAle = data.debts.filter(d => d.customerId === customerId && d.type === 'ale' && !d.paid).reduce((s, d) => s + Number(d.amount), 0);
-        return totalLi - totalAle;
-    }
-
-    function getCustomerDebts(customerId) {
-        return data.debts.filter(d => d.customerId === customerId);
-    }
-
-    function getCustomerPendingDebts(customerId) {
-        return data.debts.filter(d => d.customerId === customerId && !d.paid);
-    }
-
-    // ================================================================
-    // عرض العملاء
-    // ================================================================
+    function getPendingCount(id) { return data.debts.filter(d => d.customerId === id && !d.paid).length; }
 
     function renderClients() {
         const container = document.getElementById('clientsList');
         const search = document.getElementById('searchClient').value.toLowerCase();
         let filtered = data.customers.filter(c => c.name.toLowerCase().includes(search));
-
-        if (!filtered.length) {
-            container.innerHTML = '<p style="color:#999; text-align:center; padding:20px;">لا يوجد عملاء</p>';
-            return;
-        }
-
-        const totalBalance = filtered.reduce((sum, c) => sum + getCustomerBalance(c.id), 0);
-        document.getElementById('clientsStats').innerHTML = 
-            `📊 ${filtered.length} عميل - إجمالي الرصيد: ${formatCurrency(totalBalance)}`;
-
+        if (!filtered.length) { container.innerHTML = '<p style="color:#999;">لا يوجد عملاء</p>'; return; }
+        document.getElementById('clientsStats').innerHTML = `📊 ${filtered.length} عميل`;
         container.innerHTML = filtered.map(c => {
-            const balance = getCustomerBalance(c.id);
-            const balClass = balance >= 0 ? 'balance-positive' : 'balance-negative';
-            const balText = balance >= 0 ? `له عليك ${formatCurrency(balance)}` : `عليه لك ${formatCurrency(Math.abs(balance))}`;
-            const pending = getCustomerPendingDebts(c.id).length;
-            return `
-                <div class="item">
-                    <div class="info">
-                        <div class="name">${c.name}</div>
-                        <div class="detail">${c.phone || 'لا يوجد هاتف'} | الديون المعلقة: ${pending}</div>
-                    </div>
-                    <div style="text-align: center; min-width: 100px;">
-                        <span class="${balClass}" style="font-weight:700; font-size:16px;">${balText}</span>
-                    </div>
-                    <div class="actions">
-                        <button class="btn btn-sm btn-info" onclick="openQuickDebt('${c.id}')"><i class="fas fa-plus"></i> دين</button>
-                        <button class="btn btn-sm btn-warning" onclick="editClient('${c.id}')"><i class="fas fa-edit"></i></button>
-                        <button class="btn btn-sm btn-danger" onclick="deleteClient('${c.id}')"><i class="fas fa-trash"></i></button>
-                    </div>
+            const bal = getCustomerBalance(c.id);
+            const cls = bal >= 0 ? 'balance-positive' : 'balance-negative';
+            return `<div class="item">
+                <div class="name">${c.name}</div>
+                <div>${c.phone || ''}</div>
+                <div class="${cls}">${bal >= 0 ? 'له عليك' : 'عليه لك'} ${formatCurrency(Math.abs(bal))}</div>
+                <div>
+                    <button class="btn btn-sm btn-info" onclick="openQuickDebt('${c.id}')"><i class="fas fa-plus"></i> دين</button>
+                    <button class="btn btn-sm btn-danger" onclick="deleteClient('${c.id}')"><i class="fas fa-trash"></i></button>
                 </div>
-            `;
+            </div>`;
         }).join('');
     }
 
-    // ================================================================
-    // إدارة العملاء (مع الحفظ التلقائي)
-    // ================================================================
-
-    function showAddClient() {
-        document.getElementById('addClientModal').style.display = 'flex';
-        document.getElementById('newClientName').focus();
-    }
-
+    function showAddClient() { document.getElementById('addClientModal').style.display = 'flex'; document.getElementById('newClientName').focus(); }
     async function addClient() {
         const name = document.getElementById('newClientName').value.trim();
-        if (!name) {
-            showStatus('❌ أدخل اسم العميل', 'error');
-            return;
-        }
-        const phone = document.getElementById('newClientPhone').value.trim();
-        data.customers.push({
-            id: Date.now().toString(36) + Math.random().toString(36).substr(2, 4),
-            name: name,
-            phone: phone || ''
-        });
+        if (!name) { showStatus('❌ أدخل اسماً', 'error'); return; }
+        data.customers.push({ id: Date.now().toString(36) + Math.random().toString(36).substr(2, 4), name, phone: document.getElementById('newClientPhone').value.trim() || '' });
         document.getElementById('addClientModal').style.display = 'none';
         document.getElementById('newClientName').value = '';
-        document.getElementById('newClientPhone').value = '';
-        markUnsaved();
-        refreshAll();
-        showStatus(`✅ تم إضافة العميل "${name}"`, 'success');
-        await saveToGitHub(data);
-    }
-
-    function editClient(id) {
-        const client = data.customers.find(c => c.id === id);
-        if (!client) return;
-        editingClientId = id;
-        document.getElementById('editClientName').value = client.name;
-        document.getElementById('editClientPhone').value = client.phone || '';
-        document.getElementById('editClientModal').style.display = 'flex';
-    }
-
-    async function confirmEditClient() {
-        const name = document.getElementById('editClientName').value.trim();
-        if (!name) {
-            showStatus('❌ أدخل اسم العميل', 'error');
-            return;
-        }
-        const client = data.customers.find(c => c.id === editingClientId);
-        if (client) {
-            client.name = name;
-            client.phone = document.getElementById('editClientPhone').value.trim() || '';
-            markUnsaved();
-            refreshAll();
-            showStatus('✅ تم تحديث العميل', 'success');
-            await saveToGitHub(data);
-        }
-        document.getElementById('editClientModal').style.display = 'none';
-        editingClientId = null;
+        markUnsaved(); refreshAll(); await saveToGitHub(data);
     }
 
     function deleteClient(id) {
-        const client = data.customers.find(c => c.id === id);
-        if (!client) return;
-        const debts = getCustomerDebts(id);
+        const c = data.customers.find(c => c.id === id);
+        if (!c) return;
         deletingClientId = id;
-        document.getElementById('deleteClientInfo').innerHTML = 
-            `هل أنت متأكد من حذف العميل <strong>${client.name}</strong>؟<br>
-             ${debts.length} ديون مرتبطة به (سيتم حذفها أيضاً).`;
+        document.getElementById('deleteClientInfo').innerHTML = `حذف العميل <strong>${c.name}</strong> وجميع ديونه؟`;
         document.getElementById('deleteClientModal').style.display = 'flex';
     }
-
     async function confirmDeleteClient() {
         if (!deletingClientId) return;
         data.customers = data.customers.filter(c => c.id !== deletingClientId);
         data.debts = data.debts.filter(d => d.customerId !== deletingClientId);
-        document.getElementById('deleteClientModal').style.display = 'none';
         deletingClientId = null;
-        markUnsaved();
-        refreshAll();
-        showStatus('✅ تم حذف العميل وجميع ديونه', 'success');
-        await saveToGitHub(data);
+        document.getElementById('deleteClientModal').style.display = 'none';
+        markUnsaved(); refreshAll(); await saveToGitHub(data);
     }
 
-    // ================================================================
-    // إدارة الديون (مع الحفظ التلقائي)
-    // ================================================================
-
     async function addDebt() {
-        const customerId = document.getElementById('debtCustomerSelect').value;
-        if (!customerId) {
-            showStatus('❌ اختر العميل', 'error');
-            return;
-        }
+        const cid = document.getElementById('debtCustomerSelect').value;
+        if (!cid) { showStatus('❌ اختر عميلاً', 'error'); return; }
         const amount = parseFloat(document.getElementById('debtAmount').value);
-        if (!amount || amount <= 0) {
-            showStatus('❌ أدخل مبلغ صحيح', 'error');
-            return;
-        }
-        const type = document.getElementById('debtType').value;
-        const dueDate = document.getElementById('debtDueDate').value || new Date().toISOString().split('T')[0];
-        const note = document.getElementById('debtNote').value.trim();
-
+        if (!amount || amount <= 0) { showStatus('❌ مبلغ صحيح', 'error'); return; }
         data.debts.push({
             id: Date.now().toString(36) + Math.random().toString(36).substr(2, 4),
-            customerId: customerId,
-            type: type,
+            customerId: cid,
+            type: document.getElementById('debtType').value,
             amount: amount,
-            dueDate: dueDate,
-            note: note || '',
+            dueDate: document.getElementById('debtDueDate').value || new Date().toISOString().split('T')[0],
+            note: document.getElementById('debtNote').value.trim() || '',
             paid: false,
             createdAt: new Date().toISOString()
         });
-
         document.getElementById('debtAmount').value = '';
         document.getElementById('debtDueDate').value = '';
         document.getElementById('debtNote').value = '';
-        markUnsaved();
-        refreshAll();
-        showStatus('✅ تم تسجيل الدين', 'success');
-        await saveToGitHub(data);
+        markUnsaved(); refreshAll(); await saveToGitHub(data);
     }
 
-    function openQuickDebt(clientId) {
-        quickDebtClientId = clientId;
-        const client = data.customers.find(c => c.id === clientId);
-        document.getElementById('quickDebtClient').innerHTML = `العميل: <strong>${client ? client.name : ''}</strong>`;
+    function openQuickDebt(id) {
+        quickDebtClientId = id;
+        document.getElementById('quickDebtClient').innerHTML = `العميل: <strong>${getCustomerName(id)}</strong>`;
         document.getElementById('quickDebtAmount').value = '';
-        document.getElementById('quickDebtType').value = 'li';
         document.getElementById('quickDebtModal').style.display = 'flex';
-        document.getElementById('quickDebtAmount').focus();
     }
-
     async function confirmQuickDebt() {
         if (!quickDebtClientId) return;
         const amount = parseFloat(document.getElementById('quickDebtAmount').value);
-        if (!amount || amount <= 0) {
-            showStatus('❌ أدخل مبلغ صحيح', 'error');
-            return;
-        }
-        const type = document.getElementById('quickDebtType').value;
-
+        if (!amount || amount <= 0) { showStatus('❌ مبلغ صحيح', 'error'); return; }
         data.debts.push({
             id: Date.now().toString(36) + Math.random().toString(36).substr(2, 4),
             customerId: quickDebtClientId,
-            type: type,
+            type: document.getElementById('quickDebtType').value,
             amount: amount,
             dueDate: new Date().toISOString().split('T')[0],
             note: '',
             paid: false,
             createdAt: new Date().toISOString()
         });
-
         document.getElementById('quickDebtModal').style.display = 'none';
         quickDebtClientId = null;
-        markUnsaved();
-        refreshAll();
-        showStatus('✅ تم تسجيل الدين', 'success');
-        await saveToGitHub(data);
+        markUnsaved(); refreshAll(); await saveToGitHub(data);
     }
-
-    // ================================================================
-    // عرض جميع الديون
-    // ================================================================
 
     function renderAllDebts() {
         const container = document.getElementById('allDebtsList');
-        const search = document.getElementById('searchDebt').value.toLowerCase();
-
-        let debts = data.debts.filter(d => {
-            const customer = data.customers.find(c => c.id === d.customerId);
-            const name = customer ? customer.name : '';
-            return name.toLowerCase().includes(search) || d.note.toLowerCase().includes(search);
-        });
-
-        if (!debts.length) {
-            container.innerHTML = '<p style="color:#999; text-align:center; padding:20px;">لا توجد ديون</p>';
-            return;
-        }
-
+        let debts = data.debts;
+        if (!debts.length) { container.innerHTML = '<p style="color:#999;">لا توجد ديون</p>'; return; }
         const totalLi = debts.filter(d => d.type === 'li' && !d.paid).reduce((s, d) => s + Number(d.amount), 0);
         const totalAle = debts.filter(d => d.type === 'ale' && !d.paid).reduce((s, d) => s + Number(d.amount), 0);
-        document.getElementById('debtsStats').innerHTML = 
-            `📊 ${debts.length} دين | مستحق لي: ${formatCurrency(totalLi)} | مستحق عليّ: ${formatCurrency(totalAle)}`;
-
+        document.getElementById('debtsStats').innerHTML = `📊 ${debts.length} دين | لي: ${formatCurrency(totalLi)} | عليّ: ${formatCurrency(totalAle)}`;
         container.innerHTML = debts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).map(d => {
-            const customer = data.customers.find(c => c.id === d.customerId);
-            const name = customer ? customer.name : 'غير معروف';
-            const isPaid = d.paid;
-            const typeLabel = d.type === 'li' ? 'لي' : 'عليّ';
-            const amountClass = isPaid ? '' : (d.type === 'li' ? 'balance-positive' : 'balance-negative');
-            return `
-                <div class="item">
-                    <div class="info">
-                        <div class="name">${name}</div>
-                        <div class="detail">${typeLabel} | ${d.dueDate} ${d.note ? '| ' + d.note : ''} ${isPaid ? '✅ مدفوع' : '⏳ معلق'}</div>
-                    </div>
-                    <div style="text-align: center; min-width: 100px;">
-                        <span class="${amountClass}" style="font-weight:700; font-size:16px;">${formatCurrency(d.amount)}</span>
-                    </div>
-                    <div class="actions">
-                        ${!isPaid ? `<button class="btn btn-sm btn-success" onclick="openPayModal('${d.id}')"><i class="fas fa-check"></i> تسديد</button>` : ''}
-                        <button class="btn btn-sm btn-danger" onclick="deleteDebt('${d.id}')"><i class="fas fa-trash"></i></button>
-                    </div>
+            const name = getCustomerName(d.customerId);
+            const cls = d.type === 'li' ? 'balance-positive' : 'balance-negative';
+            return `<div class="item">
+                <div>${name}</div>
+                <div>${d.type === 'li' ? 'لي' : 'عليّ'} | ${d.dueDate}</div>
+                <div class="${cls}">${formatCurrency(d.amount)}</div>
+                <div>
+                    ${!d.paid ? `<button class="btn btn-sm btn-success" onclick="openPayModal('${d.id}')"><i class="fas fa-check"></i> تسديد</button>` : '<span style="color:green;">✅ مدفوع</span>'}
+                    <button class="btn btn-sm btn-danger" onclick="deleteDebt('${d.id}')"><i class="fas fa-trash"></i></button>
                 </div>
-            `;
+            </div>`;
         }).join('');
     }
 
-    // ================================================================
-    // تسديد وحذف الديون
-    // ================================================================
-
-    function openPayModal(id) {
-        payingDebtId = id;
-        const debt = data.debts.find(d => d.id === id);
-        if (!debt) return;
-        const customer = data.customers.find(c => c.id === debt.customerId);
-        document.getElementById('payModalInfo').innerHTML = 
-            `تسجيل الدين كـ "مدفوع" للعميل <strong>${customer ? customer.name : ''}</strong><br>
-             المبلغ: ${formatCurrency(debt.amount)} | النوع: ${debt.type === 'li' ? 'لي' : 'عليّ'}`;
-        document.getElementById('payModal').style.display = 'flex';
-    }
-
-    async function confirmPay() {
-        if (!payingDebtId) return;
-        const debt = data.debts.find(d => d.id === payingDebtId);
-        if (debt) {
-            debt.paid = true;
-            markUnsaved();
-            refreshAll();
-            showStatus('✅ تم تسجيل الدين كمدفوع', 'success');
-            await saveToGitHub(data);
-        }
-        document.getElementById('payModal').style.display = 'none';
-        payingDebtId = null;
-    }
-
-    async function deleteDebt(id) {
-        if (!confirm('هل أنت متأكد من حذف هذا الدين؟')) return;
-        data.debts = data.debts.filter(d => d.id !== id);
-        markUnsaved();
-        refreshAll();
-        showStatus('✅ تم حذف الدين', 'success');
-        await saveToGitHub(data);
-    }
-
-    // ================================================================
-    // النسخ الاحتياطي والاستعادة
-    // ================================================================
-
-    function exportBackup() {
-        const json = JSON.stringify(data, null, 2);
-        const blob = new Blob([json], { type: 'application/json;charset=utf-8' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        const now = new Date();
-        const dateStr = now.getFullYear() + '-' + String(now.getMonth()+1).padStart(2,'0') + '-' + String(now.getDate()).padStart(2,'0');
-        a.download = `debt_backup_${dateStr}.json`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-        showStatus('✅ تم تحميل النسخة الاحتياطية', 'success');
-    }
-
-    function importBackup(event) {
-        const file = event.target.files[0];
-        if (!file) return;
-        const reader = new FileReader();
-        reader.onload = async function(e) {
-            try {
-                const imported = JSON.parse(e.target.result);
-                if (imported.customers && imported.debts) {
-                    if (confirm('سيتم استبدال جميع البيانات الحالية. هل أنت متأكد؟')) {
-                        data.customers = imported.customers;
-                        data.debts = imported.debts;
-                        saveLocal();
-                        markUnsaved();
-                        refreshAll();
-                        showStatus('✅ تم استعادة البيانات', 'success');
-                        await saveToGitHub(data);
-                    }
-                } else {
-                    showStatus('❌ هذا الملف غير صالح', 'error');
-                }
-            } catch (error) {
-                showStatus('❌ حدث خطأ في قراءة الملف', 'error');
-            }
-        };
-        reader.readAsText(file, 'utf-8');
-        event.target.value = '';
-    }
-
-    // ================================================================
-    // دوال التحديث العامة
-    // ================================================================
+    function openPayModal(id) { payingDebtId = id; const d = data.debts.find(x => x.id === id); if (!d) return; document.getElementById('payModalInfo').innerHTML = `تسديد ${formatCurrency(d.amount)} للعميل ${getCustomerName(d.customerId)}`; document.getElementById('payModal').style.display = 'flex'; }
+    async function confirmPay() { if (!payingDebtId) return; const d = data.debts.find(x => x.id === payingDebtId); if (d) { d.paid = true; markUnsaved(); refreshAll(); await saveToGitHub(data); } document.getElementById('payModal').style.display = 'none'; payingDebtId = null; }
+    async function deleteDebt(id) { if (!confirm('حذف الدين؟')) return; data.debts = data.debts.filter(d => d.id !== id); markUnsaved(); refreshAll(); await saveToGitHub(data); }
 
     function refreshAll() {
         renderClients();
-        const debtSelect = document.getElementById('debtCustomerSelect');
-        if (debtSelect) {
-            const val = debtSelect.value;
-            debtSelect.innerHTML = '';
-            data.customers.forEach(c => {
-                debtSelect.innerHTML += `<option value="${c.id}">${c.name}</option>`;
-            });
-            debtSelect.value = val;
-        }
+        const sel = document.getElementById('debtCustomerSelect');
+        if (sel) { const v = sel.value; sel.innerHTML = ''; data.customers.forEach(c => sel.innerHTML += `<option value="${c.id}">${c.name}</option>`); sel.value = v; }
         renderAllDebts();
         document.getElementById('totalCustomers').innerText = data.customers.length;
-        updateStatusBadge();
+        updateStatus();
     }
 
-    // ================================================================
-    // علامات التبويب
-    // ================================================================
+    function updateStatus() {
+        const badge = document.getElementById('statusBadge');
+        if (isOnline) { badge.innerHTML = '🟢 متصل'; badge.className = 'connection-status'; }
+        else { badge.innerHTML = '🔴 غير متصل'; badge.className = 'connection-status offline'; }
+    }
 
     function switchTab(tab) {
         document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
         document.getElementById(tab + 'Tab').classList.add('active');
-        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-            if (btn.textContent.includes(tab === 'clients' ? 'العملاء' : 
-                tab === 'addDebt' ? 'إضافة دين' :
-                tab === 'debts' ? 'كل الديون' : 'إعدادات')) {
-                btn.classList.add('active');
-            }
-        });
         if (tab === 'debts') renderAllDebts();
         if (tab === 'clients') renderClients();
-        if (tab === 'addDebt') {
-            const select = document.getElementById('debtCustomerSelect');
-            select.innerHTML = '';
-            data.customers.forEach(c => {
-                select.innerHTML += `<option value="${c.id}">${c.name}</option>`;
-            });
-        }
+        if (tab === 'addDebt') { const sel = document.getElementById('debtCustomerSelect'); sel.innerHTML = ''; data.customers.forEach(c => sel.innerHTML += `<option value="${c.id}">${c.name}</option>`); }
     }
-
-    // ================================================================
-    // الإعدادات
-    // ================================================================
-
-    function updateSettings() {
-        const token = document.getElementById('settingsToken').value.trim();
-        const repo = document.getElementById('settingsRepo').value.trim();
-        const file = document.getElementById('settingsFile').value.trim();
-
-        if (!token || !repo || !file) {
-            showStatus('❌ جميع الحقول مطلوبة', 'error');
-            return;
-        }
-
-        localStorage.setItem('debt_token', token);
-        localStorage.setItem('debt_repo', repo);
-        localStorage.setItem('debt_file', file);
-
-        GITHUB_TOKEN = token;
-        REPO_OWNER = repo.split('/')[0];
-        REPO_NAME = repo.split('/')[1];
-        DATA_FILE = file;
-
-        showStatus('✅ تم تحديث الإعدادات، جاري إعادة التحميل...', 'success');
-        setTimeout(() => location.reload(), 1000);
-    }
-
-    // ================================================================
-    // عرض الرسائل
-    // ================================================================
 
     function showStatus(msg, type) {
         const s = document.getElementById('status');
@@ -857,122 +412,19 @@
         setTimeout(() => s.innerHTML = '', 4000);
     }
 
-    // ================================================================
-    // إغلاق المودالات عند النقر خارجها
-    // ================================================================
-
-    // نضيف مودالات بسيطة إذا لم تكن موجودة في الـ HTML
-    function ensureModals() {
-        const modals = [
-            { id: 'addClientModal', title: 'إضافة عميل جديد', fields: [{id:'newClientName',label:'اسم العميل'},{id:'newClientPhone',label:'رقم الهاتف'}] },
-            { id: 'editClientModal', title: 'تعديل العميل', fields: [{id:'editClientName',label:'اسم العميل'},{id:'editClientPhone',label:'رقم الهاتف'}] },
-            { id: 'deleteClientModal', title: 'حذف العميل', info: 'deleteClientInfo' },
-            { id: 'payModal', title: 'تسديد دين', info: 'payModalInfo' },
-            { id: 'quickDebtModal', title: 'إضافة دين سريع', info: 'quickDebtClient' }
-        ];
-
-        modals.forEach(m => {
-            if (!document.getElementById(m.id)) {
-                const modal = document.createElement('div');
-                modal.id = m.id;
-                modal.className = 'modal';
-                let content = `<div class="modal-box"><h3>${m.title}</h3>`;
-                if (m.fields) {
-                    m.fields.forEach(f => {
-                        content += `<div class="form-group"><label>${f.label}</label><input type="text" id="${f.id}"></div>`;
-                    });
-                    content += `<div style="display:flex;gap:10px;margin-top:15px;">
-                        <button class="btn btn-success" onclick="document.getElementById('${m.id}').style.display='none'">إضافة</button>
-                        <button class="btn btn-secondary" onclick="document.getElementById('${m.id}').style.display='none'">إلغاء</button>
-                    </div>`;
-                } else if (m.info) {
-                    content += `<p id="${m.info}"></p>
-                    <div style="display:flex;gap:10px;margin-top:15px;">
-                        <button class="btn btn-success" onclick="document.getElementById('${m.id}').style.display='none'">تأكيد</button>
-                        <button class="btn btn-secondary" onclick="document.getElementById('${m.id}').style.display='none'">إلغاء</button>
-                    </div>`;
-                }
-                content += '</div>';
-                modal.innerHTML = content;
-                document.body.appendChild(modal);
-                modal.addEventListener('click', function(e) {
-                    if (e.target === this) this.style.display = 'none';
-                });
-            }
-        });
-    }
+    document.querySelectorAll('.modal').forEach(m => m.addEventListener('click', function(e) { if (e.target === this) this.style.display = 'none'; }));
 
     // ================================================================
     // بدء التشغيل
     // ================================================================
-
-    async function init() {
-        // التأكد من وجود المودالات
-        ensureModals();
-
-        // تحميل الإعدادات من localStorage
-        const repo = localStorage.getItem('debt_repo') || DEFAULT_REPO;
-        REPO_OWNER = repo.split('/')[0];
-        REPO_NAME = repo.split('/')[1];
-        GITHUB_TOKEN = localStorage.getItem('debt_token') || DEFAULT_TOKEN;
-        DATA_FILE = localStorage.getItem('debt_file') || DEFAULT_FILE;
-
-        // تعبئة حقول الإعدادات
-        document.getElementById('settingsToken').value = GITHUB_TOKEN;
-        document.getElementById('settingsRepo').value = repo;
-        document.getElementById('settingsFile').value = DATA_FILE;
-
-        // محاولة التحميل من GitHub
-        try {
-            const remoteData = await loadFromGitHub();
-            if (remoteData && remoteData.customers && remoteData.debts) {
-                data.customers = remoteData.customers;
-                data.debts = remoteData.debts;
-                isOnline = true;
-            } else {
-                loadLocal();
-                isOnline = false;
-                if (data.customers.length === 0) {
-                    const defaultNames = [
-                        "اخو حسنين", "شيخ عباس الطيب", "عباس رخيت", "عبدالله الحلاق",
-                        "امير نسيب علي جام", "ابو الهود", "كريم عويز ابو عزيز", "ابو حنين سيراميك"
-                    ];
-                    defaultNames.forEach(name => {
-                        data.customers.push({
-                            id: Date.now().toString(36) + Math.random().toString(36).substr(2, 4),
-                            name: name,
-                            phone: ''
-                        });
-                    });
-                    saveLocal();
-                    await saveToGitHub(data);
-                }
-            }
-        } catch (e) {
-            loadLocal();
-            isOnline = false;
-        }
-
+    (async function init() {
+        const remote = await loadFromGitHub();
+        if (remote && remote.customers && remote.debts) { data.customers = remote.customers; data.debts = remote.debts; isOnline = true; }
+        else { loadLocal(); isOnline = false; if (data.customers.length === 0) { ['اخو حسنين', 'شيخ عباس', 'عباس رخيت', 'عبدالله الحلاق'].forEach(n => data.customers.push({ id: Date.now().toString(36) + Math.random().toString(36).substr(2, 4), name: n, phone: '' })); saveLocal(); await saveToGitHub(data); } }
         refreshAll();
-        updateStatusBadge();
-
-        setInterval(() => {
-            if (hasUnsaved) {
-                saveAllChanges();
-            }
-        }, 300000);
-
-        console.log('✅ تم تحميل دفتر الديون بنجاح! عدد العملاء:', data.customers.length);
-    }
-
-    // بدء التطبيق
-    init();
-
-    window.addEventListener('beforeunload', function() {
-        if (hasUnsaved) {
-            saveToGitHub(data);
-        }
-    });
+        setInterval(() => { if (hasUnsaved) saveAllChanges(); }, 300000);
+        window.addEventListener('beforeunload', () => { if (hasUnsaved) saveToGitHub(data); });
+    })();
 </script>
 </body>
 </html>
