@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دفتر الديون - مع التسديد السريع</title>
+    <title>دفتر الديون - مع الحفظ التلقائي على GitHub</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
@@ -82,6 +82,7 @@
             display: flex;
             gap: 12px;
             margin: 6px 0 20px;
+            flex-wrap: wrap;
         }
         .backup-row .btn-sm {
             padding: 10px 18px;
@@ -97,6 +98,21 @@
         .backup-row .btn-sm i { margin-left: 8px; }
         .backup-row .btn-sm:hover { background: #f2f2f5; }
         #fileInput { display: none; }
+
+        /* مؤشر حالة الاتصال */
+        .connection-status {
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 600;
+            background: #e8f0e8;
+            color: #2d6a2d;
+        }
+        .connection-status.offline {
+            background: #f0e8e8;
+            color: #8a2d2d;
+        }
 
         .screen { display: block; }
 
@@ -373,6 +389,18 @@
         .fw-bold { font-weight: 700; }
         .pay-all-btn { background: #2d2d2d; color: #fff; border: none; padding: 10px; border-radius: 14px; font-weight: 700; cursor: pointer; width: 100%; }
         .pay-all-btn:hover { background: #1a1a1a; }
+        .sync-btn {
+            background: #1b1b1b;
+            color: #fff;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 13px;
+        }
+        .sync-btn:hover { background: #000; }
+        .sync-btn:disabled { opacity: 0.5; cursor: not-allowed; }
     </style>
 </head>
 <body>
@@ -380,7 +408,10 @@
 
     <div class="app-header">
         <h1><i class="fas fa-scale-balanced"></i> دفتر الأموال</h1>
-        <div style="font-size:14px; color:#8e8e93;">إدارة الديون</div>
+        <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+            <span class="connection-status" id="statusBadge">🟢 متصل</span>
+            <button class="sync-btn" id="syncBtn" onclick="syncWithGitHub()"><i class="fas fa-sync"></i> مزامنة</button>
+        </div>
     </div>
 
     <!-- الإحصائيات -->
@@ -446,7 +477,7 @@
         </div>
     </div>
 
-    <!-- ======== مودال التسديد السريع (الديون غير المسددة فقط) ======== -->
+    <!-- ======== مودال التسديد السريع ======== -->
     <div id="paymentModal" class="modal-overlay">
         <div class="modal">
             <button class="close-btn" onclick="closeModal('paymentModal')">&times;</button>
@@ -461,7 +492,7 @@
         </div>
     </div>
 
-    <!-- ======== مودال إدارة العميل (عرض وحذف الديون) ======== -->
+    <!-- ======== مودال إدارة العميل ======== -->
     <div id="clientModal" class="modal-overlay">
         <div class="modal">
             <button class="close-btn" onclick="closeModal('clientModal')">&times;</button>
@@ -487,63 +518,219 @@
 </div>
 
 <script>
-    // --------------------------------------------------------------
-    // قائمة العملاء
-    // --------------------------------------------------------------
-    const RAW_CUSTOMERS = [
-        "اخو حسنين", "شيخ عباس الطيب", "عباس رخيت", "عبدالله الحلاق",
-        "امير نسيب علي جام", "ابو الهود", "كريم عويز ابو عزيز", "ابو حنين سيراميك",
-        "ابو كسور", "ابو سيف صيدلية", "ابو سجاد جيران ابو وهاب", "ياس ابو تبارك",
-        "ابو وليد عمارة", "ضرغام فريد حطابات", "احمد الطويل كبة", "ابو حوراء السلطاني",
-        "ام احمد الحمراوية", "رياض شبوط", "احمد صيرفه", "احمد الدوري",
-        "احمد هادي", "احمد بنزات", "احمد موسى جبران", "احمد الصيني",
-        "ابو روان", "شركة الانوار", "صيدلية الحمد", "علي المصري",
-        "علي وسام كاظم حميد", "علي الاخرس", "علي حازم", "علي ابو زهراء",
-        "علي الخليجي", "علي خضر عباس", "علي دراجات", "حيدر باقر اخو علي",
-        "علي كجه", "علي اللولوي", "علي مكي البيت", "علي صباري",
-        "كريم كهوة", "امين محمد علي", "امير سكلة", "امير حيدر عبيس",
-        "حسن مطعم", "امير برز", "امجد راضي", "امجد الخباز",
-        "اركان عويز", "اشرف الحداد", "اشرف راضي", "اثير كتاب",
-        "ابو ايوب جبران", "بهاء ابو قماش", "جواد ابو سجاد", "بسام عماد",
-        "كرايب حسين", "باسم قرب المولدة", "باسم الزاملي", "ديو الكهوة",
-        "ام رقية شاوي", "ضرغام كرين", "دكتور عامر", "فلاح جيجان",
-        "فاضل عبيدي", "بيت ستوري", "فقار الحلاق", "فلاح كبة",
-        "فلاح الفحام", "محمد الدوري فنكر", "فريد الشرطي", "ابو فاطمة",
-        "علاء عنون Fbs", "ابو سارة فؤاد مبارك", "ابو زينب الثرام", "حسن كهوة",
-        "حسن كهوة البيت", "عبدالله عماد اسود", "حيدر راضي", "حمزة ملابس",
-        "حسن الخباز", "حازم ببسي", "حسين مهند", "حسين مغيم ب",
-        "بيت علي عوفي", "حسين ابو لحيه", "ابو عباس الجنابي", "حسام ابو مينا كيبل",
-        "حسين برص", "منتصر الكهربائي", "ابراهيم رويهي جفات", "ابو ابراهيم جبران",
-        "جبار ابو كرار علوة", "استاذ جعفر", "جلال حيدر الخباز", "زيد جبران تكسي",
-        "سيف عوض", "سيف علي كاظم", "خالي حسن", "كرار حيدر عبيس",
-        "امير حميد رشيد", "كرار نوفي", "ابو ليلى جيران زيد", "لؤي ابو امير",
-        "شركة الفا", "عباس محمد جامعين", "فلاح لفات", "محمد عامر 2",
-        "محمد عامر", "سيد محمد حيدر", "لؤي مستشفى الولادة", "مهدي كهربائ كيبل",
-        "ميثم عكيلي", "مازن الفيتر", "مشتاق عكروك", "محسن نعمان",
-        "مرتضى فلفله", "مشرق عكروك", "مصطفى جبران", "علي فلفله",
-        "مصطفى فلاح", "عباس مطر الكهربائي", "مصطفى غني", "مصطفى كوزمتك",
-        "مرتضى كنزاع", "رجاء عليوي الحمد", "محمد ابن رضيه", "سيد عباس",
-        "سيد محمد اصلاحي", "صدام جياد جديده", "صفاء قطن", "صفاء ستار",
-        "سيف باقر", "سجاد الدوري", "صلاح جبران", "ابو حسن سليم",
-        "مهند عكروك", "ستار العزاوي", "سيتو كهوة", "شذى غطريف",
-        "حسين سودان", "حيدر محمد زويد", "اهل عقيل علوة", "ثامر جديدة",
-        "ام الهنا", "ام مريم - باجي", "وسيم يوسف", "حيدر اخو سيتو",
-        "ياسر مقابل حسن كبة", "صفاء عبدالكريم صادق", "محمد غني", "كرار سهيله",
-        "زيد فلافل", "زيد كافتريا", "faris9", "hell", "hus93", "jalil", "musleem", "nona", "raheem"
-    ];
-    const ALL_CUSTOMERS = [...new Set(RAW_CUSTOMERS)];
+    // ================================================================
+    // 🔐 إعدادات GitHub - غيّر هذه القيم حسب حسابك
+    // ================================================================
+    const GITHUB_TOKEN = 'ghp_YourPersonalAccessTokenHere'; // ضع رمز GitHub الشخصي هنا
+    const REPO_OWNER = 'YourGitHubUsername';               // اسم المستخدم على GitHub
+    const REPO_NAME = 'my-debt-data';                      // اسم المستودع الذي سيحفظ البيانات
+    const DATA_FILE = 'data.json';                         // اسم ملف البيانات داخل المستودع
 
-    // ---------- قاعدة البيانات ----------
+    // ================================================================
+    // متغيرات عامة
+    // ================================================================
     let data = {
-        customers: JSON.parse(localStorage.getItem('debt_customers')) || [],
-        debts: JSON.parse(localStorage.getItem('debts_list')) || []
+        customers: [],
+        debts: []
     };
+    let currentSha = '';           // لتخزين رقم إصدار الملف من GitHub
+    let isOnline = true;           // حالة الاتصال
+    let syncInProgress = false;    // لمنع تكرار المزامنة
 
-    function saveData() {
+    // ================================================================
+    // دوال GitHub API
+    // ================================================================
+
+    /**
+     * تحميل البيانات من GitHub
+     */
+    async function loadFromGitHub() {
+        try {
+            const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${DATA_FILE}`;
+            const response = await fetch(url, {
+                headers: {
+                    'Authorization': `token ${GITHUB_TOKEN}`,
+                    'Accept': 'application/vnd.github.v3+json'
+                }
+            });
+
+            if (response.status === 404) {
+                // الملف غير موجود → نعيد بيانات فارغة
+                return { customers: [], debts: [] };
+            }
+
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}`);
+            }
+
+            const result = await response.json();
+            currentSha = result.sha;
+            const content = atob(result.content);
+            return JSON.parse(content);
+        } catch (error) {
+            console.warn('⚠️ فشل التحميل من GitHub:', error.message);
+            return null;
+        }
+    }
+
+    /**
+     * حفظ البيانات إلى GitHub
+     */
+    async function saveToGitHub(dataToSave) {
+        if (syncInProgress) return false;
+        syncInProgress = true;
+        document.getElementById('syncBtn').disabled = true;
+
+        try {
+            // 1. نحتاج أولاً إلى SHA الحالي (للتحديث)
+            const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${DATA_FILE}`;
+            let sha = currentSha;
+
+            // إذا لم يكن لدينا SHA، نحاول جلب الملف أولاً
+            if (!sha) {
+                const getResponse = await fetch(url, {
+                    headers: {
+                        'Authorization': `token ${GITHUB_TOKEN}`,
+                        'Accept': 'application/vnd.github.v3+json'
+                    }
+                });
+                if (getResponse.ok) {
+                    const result = await getResponse.json();
+                    sha = result.sha;
+                    currentSha = sha;
+                }
+            }
+
+            const content = btoa(unescape(encodeURIComponent(JSON.stringify(dataToSave, null, 2))));
+
+            const payload = {
+                message: `تحديث البيانات - ${new Date().toLocaleString('ar-EG')}`,
+                content: content,
+                sha: sha || undefined
+            };
+
+            const putResponse = await fetch(url, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `token ${GITHUB_TOKEN}`,
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/vnd.github.v3+json'
+                },
+                body: JSON.stringify(payload)
+            });
+
+            if (!putResponse.ok) {
+                const errorData = await putResponse.json();
+                throw new Error(errorData.message || `HTTP ${putResponse.status}`);
+            }
+
+            const result = await putResponse.json();
+            currentSha = result.content.sha;
+            isOnline = true;
+            updateStatusBadge();
+            console.log('✅ تم حفظ البيانات على GitHub بنجاح!');
+            return true;
+
+        } catch (error) {
+            console.error('❌ فشل الحفظ على GitHub:', error.message);
+            isOnline = false;
+            updateStatusBadge();
+            // نحفظ محلياً كنسخة احتياطية
+            localStorage.setItem('github_backup', JSON.stringify(dataToSave));
+            return false;
+        } finally {
+            syncInProgress = false;
+            document.getElementById('syncBtn').disabled = false;
+        }
+    }
+
+    /**
+     * مزامنة البيانات مع GitHub (تحميل ثم حفظ إن لزم)
+     */
+    async function syncWithGitHub() {
+        const btn = document.getElementById('syncBtn');
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري...';
+
+        try {
+            // 1. نحمل أحدث البيانات من GitHub
+            const remoteData = await loadFromGitHub();
+            if (remoteData) {
+                // دمج البيانات: نأخذ العملاء من GitHub، والديون أيضاً
+                data.customers = remoteData.customers || [];
+                data.debts = remoteData.debts || [];
+                saveLocal();
+                updateUI();
+                alert('✅ تم تحديث البيانات من GitHub بنجاح!');
+            } else {
+                // إذا فشل التحميل، نحاول رفع البيانات المحلية إلى GitHub
+                const saved = await saveToGitHub(data);
+                if (saved) {
+                    alert('✅ تم رفع البيانات إلى GitHub بنجاح!');
+                } else {
+                    alert('⚠️ فشل الاتصال بـ GitHub. البيانات محفوظة محلياً.');
+                }
+            }
+        } catch (error) {
+            alert('❌ حدث خطأ أثناء المزامنة: ' + error.message);
+        }
+
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fas fa-sync"></i> مزامنة';
+    }
+
+    // ================================================================
+    // دوال التخزين المحلي (كدعم احتياطي)
+    // ================================================================
+
+    function saveLocal() {
         localStorage.setItem('debt_customers', JSON.stringify(data.customers));
         localStorage.setItem('debts_list', JSON.stringify(data.debts));
+    }
+
+    function loadLocal() {
+        const customers = JSON.parse(localStorage.getItem('debt_customers'));
+        const debts = JSON.parse(localStorage.getItem('debts_list'));
+        if (customers) data.customers = customers;
+        if (debts) data.debts = debts;
+    }
+
+    // ================================================================
+    // دالة الحفظ الرئيسية (تحفظ محلياً + ترسل إلى GitHub في الخلفية)
+    // ================================================================
+
+    async function saveData() {
+        // حفظ محلياً فوراً
+        saveLocal();
+
+        // محاولة الرفع إلى GitHub في الخلفية (لا ننتظر النتيجة)
+        try {
+            await saveToGitHub(data);
+        } catch (e) {
+            // الخطأ تم التعامل معه داخل saveToGitHub
+        }
+
         updateUI();
     }
+
+    // ================================================================
+    // حالة الاتصال
+    // ================================================================
+
+    function updateStatusBadge() {
+        const badge = document.getElementById('statusBadge');
+        if (isOnline) {
+            badge.innerHTML = '🟢 متصل';
+            badge.className = 'connection-status';
+        } else {
+            badge.innerHTML = '🔴 غير متصل (حفظ محلي)';
+            badge.className = 'connection-status offline';
+        }
+    }
+
+    // ================================================================
+    // دوال التطبيق الأساسية (نفس الكود السابق مع تعديل saveData)
+    // ================================================================
 
     function getCustomerName(id) {
         const c = data.customers.find(c => c.id === id);
@@ -584,7 +771,7 @@
         });
     });
 
-    // ---------- عرض العملاء (مع زر تسديد) ----------
+    // ---------- عرض العملاء ----------
     function renderCustomers() {
         const container = document.getElementById('customersList');
         const search = document.getElementById('searchCustomer').value.toLowerCase();
@@ -597,7 +784,6 @@
             const balance = getCustomerBalance(c.id);
             const balClass = balance >= 0 ? 'positive' : 'negative';
             const balText = balance >= 0 ? `له عليك ${formatCurrency(balance)}` : `عليه لك ${formatCurrency(Math.abs(balance))}`;
-            // تحقق من وجود ديون غير مسددة لإظهار زر التسديد بشكل بارز
             const hasPending = data.debts.some(d => d.customerId === c.id && !d.paid);
             return `<div class="customer-item">
                 <div class="info" onclick="openClientModal('${c.id}')">
@@ -624,11 +810,10 @@
                 phone: phone || ''
             });
             saveData();
-            renderCustomers();
         }
     }
 
-    // ---------- حذف العميل (موجود داخل المودال) ----------
+    // ---------- حذف العميل ----------
     function deleteCurrentCustomer() {
         if (!currentModalClientId) return;
         const client = data.customers.find(c => c.id === currentModalClientId);
@@ -640,13 +825,12 @@
                 data.debts = data.debts.filter(d => d.customerId !== id);
                 saveData();
                 closeModal('clientModal');
-                renderCustomers();
                 alert('✅ تم حذف العميل وجميع ديونه.');
             }
         }
     }
 
-    // ---------- مودال إضافة دين ----------
+    // ---------- إضافة دين ----------
     let addDebtTargetId = null;
 
     function openAddDebtFromMain(clientId) {
@@ -702,7 +886,7 @@
         addDebtTargetId = null;
     }
 
-    // ---------- 🚀 مودال التسديد السريع (الديون غير المسددة فقط) ----------
+    // ---------- مودال التسديد ----------
     function openPaymentModal(clientId) {
         const client = data.customers.find(c => c.id === clientId);
         if (!client) return;
@@ -739,7 +923,6 @@
         }).join('');
     }
 
-    // تسديد دين فردي من مودال التسديد
     function paySingleDebt(id) {
         if (confirm('تسجيل هذا الدين كـ "مدفوع"؟')) {
             const debt = data.debts.find(d => d.id === id);
@@ -748,9 +931,7 @@
                 saveData();
                 if (paymentClientId) {
                     renderPaymentDebts(paymentClientId);
-                    // تحديث الرصيد في الخلفية
                     renderCustomers();
-                    // تحديث المودال الرئيسي إذا كان مفتوحاً
                     if (currentModalClientId) {
                         renderModalDebts(currentModalClientId);
                         updateModalBalance();
@@ -761,7 +942,6 @@
         }
     }
 
-    // تسديد جميع الديون غير المسددة للعميل الحالي
     function payAllDebts() {
         if (!paymentClientId) return;
         const pending = data.debts.filter(d => d.customerId === paymentClientId && !d.paid);
@@ -782,7 +962,7 @@
         }
     }
 
-    // ---------- مودال إدارة العميل (عرض كل الديون) ----------
+    // ---------- مودال إدارة العميل ----------
     function openClientModal(clientId) {
         const client = data.customers.find(c => c.id === clientId);
         if (!client) return;
@@ -825,7 +1005,6 @@
         }).join('');
     }
 
-    // دوال الإدارة من داخل المودال
     function markPaidFromModal(id) {
         const debt = data.debts.find(d => d.id === id);
         if (debt) {
@@ -836,7 +1015,6 @@
                 updateModalBalance();
             }
             renderCustomers();
-            // إغلاق مودال التسديد إذا كان مفتوحاً
             if (paymentClientId) {
                 renderPaymentDebts(paymentClientId);
             }
@@ -907,7 +1085,6 @@
                         data.debts = imported.debts;
                         saveData();
                         alert('✅ تم استعادة البيانات بنجاح!');
-                        renderCustomers();
                     }
                 } else {
                     alert('❌ هذا الملف غير صالح.');
@@ -939,19 +1116,85 @@
         }
     }
 
+    // ---------- العملاء الافتراضيون ----------
+    const RAW_CUSTOMERS = [
+        "اخو حسنين", "شيخ عباس الطيب", "عباس رخيت", "عبدالله الحلاق",
+        "امير نسيب علي جام", "ابو الهود", "كريم عويز ابو عزيز", "ابو حنين سيراميك",
+        "ابو كسور", "ابو سيف صيدلية", "ابو سجاد جيران ابو وهاب", "ياس ابو تبارك",
+        "ابو وليد عمارة", "ضرغام فريد حطابات", "احمد الطويل كبة", "ابو حوراء السلطاني",
+        "ام احمد الحمراوية", "رياض شبوط", "احمد صيرفه", "احمد الدوري",
+        "احمد هادي", "احمد بنزات", "احمد موسى جبران", "احمد الصيني",
+        "ابو روان", "شركة الانوار", "صيدلية الحمد", "علي المصري",
+        "علي وسام كاظم حميد", "علي الاخرس", "علي حازم", "علي ابو زهراء",
+        "علي الخليجي", "علي خضر عباس", "علي دراجات", "حيدر باقر اخو علي",
+        "علي كجه", "علي اللولوي", "علي مكي البيت", "علي صباري",
+        "كريم كهوة", "امين محمد علي", "امير سكلة", "امير حيدر عبيس",
+        "حسن مطعم", "امير برز", "امجد راضي", "امجد الخباز",
+        "اركان عويز", "اشرف الحداد", "اشرف راضي", "اثير كتاب",
+        "ابو ايوب جبران", "بهاء ابو قماش", "جواد ابو سجاد", "بسام عماد",
+        "كرايب حسين", "باسم قرب المولدة", "باسم الزاملي", "ديو الكهوة",
+        "ام رقية شاوي", "ضرغام كرين", "دكتور عامر", "فلاح جيجان",
+        "فاضل عبيدي", "بيت ستوري", "فقار الحلاق", "فلاح كبة",
+        "فلاح الفحام", "محمد الدوري فنكر", "فريد الشرطي", "ابو فاطمة",
+        "علاء عنون Fbs", "ابو سارة فؤاد مبارك", "ابو زينب الثرام", "حسن كهوة",
+        "حسن كهوة البيت", "عبدالله عماد اسود", "حيدر راضي", "حمزة ملابس",
+        "حسن الخباز", "حازم ببسي", "حسين مهند", "حسين مغيم ب",
+        "بيت علي عوفي", "حسين ابو لحيه", "ابو عباس الجنابي", "حسام ابو مينا كيبل",
+        "حسين برص", "منتصر الكهربائي", "ابراهيم رويهي جفات", "ابو ابراهيم جبران",
+        "جبار ابو كرار علوة", "استاذ جعفر", "جلال حيدر الخباز", "زيد جبران تكسي",
+        "سيف عوض", "سيف علي كاظم", "خالي حسن", "كرار حيدر عبيس",
+        "امير حميد رشيد", "كرار نوفي", "ابو ليلى جيران زيد", "لؤي ابو امير",
+        "شركة الفا", "عباس محمد جامعين", "فلاح لفات", "محمد عامر 2",
+        "محمد عامر", "سيد محمد حيدر", "لؤي مستشفى الولادة", "مهدي كهربائ كيبل",
+        "ميثم عكيلي", "مازن الفيتر", "مشتاق عكروك", "محسن نعمان",
+        "مرتضى فلفله", "مشرق عكروك", "مصطفى جبران", "علي فلفله",
+        "مصطفى فلاح", "عباس مطر الكهربائي", "مصطفى غني", "مصطفى كوزمتك",
+        "مرتضى كنزاع", "رجاء عليوي الحمد", "محمد ابن رضيه", "سيد عباس",
+        "سيد محمد اصلاحي", "صدام جياد جديده", "صفاء قطن", "صفاء ستار",
+        "سيف باقر", "سجاد الدوري", "صلاح جبران", "ابو حسن سليم",
+        "مهند عكروك", "ستار العزاوي", "سيتو كهوة", "شذى غطريف",
+        "حسين سودان", "حيدر محمد زويد", "اهل عقيل علوة", "ثامر جديدة",
+        "ام الهنا", "ام مريم - باجي", "وسيم يوسف", "حيدر اخو سيتو",
+        "ياسر مقابل حسن كبة", "صفاء عبدالكريم صادق", "محمد غني", "كرار سهيله",
+        "زيد فلافل", "زيد كافتريا", "faris9", "hell", "hus93", "jalil", "musleem", "nona", "raheem"
+    ];
+    const ALL_CUSTOMERS = [...new Set(RAW_CUSTOMERS)];
+
     // ---------- بدء التشغيل ----------
-    window.onload = function() {
-        if (data.customers.length === 0) {
-            ALL_CUSTOMERS.forEach(name => {
-                data.customers.push({
-                    id: Date.now().toString(36) + Math.random().toString(36).substr(2, 4),
-                    name: name,
-                    phone: ''
+    window.onload = async function() {
+        // 1. نحاول تحميل البيانات من GitHub
+        const remoteData = await loadFromGitHub();
+
+        if (remoteData && remoteData.customers && remoteData.debts) {
+            // وجدنا بيانات على GitHub
+            data.customers = remoteData.customers;
+            data.debts = remoteData.debts;
+            isOnline = true;
+        } else {
+            // 2. لم نجد بيانات على GitHub → نبحث في localStorage
+            loadLocal();
+            if (data.customers.length === 0) {
+                // 3. لا توجد بيانات محلية → نضيف العملاء الافتراضيين
+                ALL_CUSTOMERS.forEach(name => {
+                    data.customers.push({
+                        id: Date.now().toString(36) + Math.random().toString(36).substr(2, 4),
+                        name: name,
+                        phone: ''
+                    });
                 });
-            });
-            saveData();
+            }
+            isOnline = false;
         }
+
+        // حفظ محلياً ورفع إلى GitHub إذا كانت البيانات جديدة
+        saveLocal();
+        if (data.customers.length > 0) {
+            await saveToGitHub(data);
+        }
+
+        updateStatusBadge();
         updateUI();
+        console.log('✅ تم تحميل الصفحة بنجاح!');
     };
 </script>
 </body>
