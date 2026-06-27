@@ -527,9 +527,9 @@
 
 <script>
     // ================================================================
-    // 🔐 إعدادات GitHub - تم تعبئتها بمعلوماتك كما أرسلتها
+    // 🔐 إعدادات GitHub - تم تحديثها بالرمز الجديد
     // ================================================================
-    const GITHUB_TOKEN = 'ghp_1234567890abcdefghijklmnopqrstuvwxyz';
+    const GITHUB_TOKEN = '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';
     const REPO_OWNER = 'raedalzubaidi21-source';
     const REPO_NAME = 'my-debt-data';
     const DATA_FILE = 'data.json';
@@ -539,7 +539,7 @@
     // ================================================================
     let data = { customers: [], debts: [] };
     let currentSha = '';
-    let isOnline = true;
+    let isOnline = false;
     let syncInProgress = false;
 
     // ================================================================
@@ -1140,7 +1140,7 @@
     const ALL_CUSTOMERS = [...new Set(RAW_CUSTOMERS)];
 
     // ================================================================
-    // 🚀 بدء التشغيل - مع التصحيح (إضافة العملاء إذا كانت القائمة فارغة)
+    // 🚀 بدء التشغيل
     // ================================================================
     window.onload = async function() {
         // 1. نحاول تحميل البيانات من GitHub
@@ -1157,8 +1157,7 @@
             isOnline = false;
         }
 
-        // 4. 🛠️ التصحيح المهم: إذا كانت قائمة العملاء فارغة (بغض النظر عن المصدر)،
-        //    نضيف العملاء الافتراضيين تلقائياً.
+        // 4. إذا كانت قائمة العملاء فارغة، نضيف العملاء الافتراضيين
         if (data.customers.length === 0) {
             console.log('📝 لا يوجد عملاء، جاري إضافة العملاء الافتراضيين...');
             ALL_CUSTOMERS.forEach(name => {
@@ -1168,15 +1167,13 @@
                     phone: ''
                 });
             });
-            // بعد إضافة العملاء، نحفظهم محلياً ونرفعهم إلى GitHub
             saveLocal();
             await saveToGitHub(data);
         } else {
-            // إذا كان هناك عملاء، نحفظهم محلياً فقط (الرفع تم في saveData عند التعديل)
             saveLocal();
         }
 
-        // 5. تحديث الواجهة وحالة الاتصال
+        // 5. تحديث الواجهة
         updateStatusBadge();
         updateUI();
         console.log('✅ تم تحميل الصفحة بنجاح! عدد العملاء:', data.customers.length);
