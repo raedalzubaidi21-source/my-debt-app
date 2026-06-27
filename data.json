@@ -1,0 +1,826 @@
+{
+  "customers": [
+    {
+      "id": "mqw7ks2r3wuh",
+      "name": "اخو حسنين",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rkuhw",
+      "name": "شيخ عباس الطيب",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2r75ha",
+      "name": "عباس رخيت",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rfng9",
+      "name": "عبدالله الحلاق",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2r7sr7",
+      "name": "امير نسيب علي جام",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rcw9s",
+      "name": "ابو الهود",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rpj54",
+      "name": "كريم عويز ابو عزيز",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rdhhw",
+      "name": "ابو حنين سيراميك",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2r3p50",
+      "name": "ابو كسور",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2r3jei",
+      "name": "ابو سيف صيدلية",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rl3lq",
+      "name": "ابو سجاد جيران ابو وهاب",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2ruyrt",
+      "name": "ياس ابو تبارك",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2r4cdb",
+      "name": "ابو وليد عمارة",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2r5swy",
+      "name": "ضرغام فريد حطابات",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rvr35",
+      "name": "احمد الطويل كبة",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rk4no",
+      "name": "ابو حوراء السلطاني",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2r5j2d",
+      "name": "ام احمد الحمراوية",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2r88o5",
+      "name": "رياض شبوط",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2ry4cs",
+      "name": "احمد صيرفه",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rjiie",
+      "name": "احمد الدوري",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2r8gfy",
+      "name": "احمد هادي",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rwnfz",
+      "name": "احمد بنزات",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2r82o3",
+      "name": "احمد موسى جبران",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rcqoy",
+      "name": "احمد الصيني",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2r92fd",
+      "name": "ابو روان",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rxypg",
+      "name": "شركة الانوار",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rd36m",
+      "name": "صيدلية الحمد",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rghqa",
+      "name": "علي المصري",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rdmn4",
+      "name": "علي وسام كاظم حميد",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rnol9",
+      "name": "علي الاخرس",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rq6t7",
+      "name": "علي حازم",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rgga1",
+      "name": "علي ابو زهراء",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2ru0ic",
+      "name": "علي الخليجي",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2roujf",
+      "name": "علي خضر عباس",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rkbli",
+      "name": "علي دراجات",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2r3vip",
+      "name": "حيدر باقر اخو علي",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2r5joc",
+      "name": "علي كجه",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rodj8",
+      "name": "علي اللولوي",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rydft",
+      "name": "علي مكي البيت",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rtq4g",
+      "name": "علي صباري",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2r7sxr",
+      "name": "كريم كهوة",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2ru9a1",
+      "name": "امين محمد علي",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rhxlv",
+      "name": "امير سكلة",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2r3ijk",
+      "name": "امير حيدر عبيس",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rsry4",
+      "name": "حسن مطعم",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rmv5n",
+      "name": "امير برز",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rowjh",
+      "name": "امجد راضي",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rgynt",
+      "name": "امجد الخباز",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rf62k",
+      "name": "اركان عويز",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rvms6",
+      "name": "اشرف الحداد",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rly9g",
+      "name": "اشرف راضي",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2r8h6b",
+      "name": "اثير كتاب",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rwm6v",
+      "name": "ابو ايوب جبران",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rj4lj",
+      "name": "بهاء ابو قماش",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rgu8q",
+      "name": "جواد ابو سجاد",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rw5co",
+      "name": "بسام عماد",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rjlqo",
+      "name": "كرايب حسين",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2r69jb",
+      "name": "باسم قرب المولدة",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rpgrv",
+      "name": "باسم الزاملي",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rd3hd",
+      "name": "ديو الكهوة",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2ra1uw",
+      "name": "ام رقية شاوي",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rhk0x",
+      "name": "ضرغام كرين",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2r5jp3",
+      "name": "دكتور عامر",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rr9b2",
+      "name": "فلاح جيجان",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2r9c1a",
+      "name": "فاضل عبيدي",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rg30l",
+      "name": "بيت ستوري",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rjndg",
+      "name": "فقار الحلاق",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rpqq9",
+      "name": "فلاح كبة",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rj0vk",
+      "name": "فلاح الفحام",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2r1jr8",
+      "name": "محمد الدوري فنكر",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2r7b6t",
+      "name": "فريد الشرطي",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2r5iuf",
+      "name": "ابو فاطمة",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2r1w85",
+      "name": "علاء عنون Fbs",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rfq2w",
+      "name": "ابو سارة فؤاد مبارك",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rplk6",
+      "name": "ابو زينب الثرام",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rmkk3",
+      "name": "حسن كهوة",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rmsab",
+      "name": "حسن كهوة البيت",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rgx3e",
+      "name": "عبدالله عماد اسود",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2r6j3y",
+      "name": "حيدر راضي",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rmhmw",
+      "name": "حمزة ملابس",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rlbsu",
+      "name": "حسن الخباز",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2r96q0",
+      "name": "حازم ببسي",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rcs8a",
+      "name": "حسين مهند",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2ris75",
+      "name": "حسين مغيم ب",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rqfp3",
+      "name": "بيت علي عوفي",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rmm53",
+      "name": "حسين ابو لحيه",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2r2jj6",
+      "name": "ابو عباس الجنابي",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rm66v",
+      "name": "حسام ابو مينا كيبل",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rwk60",
+      "name": "حسين برص",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rpyqj",
+      "name": "منتصر الكهربائي",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rc175",
+      "name": "ابراهيم رويهي جفات",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rtouu",
+      "name": "ابو ابراهيم جبران",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2raa24",
+      "name": "جبار ابو كرار علوة",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rc816",
+      "name": "استاذ جعفر",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2r3nl5",
+      "name": "جلال حيدر الخباز",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rnpog",
+      "name": "زيد جبران تكسي",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rvrm5",
+      "name": "سيف عوض",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rsqk4",
+      "name": "سيف علي كاظم",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rp7ae",
+      "name": "خالي حسن",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rqker",
+      "name": "كرار حيدر عبيس",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rfnuu",
+      "name": "امير حميد رشيد",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rdsy4",
+      "name": "كرار نوفي",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2r17le",
+      "name": "ابو ليلى جيران زيد",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2r4p4c",
+      "name": "لؤي ابو امير",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2ro6ae",
+      "name": "شركة الفا",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2r3i60",
+      "name": "عباس محمد جامعين",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rpp57",
+      "name": "فلاح لفات",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2r9rss",
+      "name": "محمد عامر 2",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2r5cde",
+      "name": "محمد عامر",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rhycn",
+      "name": "سيد محمد حيدر",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rukoq",
+      "name": "لؤي مستشفى الولادة",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rl02m",
+      "name": "مهدي كهربائ كيبل",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rqj75",
+      "name": "ميثم عكيلي",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2r81lj",
+      "name": "مازن الفيتر",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rwwj3",
+      "name": "مشتاق عكروك",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2ry9cm",
+      "name": "محسن نعمان",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rhqxw",
+      "name": "مرتضى فلفله",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2r8gxm",
+      "name": "مشرق عكروك",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rtx5l",
+      "name": "مصطفى جبران",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rbh3c",
+      "name": "علي فلفله",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2ruvw0",
+      "name": "مصطفى فلاح",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2r8ysv",
+      "name": "عباس مطر الكهربائي",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rn9s0",
+      "name": "مصطفى غني",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rpvpn",
+      "name": "مصطفى كوزمتك",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rftkd",
+      "name": "مرتضى كنزاع",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rplze",
+      "name": "رجاء عليوي الحمد",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rntx8",
+      "name": "محمد ابن رضيه",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rrnfr",
+      "name": "سيد عباس",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2r5hox",
+      "name": "سيد محمد اصلاحي",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2r6vmt",
+      "name": "صدام جياد جديده",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2ruicz",
+      "name": "صفاء قطن",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rh65n",
+      "name": "صفاء ستار",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rfocl",
+      "name": "سيف باقر",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rfk5s",
+      "name": "سجاد الدوري",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rejzp",
+      "name": "صلاح جبران",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rlhnr",
+      "name": "ابو حسن سليم",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2r1k1m",
+      "name": "مهند عكروك",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rjnuc",
+      "name": "ستار العزاوي",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2r5nwm",
+      "name": "سيتو كهوة",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2r0s12",
+      "name": "شذى غطريف",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rhifb",
+      "name": "حسين سودان",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rx6n9",
+      "name": "حيدر محمد زويد",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rm2rb",
+      "name": "اهل عقيل علوة",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2r8zf9",
+      "name": "ثامر جديدة",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rp2is",
+      "name": "ام الهنا",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rchi3",
+      "name": "ام مريم - باجي",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2r7luw",
+      "name": "وسيم يوسف",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2r8m2y",
+      "name": "حيدر اخو سيتو",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rpumg",
+      "name": "ياسر مقابل حسن كبة",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rz64f",
+      "name": "صفاء عبدالكريم صادق",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rmzxy",
+      "name": "محمد غني",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2r269t",
+      "name": "كرار سهيله",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rxal6",
+      "name": "زيد فلافل",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2re217",
+      "name": "زيد كافتريا",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rrmd0",
+      "name": "faris9",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rhf8z",
+      "name": "hell",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2r32ah",
+      "name": "hus93",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2r6w9c",
+      "name": "jalil",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2r05k3",
+      "name": "musleem",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2r1u47",
+      "name": "nona",
+      "phone": ""
+    },
+    {
+      "id": "mqw7ks2rr2lp",
+      "name": "raheem",
+      "phone": ""
+    },
+    {
+      "id": "mqw949x4u9y3",
+      "name": "رائد الزبيدي",
+      "phone": "07816005051"
+    }
+  ],
+  "debts": [
+    {
+      "id": "mqw8aoqzmd8l",
+      "customerId": "mqw7ks2rkuhw",
+      "type": "li",
+      "amount": 35000,
+      "dueDate": "2026-06-27",
+      "note": "",
+      "paid": false,
+      "createdAt": "2026-06-27T10:40:04.043Z"
+    }
+  ]
+}
