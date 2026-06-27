@@ -813,6 +813,16 @@
   ],
   "debts": [
     {
+      "id": "mqwghix8gua5",
+      "customerId": "mqwgh8ewz5m2",
+      "type": "li",
+      "amount": 35000,
+      "dueDate": "2026-06-27",
+      "note": "",
+      "paid": false,
+      "createdAt": "2026-06-27T14:29:20.012Z"
+    },
+    {
       "id": "mqwggp2pe77a",
       "customerId": "mqwdxmql2cno",
       "type": "li",
