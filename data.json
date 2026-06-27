@@ -546,11 +546,6 @@
       "phone": ""
     },
     {
-      "id": "mqwdxmql2cno",
-      "name": "سيد محمد حيدر",
-      "phone": ""
-    },
-    {
       "id": "mqwdxmqlp138",
       "name": "لؤي مستشفى الولادة",
       "phone": ""
@@ -823,16 +818,6 @@
       "createdAt": "2026-06-27T14:29:20.012Z"
     },
     {
-      "id": "mqwggp2pe77a",
-      "customerId": "mqwdxmql2cno",
-      "type": "li",
-      "amount": 35000,
-      "dueDate": "2026-06-27",
-      "note": "",
-      "paid": false,
-      "createdAt": "2026-06-27T14:28:41.330Z"
-    },
-    {
       "id": "mqwgfyd9f1ay",
       "customerId": "mqwdxmql3tqj",
       "type": "li",
@@ -1101,16 +1086,6 @@
       "note": "",
       "paid": false,
       "createdAt": "2026-06-27T14:20:23.216Z"
-    },
-    {
-      "id": "mqwg5vxhce6w",
-      "customerId": "mqwdxmql2cno",
-      "type": "li",
-      "amount": 35000,
-      "dueDate": "2026-06-27",
-      "note": "",
-      "paid": false,
-      "createdAt": "2026-06-27T14:20:16.997Z"
     },
     {
       "id": "mqwg5sge69iu",
