@@ -34,6 +34,8 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 28px;
+            flex-wrap: wrap;
+            gap: 10px;
         }
         .app-header h1 {
             font-size: 28px;
@@ -43,6 +45,12 @@
         .app-header h1 i {
             color: #3a3a3a;
             margin-left: 10px;
+        }
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
         }
 
         .totals {
@@ -99,7 +107,6 @@
         .backup-row .btn-sm:hover { background: #f2f2f5; }
         #fileInput { display: none; }
 
-        /* مؤشر حالة الاتصال */
         .connection-status {
             display: inline-block;
             padding: 4px 14px;
@@ -108,13 +115,25 @@
             font-weight: 600;
             background: #e8f0e8;
             color: #2d6a2d;
+            white-space: nowrap;
         }
         .connection-status.offline {
             background: #f0e8e8;
             color: #8a2d2d;
         }
-
-        .screen { display: block; }
+        .sync-btn {
+            background: #1b1b1b;
+            color: #fff;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 13px;
+            white-space: nowrap;
+        }
+        .sync-btn:hover { background: #000; }
+        .sync-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
         .search-box {
             position: relative;
@@ -213,7 +232,6 @@
         .customer-item .actions .btn-sm.pay { background: #e8e8f0; border-color: #8a8aaa; }
         .customer-item .actions .btn-sm.pay:hover { background: #d0d0e0; }
 
-        /* المودالات */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -389,18 +407,11 @@
         .fw-bold { font-weight: 700; }
         .pay-all-btn { background: #2d2d2d; color: #fff; border: none; padding: 10px; border-radius: 14px; font-weight: 700; cursor: pointer; width: 100%; }
         .pay-all-btn:hover { background: #1a1a1a; }
-        .sync-btn {
-            background: #1b1b1b;
-            color: #fff;
-            border: none;
-            padding: 8px 18px;
-            border-radius: 30px;
-            font-weight: 600;
-            cursor: pointer;
-            font-size: 13px;
+        @media (max-width: 600px) {
+            .app { padding: 20px 15px; }
+            .totals { grid-template-columns: 1fr; }
+            .app-header h1 { font-size: 22px; }
         }
-        .sync-btn:hover { background: #000; }
-        .sync-btn:disabled { opacity: 0.5; cursor: not-allowed; }
     </style>
 </head>
 <body>
@@ -408,13 +419,12 @@
 
     <div class="app-header">
         <h1><i class="fas fa-scale-balanced"></i> دفتر الأموال</h1>
-        <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+        <div class="header-actions">
             <span class="connection-status" id="statusBadge">🟢 متصل</span>
             <button class="sync-btn" id="syncBtn" onclick="syncWithGitHub()"><i class="fas fa-sync"></i> مزامنة</button>
         </div>
     </div>
 
-    <!-- الإحصائيات -->
     <div class="totals">
         <div class="total-card">
             <span class="label"><i class="fas fa-arrow-left" style="margin-left:8px;"></i> مستحق لي</span>
@@ -426,14 +436,12 @@
         </div>
     </div>
 
-    <!-- أزرار النسخ الاحتياطي -->
     <div class="backup-row">
         <div class="btn-sm" onclick="exportBackup()"><i class="fas fa-download"></i> نسخ احتياطي</div>
         <div class="btn-sm" onclick="document.getElementById('fileInput').click()"><i class="fas fa-upload"></i> استعادة</div>
         <input type="file" id="fileInput" accept=".json" onchange="importBackup(event)">
     </div>
 
-    <!-- شاشة العملاء -->
     <div class="search-box">
         <i class="fas fa-search"></i>
         <input type="text" id="searchCustomer" placeholder="ابحث عن عميل..." oninput="renderCustomers()">
@@ -441,7 +449,7 @@
     <button class="btn-primary" style="margin-bottom:16px;" onclick="showAddCustomer()">+ إضافة عميل جديد</button>
     <div id="customersList"></div>
 
-    <!-- ======== مودال إضافة دين ======== -->
+    <!-- مودال إضافة دين -->
     <div id="addDebtModal" class="modal-overlay">
         <div class="modal">
             <button class="close-btn" onclick="closeModal('addDebtModal')">&times;</button>
@@ -477,7 +485,7 @@
         </div>
     </div>
 
-    <!-- ======== مودال التسديد السريع ======== -->
+    <!-- مودال التسديد السريع -->
     <div id="paymentModal" class="modal-overlay">
         <div class="modal">
             <button class="close-btn" onclick="closeModal('paymentModal')">&times;</button>
@@ -492,7 +500,7 @@
         </div>
     </div>
 
-    <!-- ======== مودال إدارة العميل ======== -->
+    <!-- مودال إدارة العميل -->
     <div id="clientModal" class="modal-overlay">
         <div class="modal">
             <button class="close-btn" onclick="closeModal('clientModal')">&times;</button>
@@ -519,31 +527,25 @@
 
 <script>
     // ================================================================
-    // 🔐 إعدادات GitHub - غيّر هذه القيم حسب حسابك
+    // 🔐 إعدادات GitHub - تم تعبئتها بمعلوماتك كما أرسلتها
     // ================================================================
-    const GITHUB_TOKEN = 'ghp_YourPersonalAccessTokenHere'; // ضع رمز GitHub الشخصي هنا
-    const REPO_OWNER = 'YourGitHubUsername';               // اسم المستخدم على GitHub
-    const REPO_NAME = 'my-debt-data';                      // اسم المستودع الذي سيحفظ البيانات
-    const DATA_FILE = 'data.json';                         // اسم ملف البيانات داخل المستودع
+    const GITHUB_TOKEN = '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';
+    const REPO_OWNER = 'raedalzubaidi21-source';
+    const REPO_NAME = 'my-debt-data';
+    const DATA_FILE = 'data.json';
 
     // ================================================================
-    // متغيرات عامة
+    // المتغيرات العامة
     // ================================================================
-    let data = {
-        customers: [],
-        debts: []
-    };
-    let currentSha = '';           // لتخزين رقم إصدار الملف من GitHub
-    let isOnline = true;           // حالة الاتصال
-    let syncInProgress = false;    // لمنع تكرار المزامنة
+    let data = { customers: [], debts: [] };
+    let currentSha = '';
+    let isOnline = true;
+    let syncInProgress = false;
 
     // ================================================================
     // دوال GitHub API
     // ================================================================
 
-    /**
-     * تحميل البيانات من GitHub
-     */
     async function loadFromGitHub() {
         try {
             const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${DATA_FILE}`;
@@ -555,7 +557,6 @@
             });
 
             if (response.status === 404) {
-                // الملف غير موجود → نعيد بيانات فارغة
                 return { customers: [], debts: [] };
             }
 
@@ -573,20 +574,15 @@
         }
     }
 
-    /**
-     * حفظ البيانات إلى GitHub
-     */
     async function saveToGitHub(dataToSave) {
         if (syncInProgress) return false;
         syncInProgress = true;
         document.getElementById('syncBtn').disabled = true;
 
         try {
-            // 1. نحتاج أولاً إلى SHA الحالي (للتحديث)
             const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${DATA_FILE}`;
             let sha = currentSha;
 
-            // إذا لم يكن لدينا SHA، نحاول جلب الملف أولاً
             if (!sha) {
                 const getResponse = await fetch(url, {
                     headers: {
@@ -635,7 +631,6 @@
             console.error('❌ فشل الحفظ على GitHub:', error.message);
             isOnline = false;
             updateStatusBadge();
-            // نحفظ محلياً كنسخة احتياطية
             localStorage.setItem('github_backup', JSON.stringify(dataToSave));
             return false;
         } finally {
@@ -644,26 +639,20 @@
         }
     }
 
-    /**
-     * مزامنة البيانات مع GitHub (تحميل ثم حفظ إن لزم)
-     */
     async function syncWithGitHub() {
         const btn = document.getElementById('syncBtn');
         btn.disabled = true;
         btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري...';
 
         try {
-            // 1. نحمل أحدث البيانات من GitHub
             const remoteData = await loadFromGitHub();
             if (remoteData) {
-                // دمج البيانات: نأخذ العملاء من GitHub، والديون أيضاً
                 data.customers = remoteData.customers || [];
                 data.debts = remoteData.debts || [];
                 saveLocal();
                 updateUI();
                 alert('✅ تم تحديث البيانات من GitHub بنجاح!');
             } else {
-                // إذا فشل التحميل، نحاول رفع البيانات المحلية إلى GitHub
                 const saved = await saveToGitHub(data);
                 if (saved) {
                     alert('✅ تم رفع البيانات إلى GitHub بنجاح!');
@@ -680,7 +669,7 @@
     }
 
     // ================================================================
-    // دوال التخزين المحلي (كدعم احتياطي)
+    // دوال التخزين المحلي
     // ================================================================
 
     function saveLocal() {
@@ -695,21 +684,11 @@
         if (debts) data.debts = debts;
     }
 
-    // ================================================================
-    // دالة الحفظ الرئيسية (تحفظ محلياً + ترسل إلى GitHub في الخلفية)
-    // ================================================================
-
     async function saveData() {
-        // حفظ محلياً فوراً
         saveLocal();
-
-        // محاولة الرفع إلى GitHub في الخلفية (لا ننتظر النتيجة)
         try {
             await saveToGitHub(data);
-        } catch (e) {
-            // الخطأ تم التعامل معه داخل saveToGitHub
-        }
-
+        } catch (e) {}
         updateUI();
     }
 
@@ -729,7 +708,7 @@
     }
 
     // ================================================================
-    // دوال التطبيق الأساسية (نفس الكود السابق مع تعديل saveData)
+    // دوال التطبيق الأساسية
     // ================================================================
 
     function getCustomerName(id) {
@@ -799,7 +778,7 @@
         }).join('');
     }
 
-    // ---------- إضافة عميل جديد ----------
+    // ---------- إضافة عميل ----------
     function showAddCustomer() {
         const name = prompt('أدخل اسم العميل الجديد:');
         if (name && name.trim()) {
@@ -1160,41 +1139,47 @@
     ];
     const ALL_CUSTOMERS = [...new Set(RAW_CUSTOMERS)];
 
-    // ---------- بدء التشغيل ----------
+    // ================================================================
+    // 🚀 بدء التشغيل - مع التصحيح (إضافة العملاء إذا كانت القائمة فارغة)
+    // ================================================================
     window.onload = async function() {
         // 1. نحاول تحميل البيانات من GitHub
         const remoteData = await loadFromGitHub();
 
+        // 2. إذا وجدنا بيانات على GitHub (حتى لو كانت فارغة)، نأخذها
         if (remoteData && remoteData.customers && remoteData.debts) {
-            // وجدنا بيانات على GitHub
             data.customers = remoteData.customers;
             data.debts = remoteData.debts;
             isOnline = true;
         } else {
-            // 2. لم نجد بيانات على GitHub → نبحث في localStorage
+            // 3. إذا فشل التحميل، نبحث في localStorage
             loadLocal();
-            if (data.customers.length === 0) {
-                // 3. لا توجد بيانات محلية → نضيف العملاء الافتراضيين
-                ALL_CUSTOMERS.forEach(name => {
-                    data.customers.push({
-                        id: Date.now().toString(36) + Math.random().toString(36).substr(2, 4),
-                        name: name,
-                        phone: ''
-                    });
-                });
-            }
             isOnline = false;
         }
 
-        // حفظ محلياً ورفع إلى GitHub إذا كانت البيانات جديدة
-        saveLocal();
-        if (data.customers.length > 0) {
+        // 4. 🛠️ التصحيح المهم: إذا كانت قائمة العملاء فارغة (بغض النظر عن المصدر)،
+        //    نضيف العملاء الافتراضيين تلقائياً.
+        if (data.customers.length === 0) {
+            console.log('📝 لا يوجد عملاء، جاري إضافة العملاء الافتراضيين...');
+            ALL_CUSTOMERS.forEach(name => {
+                data.customers.push({
+                    id: Date.now().toString(36) + Math.random().toString(36).substr(2, 4),
+                    name: name,
+                    phone: ''
+                });
+            });
+            // بعد إضافة العملاء، نحفظهم محلياً ونرفعهم إلى GitHub
+            saveLocal();
             await saveToGitHub(data);
+        } else {
+            // إذا كان هناك عملاء، نحفظهم محلياً فقط (الرفع تم في saveData عند التعديل)
+            saveLocal();
         }
 
+        // 5. تحديث الواجهة وحالة الاتصال
         updateStatusBadge();
         updateUI();
-        console.log('✅ تم تحميل الصفحة بنجاح!');
+        console.log('✅ تم تحميل الصفحة بنجاح! عدد العملاء:', data.customers.length);
     };
 </script>
 </body>
