@@ -1,222 +1,280 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html dir="rtl" lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دفتر الديون</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>دفتر الديون - الإدارة المتكاملة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* جميع الأنماط كما هي، تم حذفها للاختصار ولكنها موجودة في الملف الأصلي */
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, 'Segoe UI', Roboto, sans-serif; }
-        body { background: #f0f0f2; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; padding: 30px 20px; }
-        .app { max-width: 820px; width: 100%; background: #ffffff; border-radius: 28px; padding: 30px 28px 35px; box-shadow: 0 10px 40px rgba(0,0,0,0.04); border: 1px solid #e8e8ec; }
-        .app-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; flex-wrap: wrap; gap: 10px; }
-        .app-header h1 { font-size: 28px; font-weight: 700; color: #1b1b1b; }
-        .app-header h1 i { color: #3a3a3a; margin-left: 10px; }
-        .header-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-        .totals { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 28px; }
-        .total-card { background: #f8f8fa; border-radius: 18px; padding: 18px 24px; border: 1px solid #eaeaed; display: flex; justify-content: space-between; align-items: center; }
-        .total-card .label { font-size: 16px; color: #3a3a3a; font-weight: 500; }
-        .total-card .value { font-size: 28px; font-weight: 700; color: #1b1b1b; direction: ltr; }
-        .total-card .currency { font-size: 15px; font-weight: 400; color: #8e8e93; margin-right: 6px; }
-        .backup-row { display: flex; gap: 12px; margin: 6px 0 20px; flex-wrap: wrap; }
-        .backup-row .btn-sm { padding: 10px 18px; border: 1.5px solid #d9d9df; border-radius: 14px; background: #fff; font-size: 14px; font-weight: 500; color: #1b1b1b; cursor: pointer; transition: 0.2s; }
-        .backup-row .btn-sm i { margin-left: 8px; }
-        .backup-row .btn-sm:hover { background: #f2f2f5; }
-        #fileInput { display: none; }
-        .connection-status { display: inline-block; padding: 4px 14px; border-radius: 30px; font-size: 13px; font-weight: 600; background: #e8f0e8; color: #2d6a2d; white-space: nowrap; }
-        .connection-status.offline { background: #f0e8e8; color: #8a2d2d; }
-        .sync-btn { background: #1b1b1b; color: #fff; border: none; padding: 8px 18px; border-radius: 30px; font-weight: 600; cursor: pointer; font-size: 13px; white-space: nowrap; }
-        .sync-btn:hover { background: #000; }
-        .sync-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-        .search-box { position: relative; margin-bottom: 18px; }
-        .search-box input { width: 100%; padding: 16px 20px 16px 50px; border-radius: 30px; border: 1.5px solid #e5e5ea; background: #fafafc; font-size: 16px; }
-        .search-box input:focus { border-color: #3a3a3a; outline: none; background: #fff; }
-        .search-box i { position: absolute; right: 22px; top: 18px; color: #8e8e93; font-size: 16px; }
-        .btn-primary { background: #1b1b1b; color: #fff; padding: 14px 20px; border: none; border-radius: 16px; font-weight: 700; font-size: 15px; cursor: pointer; width: 100%; transition: 0.2s; }
-        .btn-primary:hover { background: #000; }
-        .customer-item { background: #ffffff; padding: 14px 18px; border-radius: 16px; margin-bottom: 10px; border: 1px solid #efeff1; display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
-        .customer-item:hover { border-color: #b0b0b8; background: #fafafc; }
-        .customer-item .info { flex: 1; cursor: pointer; min-width: 140px; }
-        .customer-item .info h4 { font-size: 17px; font-weight: 600; color: #1b1b1b; }
-        .customer-item .info p { font-size: 13px; color: #6e6e73; }
-        .customer-item .balance { font-weight: 700; font-size: 15px; direction: ltr; margin: 0 6px; min-width: 80px; text-align: center; }
-        .balance.positive { color: #1b1b1b; }
-        .balance.negative { color: #6e6e73; }
-        .customer-item .actions { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
-        .customer-item .actions .btn-sm { padding: 6px 14px; border: 1px solid #d9d9df; border-radius: 30px; background: #fff; font-size: 13px; font-weight: 600; cursor: pointer; transition: 0.15s; color: #1b1b1b; white-space: nowrap; }
-        .customer-item .actions .btn-sm:hover { background: #f0f0f2; border-color: #b0b0b8; }
-        .customer-item .actions .btn-sm.green { background: #e8f0e8; border-color: #8aaa8a; }
-        .customer-item .actions .btn-sm.green:hover { background: #d0e0d0; }
-        .customer-item .actions .btn-sm.pay { background: #e8e8f0; border-color: #8a8aaa; }
-        .customer-item .actions .btn-sm.pay:hover { background: #d0d0e0; }
-        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.25); backdrop-filter: blur(3px); justify-content: center; align-items: center; z-index: 1000; }
-        .modal-overlay.open { display: flex; }
-        .modal { background: #ffffff; border-radius: 32px; padding: 32px 30px; width: 500px; max-width: 94%; max-height: 90vh; overflow-y: auto; box-shadow: 0 30px 80px rgba(0,0,0,0.08); border: 1px solid #efeff1; }
-        .modal h3 { font-size: 22px; font-weight: 700; color: #1b1b1b; margin-bottom: 6px; }
-        .modal .sub-title { font-size: 16px; color: #6e6e73; margin-bottom: 18px; }
-        .modal .close-btn { float: left; background: none; border: none; font-size: 26px; color: #8e8e93; cursor: pointer; padding: 0 6px; }
-        .modal .close-btn:hover { color: #1b1b1b; }
-        .modal .form-group { margin-bottom: 16px; }
-        .modal .form-group label { display: block; font-size: 14px; font-weight: 600; color: #1b1b1b; margin-bottom: 5px; }
-        .modal .form-group input, .modal .form-group select, .modal .form-group textarea { width: 100%; padding: 12px 16px; border: 1.5px solid #e5e5ea; border-radius: 14px; font-size: 15px; background: #fafafc; }
-        .modal .form-group input:focus, .modal .form-group select:focus { border-color: #3a3a3a; outline: none; background: #fff; }
-        .modal .form-group input[disabled] { background: #f0f0f2; color: #1b1b1b; font-weight: 600; }
-        .modal .btn { width: 100%; padding: 14px; border: none; border-radius: 16px; background: #1b1b1b; color: #fff; font-weight: 700; font-size: 16px; cursor: pointer; transition: 0.2s; }
-        .modal .btn:hover { background: #000; }
-        .modal .btn-outline { background: transparent; color: #1b1b1b; border: 1.5px solid #d9d9df; }
-        .modal .btn-outline:hover { background: #f2f2f5; }
-        .quick-add-row { display: flex; gap: 10px; margin: 12px 0 16px; flex-wrap: wrap; }
-        .quick-add-row .btn { flex: 1; min-width: 70px; padding: 12px; background: #f8f8fa; color: #1b1b1b; border: 1.5px solid #d9d9df; font-weight: 600; }
-        .quick-add-row .btn:hover { background: #eaeaed; }
-        .quick-add-row .btn.custom { border-color: #3a3a3a; background: #f0f0f2; }
-        .quick-add-row .btn.custom:hover { background: #e0e0e4; }
-        .modal .debt-item { background: #f8f8fa; border-radius: 14px; padding: 12px 16px; margin-bottom: 8px; border: 1px solid #efeff1; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
-        .modal .debt-item .info p { font-size: 13px; color: #6e6e73; margin-top: 2px; }
-        .modal .debt-item .amount { font-weight: 700; font-size: 17px; direction: ltr; }
-        .modal .debt-item .amount.positive { color: #1b1b1b; }
-        .modal .debt-item .amount.negative { color: #6e6e73; }
-        .modal .debt-item .amount.paid-off { text-decoration: line-through; color: #8e8e93; }
-        .modal .debt-item .actions { display: flex; gap: 6px; }
-        .modal .debt-item .actions button { background: none; border: none; font-size: 17px; cursor: pointer; padding: 4px 8px; border-radius: 8px; color: #6e6e73; transition: 0.15s; }
-        .modal .debt-item .actions button:hover { background: #f0f0f2; }
-        .modal .debt-item .actions .pay-btn { color: #1b1b1b; font-weight: 700; }
-        .modal .debt-item .actions .pay-btn:hover { color: #0a0a0a; background: #d4d4e0; }
-        .modal .debt-item .actions .del-btn { color: #8e8e93; }
-        .modal .debt-item .actions .del-btn:hover { color: #c0392b; }
-        .badge { font-size: 12px; padding: 2px 12px; border-radius: 30px; background: #f0f0f2; color: #3a3a3a; font-weight: 600; }
-        .badge.paid { background: #e9e9ed; }
-        .empty { color: #8e8e93; text-align: center; padding: 20px 0; font-size: 15px; }
-        .flex { display: flex; gap: 10px; flex-wrap: wrap; }
-        .mt-10 { margin-top: 12px; }
-        .mb-10 { margin-bottom: 12px; }
-        .text-danger { color: #b33; }
-        .text-muted { color: #8e8e93; }
-        .fw-bold { font-weight: 700; }
-        .pay-all-btn { background: #2d2d2d; color: #fff; border: none; padding: 10px; border-radius: 14px; font-weight: 700; cursor: pointer; width: 100%; }
-        .pay-all-btn:hover { background: #1a1a1a; }
-        @media (max-width: 600px) { .app { padding: 20px 15px; } .totals { grid-template-columns: 1fr; } .app-header h1 { font-size: 22px; } }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Cairo', sans-serif; background: #f0f2f5; padding: 20px; }
+        .container { max-width: 1400px; margin: auto; }
+        .header { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: white; padding: 20px 30px; border-radius: 15px; margin-bottom: 25px; }
+        .header h1 { font-size: 28px; display: flex; align-items: center; gap: 10px; }
+        .header h1 i { color: #FFD700; }
+        .header .sub { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+        .header .sub p { font-size: 14px; opacity: 0.9; }
+        .badge-unsaved { background: #ffc107; color: #333; padding: 4px 14px; border-radius: 20px; font-size: 14px; font-weight: bold; display: none; }
+        .btn-save-all { background: #28a745; color: white; padding: 10px 25px; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; }
+        .btn-save-all:hover { background: #218838; }
+        .btn-save-all:disabled { opacity: 0.6; cursor: not-allowed; }
+        .tabs { display: flex; gap: 10px; margin-bottom: 25px; flex-wrap: wrap; }
+        .tab-btn { background: white; border: none; padding: 12px 25px; border-radius: 10px; cursor: pointer; font-weight: 600; display: flex; align-items: center; gap: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .tab-btn.active { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: white; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .card { background: white; border-radius: 15px; padding: 25px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); margin-bottom: 25px; }
+        .card h3 { margin-bottom: 20px; color: #1e3c72; border-right: 4px solid #FFD700; padding-right: 15px; }
+        .form-group { margin-bottom: 18px; }
+        label { display: block; margin-bottom: 8px; font-weight: 600; color: #333; }
+        label i { margin-left: 8px; color: #FFD700; }
+        input, select { width: 100%; padding: 10px 12px; border: 1px solid #ddd; border-radius: 8px; font-family: 'Cairo', sans-serif; }
+        input:focus, select:focus { outline: none; border-color: #2a5298; }
+        .btn { padding: 10px 20px; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; font-family: 'Cairo', sans-serif; }
+        .btn-primary { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: white; }
+        .btn-success { background: #28a745; color: white; }
+        .btn-danger { background: #dc3545; color: white; }
+        .btn-warning { background: #ffc107; color: #333; }
+        .btn-secondary { background: #6c757d; color: white; }
+        .btn-info { background: #17a2b8; color: white; }
+        .btn-sm { padding: 4px 10px; font-size: 13px; }
+        .list-container { max-height: 500px; overflow-y: auto; margin-top: 15px; }
+        .item { background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 10px; padding: 12px 15px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+        .item:hover { background: #e9ecef; }
+        .item .info { flex: 1; min-width: 150px; }
+        .item .name { font-weight: 700; color: #1e3c72; }
+        .item .detail { font-size: 13px; color: #6c757d; }
+        .item .actions { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+        .stats-box { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: white; padding: 10px 15px; border-radius: 10px; margin-bottom: 20px; text-align: center; font-weight: 600; }
+        .search-box { position: relative; margin-bottom: 20px; }
+        .search-box i { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: #999; }
+        .search-box input { padding-right: 35px; }
+        .status-message { position: fixed; bottom: 20px; left: 20px; right: 20px; max-width: 450px; margin: auto; padding: 12px 20px; background: white; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); display: flex; align-items: center; gap: 10px; z-index: 1000; animation: slideIn 0.3s ease; }
+        @keyframes slideIn { from { opacity: 0; transform: translateX(100px); } to { opacity: 1; transform: translateX(0); } }
+        .status-message.success { border-right: 4px solid #28a745; }
+        .status-message.error { border-right: 4px solid #dc3545; }
+        .status-message.info { border-right: 4px solid #17a2b8; }
+        .spinner { display: inline-block; width: 20px; height: 20px; border: 3px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: #fff; animation: spin 0.8s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .balance-positive { color: #28a745; }
+        .balance-negative { color: #dc3545; }
+        .row-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        @media (max-width: 768px) { .row-grid { grid-template-columns: 1fr; } .header h1 { font-size: 22px; } .tab-btn { padding: 8px 15px; font-size: 12px; } }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2000; justify-content: center; align-items: center; }
+        .modal .modal-box { background: white; padding: 25px; border-radius: 15px; max-width: 500px; width: 90%; max-height: 90vh; overflow-y: auto; }
+        .modal h3 { margin-bottom: 15px; color: #1e3c72; }
     </style>
 </head>
 <body>
-<div class="app">
 
-    <div class="app-header">
-        <h1><i class="fas fa-scale-balanced"></i> دفتر الأموال</h1>
-        <div class="header-actions">
-            <span class="connection-status" id="statusBadge">🟢 متصل</span>
-            <button class="sync-btn" id="syncBtn" onclick="syncWithGitHub()"><i class="fas fa-sync"></i> مزامنة</button>
+<div class="container">
+    <!-- الهيدر -->
+    <div class="header">
+        <div class="sub">
+            <div>
+                <h1><i class="fas fa-scale-balanced"></i> دفتر الديون</h1>
+                <p><i class="fas fa-users"></i> إدارة العملاء والديون | <span id="totalCustomers">0</span> عميل</p>
+            </div>
+            <div style="display: flex; gap: 10px; align-items: center;">
+                <span id="unsavedIndicator" class="badge-unsaved"><i class="fas fa-exclamation-triangle"></i> تغييرات غير محفوظة</span>
+                <button class="btn-save-all" id="saveAllBtn" onclick="saveAllChanges()"><i class="fas fa-save"></i> حفظ الآن</button>
+            </div>
         </div>
     </div>
 
-    <div class="totals">
-        <div class="total-card">
-            <span class="label"><i class="fas fa-arrow-left" style="margin-left:8px;"></i> مستحق لي</span>
-            <span class="value" id="totalLi">0 <span class="currency">د.ع</span></span>
+    <!-- علامات التبويب -->
+    <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('clients')"><i class="fas fa-users"></i> العملاء</button>
+        <button class="tab-btn" onclick="switchTab('addDebt')"><i class="fas fa-plus-circle"></i> إضافة دين</button>
+        <button class="tab-btn" onclick="switchTab('debts')"><i class="fas fa-list"></i> كل الديون</button>
+        <button class="tab-btn" onclick="switchTab('settings')"><i class="fas fa-cog"></i> إعدادات</button>
+    </div>
+
+    <!-- تبويب: العملاء -->
+    <div id="clientsTab" class="tab-content active">
+        <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 20px;">
+                <h3><i class="fas fa-user-plus"></i> إدارة العملاء</h3>
+                <button class="btn btn-primary" onclick="showAddClient()"><i class="fas fa-plus"></i> عميل جديد</button>
+            </div>
+            <div class="stats-box" id="clientsStats">📊 0 عميل - إجمالي المستحق: 0 د.ع</div>
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchClient" placeholder="ابحث عن عميل..." oninput="renderClients()">
+            </div>
+            <div id="clientsList" class="list-container"></div>
         </div>
-        <div class="total-card">
-            <span class="label"><i class="fas fa-arrow-right" style="margin-left:8px;"></i> مستحق عليّ</span>
-            <span class="value" id="totalAle">0 <span class="currency">د.ع</span></span>
-        </div>
     </div>
 
-    <div class="backup-row">
-        <div class="btn-sm" onclick="exportBackup()"><i class="fas fa-download"></i> نسخ احتياطي</div>
-        <div class="btn-sm" onclick="document.getElementById('fileInput').click()"><i class="fas fa-upload"></i> استعادة</div>
-        <input type="file" id="fileInput" accept=".json" onchange="importBackup(event)">
-    </div>
-
-    <div class="search-box">
-        <i class="fas fa-search"></i>
-        <input type="text" id="searchCustomer" placeholder="ابحث عن عميل..." oninput="renderCustomers()">
-    </div>
-    <button class="btn-primary" style="margin-bottom:16px;" onclick="showAddCustomer()">+ إضافة عميل جديد</button>
-    <div id="customersList"></div>
-
-    <!-- مودال إضافة دين -->
-    <div id="addDebtModal" class="modal-overlay">
-        <div class="modal">
-            <button class="close-btn" onclick="closeModal('addDebtModal')">&times;</button>
-            <h3>إضافة دين جديد</h3>
-            <div class="sub-title" id="addDebtClientName">للعميل: ...</div>
-            <form onsubmit="addDebtFromMain(event)">
+    <!-- تبويب: إضافة دين -->
+    <div id="addDebtTab" class="tab-content">
+        <div class="card">
+            <h3><i class="fas fa-hand-holding-usd"></i> إضافة دين جديد</h3>
+            <div class="form-group">
+                <label><i class="fas fa-user"></i> العميل</label>
+                <select id="debtCustomerSelect"></select>
+            </div>
+            <div class="row-grid">
                 <div class="form-group">
-                    <label>المبلغ (د.ع)</label>
-                    <input type="number" id="addDebtAmount" placeholder="0" step="1" required>
+                    <label><i class="fas fa-money-bill-wave"></i> المبلغ</label>
+                    <input type="number" id="debtAmount" placeholder="0">
                 </div>
                 <div class="form-group">
-                    <label>نوع الدين</label>
-                    <select id="addDebtType" required>
-                        <option value="li">لي (أنا الدائن)</option>
-                        <option value="ale">عليّ (أنا المدين)</option>
+                    <label><i class="fas fa-arrow-left"></i> النوع</label>
+                    <select id="debtType">
+                        <option value="li">لي (الدائن)</option>
+                        <option value="ale">عليّ (المدين)</option>
                     </select>
                 </div>
-                <div class="form-group">
-                    <label>تاريخ الاستحقاق</label>
-                    <input type="date" id="addDebtDueDate">
-                </div>
-                <div class="form-group">
-                    <label>ملاحظات</label>
-                    <textarea id="addDebtNote" rows="2" placeholder="اختياري..."></textarea>
-                </div>
-                <div class="quick-add-row">
-                    <button type="button" class="btn" onclick="setQuickAmount(30000)">30,000</button>
-                    <button type="button" class="btn" onclick="setQuickAmount(35000)">35,000</button>
-                    <button type="button" class="btn custom" onclick="setQuickAmount(null)">✏️ مخصص</button>
-                </div>
-                <button type="submit" class="btn">تسجيل</button>
-            </form>
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-calendar-alt"></i> تاريخ الاستحقاق</label>
+                <input type="date" id="debtDueDate">
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-sticky-note"></i> ملاحظات</label>
+                <input type="text" id="debtNote" placeholder="اختياري">
+            </div>
+            <button class="btn btn-success" onclick="addDebt()" style="width:100%;"><i class="fas fa-save"></i> تسجيل الدين</button>
         </div>
     </div>
 
-    <!-- مودال التسديد السريع -->
-    <div id="paymentModal" class="modal-overlay">
-        <div class="modal">
-            <button class="close-btn" onclick="closeModal('paymentModal')">&times;</button>
-            <h3 id="paymentModalName">تسديد ديون العميل</h3>
-            <div class="sub-title" id="paymentModalSub">اختر الدين لتسديده</div>
-            <button class="pay-all-btn" onclick="payAllDebts()" id="payAllBtn">✅ تسديد الكل</button>
-            <hr style="margin:12px 0;">
-            <div id="paymentDebtsList"></div>
-            <div style="margin-top:16px;">
-                <button class="btn btn-outline" onclick="closeModal('paymentModal')">إغلاق</button>
+    <!-- تبويب: كل الديون -->
+    <div id="debtsTab" class="tab-content">
+        <div class="card">
+            <h3><i class="fas fa-list"></i> جميع الديون</h3>
+            <div class="stats-box" id="debtsStats">📊 إجمالي الديون: 0 | مستحق لي: 0 | مستحق عليّ: 0</div>
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchDebt" placeholder="ابحث عن دين..." oninput="renderAllDebts()">
             </div>
+            <div id="allDebtsList" class="list-container"></div>
         </div>
     </div>
 
-    <!-- مودال إدارة العميل -->
-    <div id="clientModal" class="modal-overlay">
-        <div class="modal">
-            <button class="close-btn" onclick="closeModal('clientModal')">&times;</button>
-            <h3 id="clientModalName">العميل</h3>
-            <div class="sub-title" id="clientModalBalance">الرصيد: 0 د.ع</div>
-            <hr style="margin:12px 0 16px; border:0; border-top:1px solid #efeff1;">
-            <div style="font-weight:600; margin-bottom:10px;">جميع الديون</div>
-            <div id="clientModalDebtsList"></div>
-            <div style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;">
-                <button class="btn btn-outline" style="flex:1; min-width:60px;" onclick="closeModal('clientModal')">إغلاق</button>
-                <button class="btn" style="flex:1; min-width:60px;" onclick="quickAddFromModal(30000)">➕ 30,000</button>
-                <button class="btn" style="flex:1; min-width:60px;" onclick="quickAddFromModal(35000)">➕ 35,000</button>
-                <button class="btn btn-outline" style="flex:1; min-width:60px; border-color:#3a3a3a;" onclick="quickAddFromModal(null)">➕ مخصص</button>
+    <!-- تبويب: الإعدادات -->
+    <div id="settingsTab" class="tab-content">
+        <div class="card">
+            <h3><i class="fas fa-cog"></i> إعدادات التطبيق</h3>
+            <div class="form-group">
+                <label><i class="fas fa-key"></i> رمز GitHub (Token)</label>
+                <input type="text" id="settingsToken" value="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" dir="ltr">
             </div>
-            <div style="margin-top:12px; border-top:1px solid #efeff1; padding-top:12px;">
-                <button class="btn btn-outline" style="width:100%; color:#b33; border-color:#d0a0a0;" onclick="deleteCurrentCustomer()">
-                    <i class="fas fa-trash-alt"></i> حذف العميل وجميع ديونه (نادر الاستخدام)
-                </button>
+            <div class="form-group">
+                <label><i class="fas fa-folder"></i> المستودع</label>
+                <input type="text" id="settingsRepo" value="raedalzubaidi21-source/my-debt-app">
             </div>
+            <div class="form-group">
+                <label><i class="fas fa-file"></i> اسم الملف</label>
+                <input type="text" id="settingsFile" value="data.json">
+            </div>
+            <button class="btn btn-primary" onclick="updateSettings()"><i class="fas fa-save"></i> تحديث الإعدادات</button>
+            <hr style="margin: 25px 0;">
+            <button class="btn btn-danger" onclick="if(confirm('مسح جميع البيانات محلياً؟')){localStorage.clear();location.reload();}"><i class="fas fa-trash"></i> مسح البيانات المحلية</button>
         </div>
     </div>
-
 </div>
+
+<!-- مودال إضافة عميل -->
+<div id="addClientModal" class="modal">
+    <div class="modal-box">
+        <h3><i class="fas fa-user-plus"></i> إضافة عميل جديد</h3>
+        <div class="form-group">
+            <label>اسم العميل</label>
+            <input type="text" id="newClientName" placeholder="مثال: أحمد محمد">
+        </div>
+        <div class="form-group">
+            <label>رقم الهاتف (اختياري)</label>
+            <input type="text" id="newClientPhone" placeholder="0771xxxxxxx">
+        </div>
+        <div style="display: flex; gap: 10px; margin-top: 15px;">
+            <button class="btn btn-success" onclick="addClient()"><i class="fas fa-check"></i> إضافة</button>
+            <button class="btn btn-secondary" onclick="document.getElementById('addClientModal').style.display='none'"><i class="fas fa-times"></i> إلغاء</button>
+        </div>
+    </div>
+</div>
+
+<!-- مودال تسديد دين -->
+<div id="payModal" class="modal">
+    <div class="modal-box">
+        <h3><i class="fas fa-hand-holding-usd"></i> تسديد دين</h3>
+        <p id="payModalInfo"></p>
+        <div style="display: flex; gap: 10px; margin-top: 15px;">
+            <button class="btn btn-success" onclick="confirmPay()"><i class="fas fa-check"></i> تسديد</button>
+            <button class="btn btn-secondary" onclick="document.getElementById('payModal').style.display='none'"><i class="fas fa-times"></i> إلغاء</button>
+        </div>
+    </div>
+</div>
+
+<!-- مودال حذف عميل -->
+<div id="deleteClientModal" class="modal">
+    <div class="modal-box">
+        <h3><i class="fas fa-exclamation-triangle"></i> حذف العميل</h3>
+        <p id="deleteClientInfo"></p>
+        <div style="display: flex; gap: 10px; margin-top: 15px;">
+            <button class="btn btn-danger" onclick="confirmDeleteClient()"><i class="fas fa-trash"></i> حذف نهائي</button>
+            <button class="btn btn-secondary" onclick="document.getElementById('deleteClientModal').style.display='none'"><i class="fas fa-times"></i> إلغاء</button>
+        </div>
+    </div>
+</div>
+
+<!-- مودال تعديل عميل -->
+<div id="editClientModal" class="modal">
+    <div class="modal-box">
+        <h3><i class="fas fa-user-edit"></i> تعديل العميل</h3>
+        <div class="form-group">
+            <label>اسم العميل</label>
+            <input type="text" id="editClientName">
+        </div>
+        <div class="form-group">
+            <label>رقم الهاتف</label>
+            <input type="text" id="editClientPhone">
+        </div>
+        <div style="display: flex; gap: 10px; margin-top: 15px;">
+            <button class="btn btn-success" onclick="confirmEditClient()"><i class="fas fa-save"></i> حفظ</button>
+            <button class="btn btn-secondary" onclick="document.getElementById('editClientModal').style.display='none'"><i class="fas fa-times"></i> إلغاء</button>
+        </div>
+    </div>
+</div>
+
+<!-- مودال إضافة دين سريع -->
+<div id="quickDebtModal" class="modal">
+    <div class="modal-box">
+        <h3><i class="fas fa-hand-holding-usd"></i> إضافة دين سريع</h3>
+        <p id="quickDebtClient"></p>
+        <div class="form-group">
+            <label>المبلغ</label>
+            <input type="number" id="quickDebtAmount" placeholder="0">
+        </div>
+        <div class="form-group">
+            <label>النوع</label>
+            <select id="quickDebtType">
+                <option value="li">لي (الدائن)</option>
+                <option value="ale">عليّ (المدين)</option>
+            </select>
+        </div>
+        <div style="display: flex; gap: 10px; margin-top: 15px;">
+            <button class="btn btn-success" onclick="confirmQuickDebt()"><i class="fas fa-save"></i> إضافة</button>
+            <button class="btn btn-secondary" onclick="document.getElementById('quickDebtModal').style.display='none'"><i class="fas fa-times"></i> إلغاء</button>
+        </div>
+    </div>
+</div>
+
+<div id="status"></div>
 
 <script>
     // ================================================================
-    // 🔐 إعدادات GitHub - تم التعديل لاستخدام نفس المستودع
+    // 🔐 إعدادات GitHub
     // ================================================================
-    const GITHUB_TOKEN = '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'; // رمزك الجديد
-    const REPO_OWNER = 'raedalzubaidi21-source';
-    const REPO_NAME = 'my-debt-app'; // تم التغيير من my-debt-data إلى my-debt-app
-    const DATA_FILE = 'data.json';
+    const DEFAULT_TOKEN = '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';
+    const DEFAULT_REPO = 'raedalzubaidi21-source/my-debt-app';
+    const DEFAULT_FILE = 'data.json';
+
+    let GITHUB_TOKEN = localStorage.getItem('debt_token') || DEFAULT_TOKEN;
+    let REPO_OWNER = localStorage.getItem('debt_repo') || DEFAULT_REPO.split('/')[0];
+    let REPO_NAME = localStorage.getItem('debt_repo') || DEFAULT_REPO.split('/')[1];
+    let DATA_FILE = localStorage.getItem('debt_file') || DEFAULT_FILE;
 
     // ================================================================
     // المتغيرات العامة
@@ -224,10 +282,15 @@
     let data = { customers: [], debts: [] };
     let currentSha = '';
     let isOnline = false;
-    let syncInProgress = false;
+    let isSaving = false;
+    let hasUnsaved = false;
+    let editingClientId = null;
+    let deletingClientId = null;
+    let payingDebtId = null;
+    let quickDebtClientId = null;
 
     // ================================================================
-    // دوال GitHub API (نفس الكود السابق مع تعديل بسيط في الـ fetch)
+    // دوال GitHub API
     // ================================================================
 
     async function loadFromGitHub() {
@@ -259,9 +322,9 @@
     }
 
     async function saveToGitHub(dataToSave) {
-        if (syncInProgress) return false;
-        syncInProgress = true;
-        document.getElementById('syncBtn').disabled = true;
+        if (isSaving) return false;
+        isSaving = true;
+        document.getElementById('saveAllBtn').disabled = true;
 
         try {
             const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${DATA_FILE}`;
@@ -314,8 +377,11 @@
             const result = await putResponse.json();
             currentSha = result.content.sha;
             isOnline = true;
+            hasUnsaved = false;
+            document.getElementById('unsavedIndicator').style.display = 'none';
             updateStatusBadge();
             console.log('✅ تم حفظ البيانات على GitHub بنجاح!');
+            showStatus('✅ تم حفظ البيانات على GitHub', 'success');
             return true;
 
         } catch (error) {
@@ -323,44 +389,24 @@
             isOnline = false;
             updateStatusBadge();
             localStorage.setItem('github_backup', JSON.stringify(dataToSave));
+            showStatus('⚠️ فشل الحفظ على GitHub: ' + error.message, 'error');
             return false;
         } finally {
-            syncInProgress = false;
-            document.getElementById('syncBtn').disabled = false;
+            isSaving = false;
+            document.getElementById('saveAllBtn').disabled = false;
         }
     }
 
-    async function syncWithGitHub() {
-        const btn = document.getElementById('syncBtn');
-        btn.disabled = true;
-        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري...';
-
-        try {
-            const remoteData = await loadFromGitHub();
-            if (remoteData && remoteData.customers && remoteData.debts) {
-                data.customers = remoteData.customers || [];
-                data.debts = remoteData.debts || [];
-                saveLocal();
-                updateUI();
-                alert('✅ تم تحديث البيانات من GitHub بنجاح!');
-            } else {
-                const saved = await saveToGitHub(data);
-                if (saved) {
-                    alert('✅ تم رفع البيانات إلى GitHub بنجاح!');
-                } else {
-                    alert('⚠️ فشل الاتصال بـ GitHub. البيانات محفوظة محلياً.');
-                }
-            }
-        } catch (error) {
-            alert('❌ حدث خطأ أثناء المزامنة: ' + error.message);
+    async function saveAllChanges() {
+        if (!hasUnsaved) {
+            showStatus('ℹ️ لا توجد تغييرات للحفظ', 'info');
+            return;
         }
-
-        btn.disabled = false;
-        btn.innerHTML = '<i class="fas fa-sync"></i> مزامنة';
+        await saveToGitHub(data);
     }
 
     // ================================================================
-    // دوال التخزين المحلي (نفس الكود السابق)
+    // دوال التخزين المحلي
     // ================================================================
 
     function saveLocal() {
@@ -369,18 +415,15 @@
     }
 
     function loadLocal() {
-        const customers = JSON.parse(localStorage.getItem('debt_customers'));
-        const debts = JSON.parse(localStorage.getItem('debts_list'));
+        const customers = JSON.parse(localStorage.getItem('debt_customers') || 'null');
+        const debts = JSON.parse(localStorage.getItem('debts_list') || 'null');
         if (customers) data.customers = customers;
         if (debts) data.debts = debts;
     }
 
-    async function saveData() {
-        saveLocal();
-        try {
-            await saveToGitHub(data);
-        } catch (e) {}
-        updateUI();
+    function markUnsaved() {
+        hasUnsaved = true;
+        document.getElementById('unsavedIndicator').style.display = 'inline-block';
     }
 
     // ================================================================
@@ -389,22 +432,28 @@
 
     function updateStatusBadge() {
         const badge = document.getElementById('statusBadge');
+        if (!badge) return;
         if (isOnline) {
             badge.innerHTML = '🟢 متصل';
             badge.className = 'connection-status';
         } else {
-            badge.innerHTML = '🔴 غير متصل (حفظ محلي)';
+            badge.innerHTML = '🔴 غير متصل';
             badge.className = 'connection-status offline';
         }
     }
 
     // ================================================================
-    // دوال التطبيق الأساسية (جميعها كما هي، تم حذفها للاختصار)
+    // دوال التطبيق الأساسية
     // ================================================================
 
     function getCustomerName(id) {
         const c = data.customers.find(c => c.id === id);
         return c ? c.name : 'غير معروف';
+    }
+
+    function getCustomerPhone(id) {
+        const c = data.customers.find(c => c.id === id);
+        return c ? c.phone || '' : '';
     }
 
     function formatCurrency(amount) {
@@ -421,449 +470,481 @@
         return totalLi - totalAle;
     }
 
-    // ---------- المودالات ----------
-    let currentModalClientId = null;
-    let paymentClientId = null;
-
-    function openModal(id) {
-        document.getElementById(id).classList.add('open');
+    function getCustomerDebts(customerId) {
+        return data.debts.filter(d => d.customerId === customerId);
     }
 
-    function closeModal(id) {
-        document.getElementById(id).classList.remove('open');
-        if (id === 'clientModal') currentModalClientId = null;
-        if (id === 'paymentModal') paymentClientId = null;
+    function getCustomerPendingDebts(customerId) {
+        return data.debts.filter(d => d.customerId === customerId && !d.paid);
     }
 
-    document.querySelectorAll('.modal-overlay').forEach(el => {
-        el.addEventListener('click', function(e) {
-            if (e.target === this) this.classList.remove('open');
-        });
-    });
+    // ================================================================
+    // عرض العملاء
+    // ================================================================
 
-    // ---------- عرض العملاء ----------
-    function renderCustomers() {
-        const container = document.getElementById('customersList');
-        const search = document.getElementById('searchCustomer').value.toLowerCase();
+    function renderClients() {
+        const container = document.getElementById('clientsList');
+        const search = document.getElementById('searchClient').value.toLowerCase();
         let filtered = data.customers.filter(c => c.name.toLowerCase().includes(search));
+
         if (!filtered.length) {
-            container.innerHTML = '<div class="empty">لا يوجد عملاء</div>';
+            container.innerHTML = '<p style="color:#999; text-align:center; padding:20px;">لا يوجد عملاء</p>';
             return;
         }
+
+        // تحديث الإحصائيات
+        const totalBalance = filtered.reduce((sum, c) => sum + getCustomerBalance(c.id), 0);
+        document.getElementById('clientsStats').innerHTML = 
+            `📊 ${filtered.length} عميل - إجمالي الرصيد: ${formatCurrency(totalBalance)}`;
+
         container.innerHTML = filtered.map(c => {
             const balance = getCustomerBalance(c.id);
-            const balClass = balance >= 0 ? 'positive' : 'negative';
+            const balClass = balance >= 0 ? 'balance-positive' : 'balance-negative';
             const balText = balance >= 0 ? `له عليك ${formatCurrency(balance)}` : `عليه لك ${formatCurrency(Math.abs(balance))}`;
-            const hasPending = data.debts.some(d => d.customerId === c.id && !d.paid);
-            return `<div class="customer-item">
-                <div class="info" onclick="openClientModal('${c.id}')">
-                    <h4>${c.name}</h4>
-                    <p>${c.phone || ''}</p>
+            const pending = getCustomerPendingDebts(c.id).length;
+            return `
+                <div class="item">
+                    <div class="info">
+                        <div class="name">${c.name}</div>
+                        <div class="detail">${c.phone || 'لا يوجد هاتف'} | الديون المعلقة: ${pending}</div>
+                    </div>
+                    <div style="text-align: center; min-width: 100px;">
+                        <span class="${balClass}" style="font-weight:700; font-size:16px;">${balText}</span>
+                    </div>
+                    <div class="actions">
+                        <button class="btn btn-sm btn-info" onclick="openQuickDebt('${c.id}')"><i class="fas fa-plus"></i> دين</button>
+                        <button class="btn btn-sm btn-warning" onclick="editClient('${c.id}')"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-sm btn-danger" onclick="deleteClient('${c.id}')"><i class="fas fa-trash"></i></button>
+                    </div>
                 </div>
-                <span class="balance ${balClass}">${balText}</span>
-                <div class="actions">
-                    ${hasPending ? `<button class="btn-sm pay" onclick="openPaymentModal('${c.id}')"><i class="fas fa-hand-holding-usd"></i> تسديد</button>` : ''}
-                    <button class="btn-sm green" onclick="openAddDebtFromMain('${c.id}')"><i class="fas fa-plus"></i> دين</button>
-                </div>
-            </div>`;
+            `;
         }).join('');
     }
 
-    // ---------- إضافة عميل ----------
-    function showAddCustomer() {
-        const name = prompt('أدخل اسم العميل الجديد:');
-        if (name && name.trim()) {
-            const phone = prompt('رقم الهاتف (اختياري):');
-            data.customers.push({
-                id: Date.now().toString(36) + Math.random().toString(36).substr(2, 4),
-                name: name.trim(),
-                phone: phone || ''
-            });
-            saveData();
-        }
+    // ================================================================
+    // إدارة العملاء
+    // ================================================================
+
+    function showAddClient() {
+        document.getElementById('addClientModal').style.display = 'flex';
+        document.getElementById('newClientName').focus();
     }
 
-    // ---------- حذف العميل ----------
-    function deleteCurrentCustomer() {
-        if (!currentModalClientId) return;
-        const client = data.customers.find(c => c.id === currentModalClientId);
-        if (!client) return;
-        if (confirm(`⚠️ هل أنت متأكد تماماً من حذف العميل "${client.name}" وجميع ديونه (${data.debts.filter(d => d.customerId === currentModalClientId).length} دين)؟\nهذا الإجراء لا يمكن التراجع عنه.`)) {
-            if (confirm('تأكيد نهائي: اكتب "نعم" لحذف العميل')) {
-                const id = currentModalClientId;
-                data.customers = data.customers.filter(c => c.id !== id);
-                data.debts = data.debts.filter(d => d.customerId !== id);
-                saveData();
-                closeModal('clientModal');
-                alert('✅ تم حذف العميل وجميع ديونه.');
-            }
-        }
-    }
-
-    // ---------- إضافة دين ----------
-    let addDebtTargetId = null;
-
-    function openAddDebtFromMain(clientId) {
-        const client = data.customers.find(c => c.id === clientId);
-        if (!client) return;
-        addDebtTargetId = clientId;
-        document.getElementById('addDebtClientName').textContent = 'للعميل: ' + client.name;
-        document.getElementById('addDebtAmount').value = '';
-        document.getElementById('addDebtType').value = 'li';
-        document.getElementById('addDebtDueDate').value = '';
-        document.getElementById('addDebtNote').value = '';
-        openModal('addDebtModal');
-        document.getElementById('addDebtAmount').focus();
-    }
-
-    function setQuickAmount(amount) {
-        const input = document.getElementById('addDebtAmount');
-        if (amount !== null) {
-            input.value = amount;
-        } else {
-            input.value = '';
-        }
-        input.focus();
-    }
-
-    function addDebtFromMain(e) {
-        e.preventDefault();
-        if (!addDebtTargetId) return;
-        const amount = parseFloat(document.getElementById('addDebtAmount').value);
-        const type = document.getElementById('addDebtType').value;
-        const dueDate = document.getElementById('addDebtDueDate').value;
-        const note = document.getElementById('addDebtNote').value;
-
-        if (!amount || amount <= 0) {
-            alert('يرجى إدخال مبلغ صحيح.');
+    function addClient() {
+        const name = document.getElementById('newClientName').value.trim();
+        if (!name) {
+            showStatus('❌ أدخل اسم العميل', 'error');
             return;
         }
+        const phone = document.getElementById('newClientPhone').value.trim();
+        data.customers.push({
+            id: Date.now().toString(36) + Math.random().toString(36).substr(2, 4),
+            name: name,
+            phone: phone || ''
+        });
+        document.getElementById('addClientModal').style.display = 'none';
+        document.getElementById('newClientName').value = '';
+        document.getElementById('newClientPhone').value = '';
+        markUnsaved();
+        refreshAll();
+        showStatus(`✅ تم إضافة العميل "${name}"`, 'success');
+        saveAllChanges();
+    }
+
+    function editClient(id) {
+        const client = data.customers.find(c => c.id === id);
+        if (!client) return;
+        editingClientId = id;
+        document.getElementById('editClientName').value = client.name;
+        document.getElementById('editClientPhone').value = client.phone || '';
+        document.getElementById('editClientModal').style.display = 'flex';
+    }
+
+    function confirmEditClient() {
+        const name = document.getElementById('editClientName').value.trim();
+        if (!name) {
+            showStatus('❌ أدخل اسم العميل', 'error');
+            return;
+        }
+        const client = data.customers.find(c => c.id === editingClientId);
+        if (client) {
+            client.name = name;
+            client.phone = document.getElementById('editClientPhone').value.trim() || '';
+            markUnsaved();
+            refreshAll();
+            showStatus('✅ تم تحديث العميل', 'success');
+            saveAllChanges();
+        }
+        document.getElementById('editClientModal').style.display = 'none';
+        editingClientId = null;
+    }
+
+    function deleteClient(id) {
+        const client = data.customers.find(c => c.id === id);
+        if (!client) return;
+        const debts = getCustomerDebts(id);
+        deletingClientId = id;
+        document.getElementById('deleteClientInfo').innerHTML = 
+            `هل أنت متأكد من حذف العميل <strong>${client.name}</strong>؟<br>
+             ${debts.length} ديون مرتبطة به (سيتم حذفها أيضاً).`;
+        document.getElementById('deleteClientModal').style.display = 'flex';
+    }
+
+    function confirmDeleteClient() {
+        if (!deletingClientId) return;
+        data.customers = data.customers.filter(c => c.id !== deletingClientId);
+        data.debts = data.debts.filter(d => d.customerId !== deletingClientId);
+        document.getElementById('deleteClientModal').style.display = 'none';
+        deletingClientId = null;
+        markUnsaved();
+        refreshAll();
+        showStatus('✅ تم حذف العميل وجميع ديونه', 'success');
+        saveAllChanges();
+    }
+
+    // ================================================================
+    // إدارة الديون
+    // ================================================================
+
+    function addDebt() {
+        const customerId = document.getElementById('debtCustomerSelect').value;
+        if (!customerId) {
+            showStatus('❌ اختر العميل', 'error');
+            return;
+        }
+        const amount = parseFloat(document.getElementById('debtAmount').value);
+        if (!amount || amount <= 0) {
+            showStatus('❌ أدخل مبلغ صحيح', 'error');
+            return;
+        }
+        const type = document.getElementById('debtType').value;
+        const dueDate = document.getElementById('debtDueDate').value || new Date().toISOString().split('T')[0];
+        const note = document.getElementById('debtNote').value.trim();
 
         data.debts.push({
             id: Date.now().toString(36) + Math.random().toString(36).substr(2, 4),
-            customerId: addDebtTargetId,
+            customerId: customerId,
             type: type,
             amount: amount,
-            dueDate: dueDate || new Date().toISOString().split('T')[0],
+            dueDate: dueDate,
             note: note || '',
             paid: false,
             createdAt: new Date().toISOString()
         });
 
-        saveData();
-        closeModal('addDebtModal');
-        alert('✅ تم تسجيل الدين بنجاح!');
-        addDebtTargetId = null;
+        document.getElementById('debtAmount').value = '';
+        document.getElementById('debtDueDate').value = '';
+        document.getElementById('debtNote').value = '';
+        markUnsaved();
+        refreshAll();
+        showStatus('✅ تم تسجيل الدين', 'success');
+        saveAllChanges();
     }
 
-    // ---------- مودال التسديد ----------
-    function openPaymentModal(clientId) {
+    function openQuickDebt(clientId) {
+        quickDebtClientId = clientId;
         const client = data.customers.find(c => c.id === clientId);
-        if (!client) return;
-        paymentClientId = clientId;
-        document.getElementById('paymentModalName').textContent = `تسديد ديون: ${client.name}`;
-        const pendingCount = data.debts.filter(d => d.customerId === clientId && !d.paid).length;
-        document.getElementById('paymentModalSub').textContent = `لديه ${pendingCount} دين غير مسدد`;
-        renderPaymentDebts(clientId);
-        openModal('paymentModal');
+        document.getElementById('quickDebtClient').innerHTML = `العميل: <strong>${client ? client.name : ''}</strong>`;
+        document.getElementById('quickDebtAmount').value = '';
+        document.getElementById('quickDebtType').value = 'li';
+        document.getElementById('quickDebtModal').style.display = 'flex';
+        document.getElementById('quickDebtAmount').focus();
     }
 
-    function renderPaymentDebts(clientId) {
-        const container = document.getElementById('paymentDebtsList');
-        const debts = data.debts.filter(d => d.customerId === clientId && !d.paid).sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    function confirmQuickDebt() {
+        if (!quickDebtClientId) return;
+        const amount = parseFloat(document.getElementById('quickDebtAmount').value);
+        if (!amount || amount <= 0) {
+            showStatus('❌ أدخل مبلغ صحيح', 'error');
+            return;
+        }
+        const type = document.getElementById('quickDebtType').value;
+
+        data.debts.push({
+            id: Date.now().toString(36) + Math.random().toString(36).substr(2, 4),
+            customerId: quickDebtClientId,
+            type: type,
+            amount: amount,
+            dueDate: new Date().toISOString().split('T')[0],
+            note: '',
+            paid: false,
+            createdAt: new Date().toISOString()
+        });
+
+        document.getElementById('quickDebtModal').style.display = 'none';
+        quickDebtClientId = null;
+        markUnsaved();
+        refreshAll();
+        showStatus('✅ تم تسجيل الدين', 'success');
+        saveAllChanges();
+    }
+
+    // ================================================================
+    // عرض جميع الديون
+    // ================================================================
+
+    function renderAllDebts() {
+        const container = document.getElementById('allDebtsList');
+        const search = document.getElementById('searchDebt').value.toLowerCase();
+
+        let debts = data.debts.filter(d => {
+            const customer = data.customers.find(c => c.id === d.customerId);
+            const name = customer ? customer.name : '';
+            return name.toLowerCase().includes(search) || d.note.toLowerCase().includes(search);
+        });
+
         if (!debts.length) {
-            container.innerHTML = '<div class="empty">🎉 لا توجد ديون غير مسددة لهذا العميل</div>';
-            document.getElementById('payAllBtn').style.display = 'none';
+            container.innerHTML = '<p style="color:#999; text-align:center; padding:20px;">لا توجد ديون</p>';
             return;
         }
-        document.getElementById('payAllBtn').style.display = 'block';
-        container.innerHTML = debts.map(d => {
-            const label = d.type === 'li' ? 'لي' : 'عليّ';
-            const amountClass = d.type === 'li' ? 'positive' : 'negative';
-            return `<div class="debt-item">
-                <div class="info">
-                    <strong>${label}</strong> <span class="badge">معلق</span>
-                    <p>📅 ${d.dueDate} ${d.note ? '| ' + d.note : ''}</p>
-                </div>
-                <div class="actions">
-                    <span class="amount ${amountClass}">${formatCurrency(d.amount)}</span>
-                    <button class="pay-btn" onclick="paySingleDebt('${d.id}')" title="تسديد هذا الدين"><i class="fas fa-check-circle"></i> تسديد</button>
-                </div>
-            </div>`;
-        }).join('');
-    }
 
-    function paySingleDebt(id) {
-        if (confirm('تسجيل هذا الدين كـ "مدفوع"؟')) {
-            const debt = data.debts.find(d => d.id === id);
-            if (debt) {
-                debt.paid = true;
-                saveData();
-                if (paymentClientId) {
-                    renderPaymentDebts(paymentClientId);
-                    renderCustomers();
-                    if (currentModalClientId) {
-                        renderModalDebts(currentModalClientId);
-                        updateModalBalance();
-                    }
-                }
-                alert('✅ تم تسجيل الدين كمدفوع.');
-            }
-        }
-    }
+        const totalLi = debts.filter(d => d.type === 'li' && !d.paid).reduce((s, d) => s + Number(d.amount), 0);
+        const totalAle = debts.filter(d => d.type === 'ale' && !d.paid).reduce((s, d) => s + Number(d.amount), 0);
+        document.getElementById('debtsStats').innerHTML = 
+            `📊 ${debts.length} دين | مستحق لي: ${formatCurrency(totalLi)} | مستحق عليّ: ${formatCurrency(totalAle)}`;
 
-    function payAllDebts() {
-        if (!paymentClientId) return;
-        const pending = data.debts.filter(d => d.customerId === paymentClientId && !d.paid);
-        if (pending.length === 0) {
-            alert('لا توجد ديون غير مسددة.');
-            return;
-        }
-        if (confirm(`هل أنت متأكد من تسديد جميع الديون (${pending.length} دين) للعميل ${getCustomerName(paymentClientId)}؟`)) {
-            pending.forEach(d => d.paid = true);
-            saveData();
-            renderPaymentDebts(paymentClientId);
-            renderCustomers();
-            if (currentModalClientId) {
-                renderModalDebts(currentModalClientId);
-                updateModalBalance();
-            }
-            alert('✅ تم تسديد جميع الديون بنجاح!');
-        }
-    }
-
-    // ---------- مودال إدارة العميل ----------
-    function openClientModal(clientId) {
-        const client = data.customers.find(c => c.id === clientId);
-        if (!client) return;
-        currentModalClientId = clientId;
-        document.getElementById('clientModalName').textContent = client.name;
-        updateModalBalance();
-        renderModalDebts(clientId);
-        openModal('clientModal');
-    }
-
-    function updateModalBalance() {
-        if (!currentModalClientId) return;
-        const balance = getCustomerBalance(currentModalClientId);
-        document.getElementById('clientModalBalance').textContent = 'الرصيد: ' + (balance >= 0 ? '' : '- ') + formatCurrency(Math.abs(balance));
-        document.getElementById('clientModalBalance').style.color = balance >= 0 ? '#1b1b1b' : '#6e6e73';
-    }
-
-    function renderModalDebts(clientId) {
-        const container = document.getElementById('clientModalDebtsList');
-        const debts = data.debts.filter(d => d.customerId === clientId).sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-        if (!debts.length) {
-            container.innerHTML = '<div class="empty">لا توجد ديون لهذا العميل</div>';
-            return;
-        }
-        container.innerHTML = debts.map(d => {
+        container.innerHTML = debts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).map(d => {
+            const customer = data.customers.find(c => c.id === d.customerId);
+            const name = customer ? customer.name : 'غير معروف';
             const isPaid = d.paid;
-            const amountClass = isPaid ? 'paid-off' : (d.type === 'li' ? 'positive' : 'negative');
-            const label = d.type === 'li' ? 'لي' : 'عليّ';
-            return `<div class="debt-item">
-                <div class="info">
-                    <strong>${label}</strong> <span class="badge ${isPaid ? 'paid' : ''}">${isPaid ? 'مدفوع' : 'معلق'}</span>
-                    <p>📅 ${d.dueDate} ${d.note ? '| ' + d.note : ''}</p>
+            const typeLabel = d.type === 'li' ? 'لي' : 'عليّ';
+            const amountClass = isPaid ? '' : (d.type === 'li' ? 'balance-positive' : 'balance-negative');
+            return `
+                <div class="item">
+                    <div class="info">
+                        <div class="name">${name}</div>
+                        <div class="detail">${typeLabel} | ${d.dueDate} ${d.note ? '| ' + d.note : ''} ${isPaid ? '✅ مدفوع' : '⏳ معلق'}</div>
+                    </div>
+                    <div style="text-align: center; min-width: 100px;">
+                        <span class="${amountClass}" style="font-weight:700; font-size:16px;">${formatCurrency(d.amount)}</span>
+                    </div>
+                    <div class="actions">
+                        ${!isPaid ? `<button class="btn btn-sm btn-success" onclick="openPayModal('${d.id}')"><i class="fas fa-check"></i> تسديد</button>` : ''}
+                        <button class="btn btn-sm btn-danger" onclick="deleteDebt('${d.id}')"><i class="fas fa-trash"></i></button>
+                    </div>
                 </div>
-                <div class="actions">
-                    <span class="amount ${amountClass}">${formatCurrency(d.amount)}</span>
-                    ${!isPaid ? `<button class="pay-btn" onclick="markPaidFromModal('${d.id}')" title="تسديد"><i class="fas fa-check-circle"></i> تسديد</button>` : ''}
-                    <button class="del-btn" onclick="deleteDebtFromModal('${d.id}')" title="حذف الدين"><i class="fas fa-trash-alt"></i></button>
-                </div>
-            </div>`;
+            `;
         }).join('');
     }
 
-    function markPaidFromModal(id) {
+    // ================================================================
+    // تسديد وحذف الديون
+    // ================================================================
+
+    function openPayModal(id) {
+        payingDebtId = id;
         const debt = data.debts.find(d => d.id === id);
+        if (!debt) return;
+        const customer = data.customers.find(c => c.id === debt.customerId);
+        document.getElementById('payModalInfo').innerHTML = 
+            `تسجيل الدين كـ "مدفوع" للعميل <strong>${customer ? customer.name : ''}</strong><br>
+             المبلغ: ${formatCurrency(debt.amount)} | النوع: ${debt.type === 'li' ? 'لي' : 'عليّ'}`;
+        document.getElementById('payModal').style.display = 'flex';
+    }
+
+    function confirmPay() {
+        if (!payingDebtId) return;
+        const debt = data.debts.find(d => d.id === payingDebtId);
         if (debt) {
             debt.paid = true;
-            saveData();
-            if (currentModalClientId) {
-                renderModalDebts(currentModalClientId);
-                updateModalBalance();
+            markUnsaved();
+            refreshAll();
+            showStatus('✅ تم تسجيل الدين كمدفوع', 'success');
+            saveAllChanges();
+        }
+        document.getElementById('payModal').style.display = 'none';
+        payingDebtId = null;
+    }
+
+    function deleteDebt(id) {
+        if (!confirm('هل أنت متأكد من حذف هذا الدين؟')) return;
+        data.debts = data.debts.filter(d => d.id !== id);
+        markUnsaved();
+        refreshAll();
+        showStatus('✅ تم حذف الدين', 'success');
+        saveAllChanges();
+    }
+
+    // ================================================================
+    // دوال التحديث العامة
+    // ================================================================
+
+    function refreshAll() {
+        // تحديث قائمة العملاء
+        renderClients();
+
+        // تحديث قائمة العملاء في إضافة الدين
+        const debtSelect = document.getElementById('debtCustomerSelect');
+        if (debtSelect) {
+            const val = debtSelect.value;
+            debtSelect.innerHTML = '';
+            data.customers.forEach(c => {
+                debtSelect.innerHTML += `<option value="${c.id}">${c.name}</option>`;
+            });
+            debtSelect.value = val;
+        }
+
+        // تحديث جميع الديون
+        renderAllDebts();
+
+        // تحديث عدد العملاء
+        document.getElementById('totalCustomers').innerText = data.customers.length;
+
+        // تحديث حالة الاتصال
+        updateStatusBadge();
+    }
+
+    // ================================================================
+    // علامات التبويب
+    // ================================================================
+
+    function switchTab(tab) {
+        document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+        document.getElementById(tab + 'Tab').classList.add('active');
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            if (btn.textContent.includes(tab === 'clients' ? 'العملاء' : 
+                tab === 'addDebt' ? 'إضافة دين' :
+                tab === 'debts' ? 'كل الديون' : 'إعدادات')) {
+                btn.classList.add('active');
             }
-            renderCustomers();
-            if (paymentClientId) {
-                renderPaymentDebts(paymentClientId);
-            }
+        });
+        if (tab === 'debts') renderAllDebts();
+        if (tab === 'clients') renderClients();
+        if (tab === 'addDebt') {
+            const select = document.getElementById('debtCustomerSelect');
+            select.innerHTML = '';
+            data.customers.forEach(c => {
+                select.innerHTML += `<option value="${c.id}">${c.name}</option>`;
+            });
         }
     }
 
-    function deleteDebtFromModal(id) {
-        if (confirm('هل أنت متأكد من حذف هذا الدين؟')) {
-            data.debts = data.debts.filter(d => d.id !== id);
-            saveData();
-            if (currentModalClientId) {
-                renderModalDebts(currentModalClientId);
-                updateModalBalance();
-            }
-            renderCustomers();
-            if (paymentClientId) {
-                renderPaymentDebts(paymentClientId);
-            }
-            alert('✅ تم حذف الدين.');
+    // ================================================================
+    // الإعدادات
+    // ================================================================
+
+    function updateSettings() {
+        const token = document.getElementById('settingsToken').value.trim();
+        const repo = document.getElementById('settingsRepo').value.trim();
+        const file = document.getElementById('settingsFile').value.trim();
+
+        if (!token || !repo || !file) {
+            showStatus('❌ جميع الحقول مطلوبة', 'error');
+            return;
         }
+
+        localStorage.setItem('debt_token', token);
+        localStorage.setItem('debt_repo', repo);
+        localStorage.setItem('debt_file', file);
+
+        GITHUB_TOKEN = token;
+        REPO_OWNER = repo.split('/')[0];
+        REPO_NAME = repo.split('/')[1];
+        DATA_FILE = file;
+
+        showStatus('✅ تم تحديث الإعدادات، جاري إعادة التحميل...', 'success');
+        setTimeout(() => location.reload(), 1000);
     }
 
-    function quickAddFromModal(amount) {
-        if (!currentModalClientId) return;
-        openAddDebtFromMain(currentModalClientId);
-        if (amount !== null) {
-            document.getElementById('addDebtAmount').value = amount;
-        } else {
-            document.getElementById('addDebtAmount').value = '';
-        }
-        document.getElementById('addDebtAmount').focus();
-        closeModal('clientModal');
+    // ================================================================
+    // عرض الرسائل
+    // ================================================================
+
+    function showStatus(msg, type) {
+        const s = document.getElementById('status');
+        s.innerHTML = `<div class="status-message ${type}">${msg}</div>`;
+        setTimeout(() => s.innerHTML = '', 4000);
     }
 
-    // ---------- تحديث الإحصائيات ----------
-    function updateStats() {
-        document.getElementById('totalLi').innerHTML = Number(getTotal('li')).toFixed(0) + ' <span class="currency">د.ع</span>';
-        document.getElementById('totalAle').innerHTML = Number(getTotal('ale')).toFixed(0) + ' <span class="currency">د.ع</span>';
-    }
+    // ================================================================
+    // إغلاق المودالات عند النقر خارجها
+    // ================================================================
 
-    // ---------- النسخ الاحتياطي والاستعادة ----------
-    function exportBackup() {
-        const json = JSON.stringify(data, null, 2);
-        const blob = new Blob([json], { type: 'application/json' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        const now = new Date();
-        const dateStr = now.getFullYear() + '-' + String(now.getMonth()+1).padStart(2,'0') + '-' + String(now.getDate()).padStart(2,'0');
-        a.download = `debt_backup_${dateStr}.json`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-        alert('✅ تم تحميل ملف النسخ الاحتياطي.');
-    }
+    document.querySelectorAll('.modal').forEach(modal => {
+        modal.addEventListener('click', function(e) {
+            if (e.target === this) this.style.display = 'none';
+        });
+    });
 
-    function importBackup(event) {
-        const file = event.target.files[0];
-        if (!file) return;
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            try {
-                const imported = JSON.parse(e.target.result);
-                if (imported.customers && imported.debts) {
-                    if (confirm('سيتم استبدال جميع البيانات الحالية. هل أنت متأكد؟')) {
-                        data.customers = imported.customers;
-                        data.debts = imported.debts;
-                        saveData();
-                        alert('✅ تم استعادة البيانات بنجاح!');
-                    }
-                } else {
-                    alert('❌ هذا الملف غير صالح.');
+    // ================================================================
+    // بدء التشغيل
+    // ================================================================
+
+    async function init() {
+        // تحميل الإعدادات من localStorage
+        GITHUB_TOKEN = localStorage.getItem('debt_token') || DEFAULT_TOKEN;
+        const repo = localStorage.getItem('debt_repo') || DEFAULT_REPO;
+        REPO_OWNER = repo.split('/')[0];
+        REPO_NAME = repo.split('/')[1];
+        DATA_FILE = localStorage.getItem('debt_file') || DEFAULT_FILE;
+
+        // تعبئة حقول الإعدادات
+        document.getElementById('settingsToken').value = GITHUB_TOKEN;
+        document.getElementById('settingsRepo').value = repo;
+        document.getElementById('settingsFile').value = DATA_FILE;
+
+        // محاولة التحميل من GitHub
+        try {
+            const remoteData = await loadFromGitHub();
+            if (remoteData && remoteData.customers && remoteData.debts) {
+                data.customers = remoteData.customers;
+                data.debts = remoteData.debts;
+                isOnline = true;
+            } else {
+                loadLocal();
+                isOnline = false;
+                // إذا كانت البيانات فارغة، أضف بعض العملاء الافتراضيين (من القائمة القديمة)
+                if (data.customers.length === 0) {
+                    const defaultNames = [
+                        "اخو حسنين", "شيخ عباس الطيب", "عباس رخيت", "عبدالله الحلاق",
+                        "امير نسيب علي جام", "ابو الهود", "كريم عويز ابو عزيز", "ابو حنين سيراميك"
+                    ];
+                    defaultNames.forEach(name => {
+                        data.customers.push({
+                            id: Date.now().toString(36) + Math.random().toString(36).substr(2, 4),
+                            name: name,
+                            phone: ''
+                        });
+                    });
+                    markUnsaved();
+                    await saveToGitHub(data);
                 }
-            } catch (error) {
-                alert('❌ حدث خطأ في قراءة الملف.');
             }
-        };
-        reader.readAsText(file);
-        event.target.value = '';
-    }
-
-    // ---------- تحديث شامل ----------
-    function updateUI() {
-        updateStats();
-        renderCustomers();
-        if (currentModalClientId) {
-            const modal = document.getElementById('clientModal');
-            if (modal.classList.contains('open')) {
-                renderModalDebts(currentModalClientId);
-                updateModalBalance();
-            }
-        }
-        if (paymentClientId) {
-            const modal = document.getElementById('paymentModal');
-            if (modal.classList.contains('open')) {
-                renderPaymentDebts(paymentClientId);
-            }
-        }
-    }
-
-    // ---------- العملاء الافتراضيون ----------
-    const RAW_CUSTOMERS = [
-        "اخو حسنين", "شيخ عباس الطيب", "عباس رخيت", "عبدالله الحلاق",
-        "امير نسيب علي جام", "ابو الهود", "كريم عويز ابو عزيز", "ابو حنين سيراميك",
-        "ابو كسور", "ابو سيف صيدلية", "ابو سجاد جيران ابو وهاب", "ياس ابو تبارك",
-        "ابو وليد عمارة", "ضرغام فريد حطابات", "احمد الطويل كبة", "ابو حوراء السلطاني",
-        "ام احمد الحمراوية", "رياض شبوط", "احمد صيرفه", "احمد الدوري",
-        "احمد هادي", "احمد بنزات", "احمد موسى جبران", "احمد الصيني",
-        "ابو روان", "شركة الانوار", "صيدلية الحمد", "علي المصري",
-        "علي وسام كاظم حميد", "علي الاخرس", "علي حازم", "علي ابو زهراء",
-        "علي الخليجي", "علي خضر عباس", "علي دراجات", "حيدر باقر اخو علي",
-        "علي كجه", "علي اللولوي", "علي مكي البيت", "علي صباري",
-        "كريم كهوة", "امين محمد علي", "امير سكلة", "امير حيدر عبيس",
-        "حسن مطعم", "امير برز", "امجد راضي", "امجد الخباز",
-        "اركان عويز", "اشرف الحداد", "اشرف راضي", "اثير كتاب",
-        "ابو ايوب جبران", "بهاء ابو قماش", "جواد ابو سجاد", "بسام عماد",
-        "كرايب حسين", "باسم قرب المولدة", "باسم الزاملي", "ديو الكهوة",
-        "ام رقية شاوي", "ضرغام كرين", "دكتور عامر", "فلاح جيجان",
-        "فاضل عبيدي", "بيت ستوري", "فقار الحلاق", "فلاح كبة",
-        "فلاح الفحام", "محمد الدوري فنكر", "فريد الشرطي", "ابو فاطمة",
-        "علاء عنون Fbs", "ابو سارة فؤاد مبارك", "ابو زينب الثرام", "حسن كهوة",
-        "حسن كهوة البيت", "عبدالله عماد اسود", "حيدر راضي", "حمزة ملابس",
-        "حسن الخباز", "حازم ببسي", "حسين مهند", "حسين مغيم ب",
-        "بيت علي عوفي", "حسين ابو لحيه", "ابو عباس الجنابي", "حسام ابو مينا كيبل",
-        "حسين برص", "منتصر الكهربائي", "ابراهيم رويهي جفات", "ابو ابراهيم جبران",
-        "جبار ابو كرار علوة", "استاذ جعفر", "جلال حيدر الخباز", "زيد جبران تكسي",
-        "سيف عوض", "سيف علي كاظم", "خالي حسن", "كرار حيدر عبيس",
-        "امير حميد رشيد", "كرار نوفي", "ابو ليلى جيران زيد", "لؤي ابو امير",
-        "شركة الفا", "عباس محمد جامعين", "فلاح لفات", "محمد عامر 2",
-        "محمد عامر", "سيد محمد حيدر", "لؤي مستشفى الولادة", "مهدي كهربائ كيبل",
-        "ميثم عكيلي", "مازن الفيتر", "مشتاق عكروك", "محسن نعمان",
-        "مرتضى فلفله", "مشرق عكروك", "مصطفى جبران", "علي فلفله",
-        "مصطفى فلاح", "عباس مطر الكهربائي", "مصطفى غني", "مصطفى كوزمتك",
-        "مرتضى كنزاع", "رجاء عليوي الحمد", "محمد ابن رضيه", "سيد عباس",
-        "سيد محمد اصلاحي", "صدام جياد جديده", "صفاء قطن", "صفاء ستار",
-        "سيف باقر", "سجاد الدوري", "صلاح جبران", "ابو حسن سليم",
-        "مهند عكروك", "ستار العزاوي", "سيتو كهوة", "شذى غطريف",
-        "حسين سودان", "حيدر محمد زويد", "اهل عقيل علوة", "ثامر جديدة",
-        "ام الهنا", "ام مريم - باجي", "وسيم يوسف", "حيدر اخو سيتو",
-        "ياسر مقابل حسن كبة", "صفاء عبدالكريم صادق", "محمد غني", "كرار سهيله",
-        "زيد فلافل", "زيد كافتريا", "faris9", "hell", "hus93", "jalil", "musleem", "nona", "raheem"
-    ];
-    const ALL_CUSTOMERS = [...new Set(RAW_CUSTOMERS)];
-
-    // ================================================================
-    // 🚀 بدء التشغيل
-    // ================================================================
-    window.onload = async function() {
-        const remoteData = await loadFromGitHub();
-
-        if (remoteData && remoteData.customers && remoteData.debts) {
-            data.customers = remoteData.customers;
-            data.debts = remoteData.debts;
-            isOnline = true;
-        } else {
+        } catch (e) {
             loadLocal();
             isOnline = false;
         }
 
-        if (data.customers.length === 0) {
-            console.log('📝 لا يوجد عملاء، جاري إضافة العملاء الافتراضيين...');
-            ALL_CUSTOMERS.forEach(name => {
-                data.customers.push({
-                    id: Date.now().toString(36) + Math.random().toString(36).substr(2, 4),
-                    name: name,
-                    phone: ''
-                });
-            });
-            saveLocal();
+        // حفظ محلياً ورفع إذا كانت هناك تغييرات غير محفوظة
+        saveLocal();
+        if (hasUnsaved) {
             await saveToGitHub(data);
-        } else {
-            saveLocal();
         }
 
+        // تحديث الواجهة
+        refreshAll();
         updateStatusBadge();
-        updateUI();
-        console.log('✅ تم تحميل الصفحة بنجاح! عدد العملاء:', data.customers.length);
-    };
+
+        // مؤقت للحفظ التلقائي كل 5 دقائق
+        setInterval(() => {
+            if (hasUnsaved) {
+                saveAllChanges();
+            }
+        }, 300000);
+
+        console.log('✅ تم تحميل دفتر الديون بنجاح! عدد العملاء:', data.customers.length);
+    }
+
+    // بدء التطبيق
+    init();
+
+    // إضافة مستمع لحفظ تلقائي عند الإغلاق
+    window.addEventListener('beforeunload', function() {
+        if (hasUnsaved) {
+            saveToGitHub(data);
+        }
+    });
 </script>
 </body>
 </html>
