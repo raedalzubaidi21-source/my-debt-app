@@ -854,6 +854,17 @@
   ],
   "debts": [
     {
+      "id": "mqz8o1nxa5jy",
+      "customerId": "mqwdxmqljv8a",
+      "type": "li",
+      "amount": 35000,
+      "remainingAmount": 35000,
+      "dueDate": "2026-06-29",
+      "note": "",
+      "paid": false,
+      "createdAt": "2026-06-29T13:13:45.844Z"
+    },
+    {
       "id": "mqz28olzsbvv",
       "customerId": "mqwdxmqlibvz",
       "type": "li",
@@ -861,7 +872,8 @@
       "dueDate": "2026-06-29",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-29T10:13:51.383Z"
+      "createdAt": "2026-06-29T10:13:51.383Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqxygg7bn96i",
@@ -871,7 +883,8 @@
       "dueDate": "2026-06-28",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-28T15:40:09.095Z"
+      "createdAt": "2026-06-28T15:40:09.095Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqxukosj31id",
@@ -881,7 +894,8 @@
       "dueDate": "2026-06-28",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-28T13:51:28.400Z"
+      "createdAt": "2026-06-28T13:51:28.400Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqxoweiam8v4",
@@ -891,7 +905,8 @@
       "dueDate": "2026-06-28",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-28T11:12:37.235Z"
+      "createdAt": "2026-06-28T11:12:37.235Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwqb2x71heg",
@@ -901,7 +916,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T19:04:15.515Z"
+      "createdAt": "2026-06-27T19:04:15.515Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwnq3delu8a",
@@ -911,7 +927,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": true,
-      "createdAt": "2026-06-27T17:51:57.074Z"
+      "createdAt": "2026-06-27T17:51:57.074Z",
+      "remainingAmount": 0
     },
     {
       "id": "mqwng6272otj",
@@ -921,7 +938,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T17:44:14.000Z"
+      "createdAt": "2026-06-27T17:44:14.000Z",
+      "remainingAmount": 100000
     },
     {
       "id": "mqwmkj364td0",
@@ -931,7 +949,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T17:19:37.890Z"
+      "createdAt": "2026-06-27T17:19:37.890Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwla665ujc5",
@@ -941,7 +960,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T16:43:34.973Z"
+      "createdAt": "2026-06-27T16:43:34.973Z",
+      "remainingAmount": 40000
     },
     {
       "id": "mqwkmentdx26",
@@ -951,7 +971,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T16:25:06.234Z"
+      "createdAt": "2026-06-27T16:25:06.234Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwh68in2v7q",
@@ -961,7 +982,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:48:32.927Z"
+      "createdAt": "2026-06-27T14:48:32.927Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwh6665xr2v",
@@ -971,7 +993,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:48:29.886Z"
+      "createdAt": "2026-06-27T14:48:29.886Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwh633ji41e",
@@ -981,7 +1004,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:48:25.903Z"
+      "createdAt": "2026-06-27T14:48:25.903Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwh60inhwfh",
@@ -991,7 +1015,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:48:22.559Z"
+      "createdAt": "2026-06-27T14:48:22.559Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwh5xjumkpp",
@@ -1001,7 +1026,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": true,
-      "createdAt": "2026-06-27T14:48:18.714Z"
+      "createdAt": "2026-06-27T14:48:18.714Z",
+      "remainingAmount": 0
     },
     {
       "id": "mqwgpa92392u",
@@ -1011,7 +1037,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:35:22.022Z"
+      "createdAt": "2026-06-27T14:35:22.022Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwglokx5s5k",
@@ -1021,7 +1048,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:32:33.969Z"
+      "createdAt": "2026-06-27T14:32:33.969Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwgkpzes6ko",
@@ -1031,7 +1059,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:31:49.130Z"
+      "createdAt": "2026-06-27T14:31:49.130Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwghix8gua5",
@@ -1041,7 +1070,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:29:20.012Z"
+      "createdAt": "2026-06-27T14:29:20.012Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwgfyd9f1ay",
@@ -1051,7 +1081,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:28:06.717Z"
+      "createdAt": "2026-06-27T14:28:06.717Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwg9hkak4i8",
@@ -1061,7 +1092,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:23:05.002Z"
+      "createdAt": "2026-06-27T14:23:05.002Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwg9d7yldrv",
@@ -1071,7 +1103,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:22:59.374Z"
+      "createdAt": "2026-06-27T14:22:59.374Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwg9abows1m",
@@ -1081,7 +1114,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:22:55.620Z"
+      "createdAt": "2026-06-27T14:22:55.620Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwg971f3erz",
@@ -1091,7 +1125,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:22:51.364Z"
+      "createdAt": "2026-06-27T14:22:51.364Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwg91twvqqm",
@@ -1101,7 +1136,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": true,
-      "createdAt": "2026-06-27T14:22:44.612Z"
+      "createdAt": "2026-06-27T14:22:44.612Z",
+      "remainingAmount": 0
     },
     {
       "id": "mqwg8zdgoh6s",
@@ -1111,7 +1147,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:22:41.428Z"
+      "createdAt": "2026-06-27T14:22:41.428Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwg8u6m5s12",
@@ -1121,7 +1158,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:22:34.702Z"
+      "createdAt": "2026-06-27T14:22:34.702Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwg8rddtpo0",
@@ -1131,7 +1169,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": true,
-      "createdAt": "2026-06-27T14:22:31.058Z"
+      "createdAt": "2026-06-27T14:22:31.058Z",
+      "remainingAmount": 0
     },
     {
       "id": "mqwg8mg0t1j5",
@@ -1141,7 +1180,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:22:24.672Z"
+      "createdAt": "2026-06-27T14:22:24.672Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwg8hn8o4wp",
@@ -1151,7 +1191,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:22:18.452Z"
+      "createdAt": "2026-06-27T14:22:18.452Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwg8cn0v5bz",
@@ -1161,7 +1202,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:22:11.964Z"
+      "createdAt": "2026-06-27T14:22:11.964Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwg87z7f673",
@@ -1171,7 +1213,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:22:05.923Z"
+      "createdAt": "2026-06-27T14:22:05.923Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwg84eoy500",
@@ -1181,7 +1224,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:22:01.296Z"
+      "createdAt": "2026-06-27T14:22:01.296Z",
+      "remainingAmount": 30000
     },
     {
       "id": "mqwg7zjn4y7m",
@@ -1191,7 +1235,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": true,
-      "createdAt": "2026-06-27T14:21:54.996Z"
+      "createdAt": "2026-06-27T14:21:54.996Z",
+      "remainingAmount": 0
     },
     {
       "id": "mqwg7t49oxis",
@@ -1201,7 +1246,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:21:46.666Z"
+      "createdAt": "2026-06-27T14:21:46.666Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwg7jgjkau0",
@@ -1211,7 +1257,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:21:34.148Z"
+      "createdAt": "2026-06-27T14:21:34.148Z",
+      "remainingAmount": 70000
     },
     {
       "id": "mqwg7ete8no0",
@@ -1221,7 +1268,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:21:28.130Z"
+      "createdAt": "2026-06-27T14:21:28.130Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwg7cioozvf",
@@ -1231,7 +1279,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:21:25.152Z"
+      "createdAt": "2026-06-27T14:21:25.152Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwg74oupm8e",
@@ -1241,7 +1290,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:21:15.006Z"
+      "createdAt": "2026-06-27T14:21:15.006Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwg715w5fb0",
@@ -1251,7 +1301,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:21:10.436Z"
+      "createdAt": "2026-06-27T14:21:10.436Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwg6xqykd24",
@@ -1261,7 +1312,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:21:06.010Z"
+      "createdAt": "2026-06-27T14:21:06.010Z",
+      "remainingAmount": 40000
     },
     {
       "id": "mqwg6ma3fx1l",
@@ -1271,7 +1323,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:20:51.147Z"
+      "createdAt": "2026-06-27T14:20:51.147Z",
+      "remainingAmount": 40000
     },
     {
       "id": "mqwg67kadnmp",
@@ -1281,7 +1334,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:20:32.074Z"
+      "createdAt": "2026-06-27T14:20:32.074Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwg62y879xf",
@@ -1291,7 +1345,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:20:26.096Z"
+      "createdAt": "2026-06-27T14:20:26.096Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwg60q8xqbj",
@@ -1301,7 +1356,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:20:23.216Z"
+      "createdAt": "2026-06-27T14:20:23.216Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwg5sge69iu",
@@ -1311,7 +1367,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:20:12.494Z"
+      "createdAt": "2026-06-27T14:20:12.494Z",
+      "remainingAmount": 180000
     },
     {
       "id": "mqwg5gnq48ie",
@@ -1321,7 +1378,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:19:57.206Z"
+      "createdAt": "2026-06-27T14:19:57.206Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwg5ed4f0if",
@@ -1331,7 +1389,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:19:54.232Z"
+      "createdAt": "2026-06-27T14:19:54.232Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwg59ffcwzq",
@@ -1341,7 +1400,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": true,
-      "createdAt": "2026-06-27T14:19:47.835Z"
+      "createdAt": "2026-06-27T14:19:47.835Z",
+      "remainingAmount": 0
     },
     {
       "id": "mqwg57c5t1zw",
@@ -1351,7 +1411,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:19:45.125Z"
+      "createdAt": "2026-06-27T14:19:45.125Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwg4rzhjrge",
@@ -1361,7 +1422,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:19:25.230Z"
+      "createdAt": "2026-06-27T14:19:25.230Z",
+      "remainingAmount": 5000
     },
     {
       "id": "mqwg4ky2veea",
@@ -1371,7 +1433,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:19:16.106Z"
+      "createdAt": "2026-06-27T14:19:16.106Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwg4eo99gj2",
@@ -1381,7 +1444,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": true,
-      "createdAt": "2026-06-27T14:19:07.977Z"
+      "createdAt": "2026-06-27T14:19:07.977Z",
+      "remainingAmount": 0
     },
     {
       "id": "mqwg4bnylekd",
@@ -1391,7 +1455,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:19:04.078Z"
+      "createdAt": "2026-06-27T14:19:04.078Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwg46jcn0c8",
@@ -1401,7 +1466,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:18:57.432Z"
+      "createdAt": "2026-06-27T14:18:57.432Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwg43aktsj0",
@@ -1411,7 +1477,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:18:53.228Z"
+      "createdAt": "2026-06-27T14:18:53.228Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwg3rdw7tjy",
@@ -1421,7 +1488,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:18:37.796Z"
+      "createdAt": "2026-06-27T14:18:37.796Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwg3ly0yu6p",
@@ -1431,7 +1499,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:18:30.744Z"
+      "createdAt": "2026-06-27T14:18:30.744Z",
+      "remainingAmount": 70000
     },
     {
       "id": "mqwg3efc1c7j",
@@ -1441,7 +1510,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:18:21.000Z"
+      "createdAt": "2026-06-27T14:18:21.000Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwg350cdl4f",
@@ -1451,7 +1521,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:18:08.796Z"
+      "createdAt": "2026-06-27T14:18:08.796Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwg2z4s0kro",
@@ -1461,7 +1532,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:18:01.180Z"
+      "createdAt": "2026-06-27T14:18:01.180Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwg2rlk7c9d",
@@ -1471,7 +1543,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:17:51.416Z"
+      "createdAt": "2026-06-27T14:17:51.416Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwg2mng27hx",
@@ -1481,7 +1554,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:17:45.004Z"
+      "createdAt": "2026-06-27T14:17:45.004Z",
+      "remainingAmount": 30000
     },
     {
       "id": "mqwg2h9a27a1",
@@ -1491,7 +1565,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:17:38.014Z"
+      "createdAt": "2026-06-27T14:17:38.014Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwg2e8wmh91",
@@ -1501,7 +1576,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:17:34.112Z"
+      "createdAt": "2026-06-27T14:17:34.112Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwg24tz4c6t",
@@ -1511,7 +1587,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:17:21.911Z"
+      "createdAt": "2026-06-27T14:17:21.911Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwg22dsjy1x",
@@ -1521,7 +1598,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": true,
-      "createdAt": "2026-06-27T14:17:18.736Z"
+      "createdAt": "2026-06-27T14:17:18.736Z",
+      "remainingAmount": 0
     },
     {
       "id": "mqwg1vfirux8",
@@ -1531,7 +1609,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:17:09.726Z"
+      "createdAt": "2026-06-27T14:17:09.726Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwg1nswh1i4",
@@ -1541,7 +1620,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:16:59.840Z"
+      "createdAt": "2026-06-27T14:16:59.840Z",
+      "remainingAmount": 30000
     },
     {
       "id": "mqwg1jwsaqjs",
@@ -1551,7 +1631,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:16:54.796Z"
+      "createdAt": "2026-06-27T14:16:54.796Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwg1bz6ixls",
@@ -1561,7 +1642,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:16:44.514Z"
+      "createdAt": "2026-06-27T14:16:44.514Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwg18ussg99",
@@ -1571,7 +1653,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:16:40.468Z"
+      "createdAt": "2026-06-27T14:16:40.468Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwg13wwx7h5",
@@ -1581,7 +1664,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:16:34.064Z"
+      "createdAt": "2026-06-27T14:16:34.064Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwg0yfm5e82",
@@ -1591,7 +1675,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:16:26.962Z"
+      "createdAt": "2026-06-27T14:16:26.962Z",
+      "remainingAmount": 30000
     },
     {
       "id": "mqwg0vqijgfv",
@@ -1601,7 +1686,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:16:23.466Z"
+      "createdAt": "2026-06-27T14:16:23.466Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwg0n8q8afr",
@@ -1611,7 +1697,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:16:12.458Z"
+      "createdAt": "2026-06-27T14:16:12.458Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwg0kmq7l2n",
@@ -1621,7 +1708,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T14:16:09.074Z"
+      "createdAt": "2026-06-27T14:16:09.074Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwff51h2stg",
@@ -1631,7 +1719,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T13:59:29.093Z"
+      "createdAt": "2026-06-27T13:59:29.093Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwff0vip6ze",
@@ -1641,7 +1730,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T13:59:23.694Z"
+      "createdAt": "2026-06-27T13:59:23.694Z",
+      "remainingAmount": 70000
     },
     {
       "id": "mqwfes7ns9i5",
@@ -1651,7 +1741,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T13:59:12.467Z"
+      "createdAt": "2026-06-27T13:59:12.467Z",
+      "remainingAmount": 105000
     },
     {
       "id": "mqwfenlsopoq",
@@ -1661,7 +1752,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T13:59:06.496Z"
+      "createdAt": "2026-06-27T13:59:06.496Z",
+      "remainingAmount": 70000
     },
     {
       "id": "mqwfejpo84hx",
@@ -1671,7 +1763,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T13:59:01.452Z"
+      "createdAt": "2026-06-27T13:59:01.452Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwfeg47mln9",
@@ -1681,7 +1774,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T13:58:56.791Z"
+      "createdAt": "2026-06-27T13:58:56.791Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwfeb5wnukg",
@@ -1691,7 +1785,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T13:58:50.372Z"
+      "createdAt": "2026-06-27T13:58:50.372Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwfe6239v4k",
@@ -1701,7 +1796,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T13:58:43.755Z"
+      "createdAt": "2026-06-27T13:58:43.755Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwfe20pjf9r",
@@ -1711,7 +1807,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T13:58:38.521Z"
+      "createdAt": "2026-06-27T13:58:38.521Z",
+      "remainingAmount": 90000
     },
     {
       "id": "mqwfdx5c1phd",
@@ -1721,7 +1818,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T13:58:32.208Z"
+      "createdAt": "2026-06-27T13:58:32.208Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwfdpwuw09q",
@@ -1731,7 +1829,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T13:58:22.830Z"
+      "createdAt": "2026-06-27T13:58:22.830Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwfdkbexodp",
@@ -1741,7 +1840,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T13:58:15.578Z"
+      "createdAt": "2026-06-27T13:58:15.578Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwfdfn77g39",
@@ -1751,7 +1851,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T13:58:09.523Z"
+      "createdAt": "2026-06-27T13:58:09.523Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwfd3vkelqb",
@@ -1761,7 +1862,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T13:57:54.286Z"
+      "createdAt": "2026-06-27T13:57:54.286Z",
+      "remainingAmount": 50000
     },
     {
       "id": "mqwf7zlc6ixc",
@@ -1771,7 +1873,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T13:53:55.440Z"
+      "createdAt": "2026-06-27T13:53:55.440Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwf7qprdlaq",
@@ -1781,7 +1884,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T13:53:43.935Z"
+      "createdAt": "2026-06-27T13:53:43.935Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwf7ku5us6z",
@@ -1791,7 +1895,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T13:53:36.317Z"
+      "createdAt": "2026-06-27T13:53:36.317Z",
+      "remainingAmount": 5000
     },
     {
       "id": "mqwf76vcsz3c",
@@ -1801,7 +1906,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T13:53:18.223Z"
+      "createdAt": "2026-06-27T13:53:18.223Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqweblb9rh4u",
@@ -1811,7 +1917,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T13:28:43.941Z"
+      "createdAt": "2026-06-27T13:28:43.941Z",
+      "remainingAmount": 35000
     },
     {
       "id": "mqwdyazhblds",
@@ -1821,7 +1928,8 @@
       "dueDate": "2026-06-27",
       "note": "",
       "paid": false,
-      "createdAt": "2026-06-27T13:18:24.038Z"
+      "createdAt": "2026-06-27T13:18:24.038Z",
+      "remainingAmount": 35000
     }
   ]
 }
