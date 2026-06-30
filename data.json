@@ -883,11 +883,12 @@
       "customerId": "mqwdxmqlpyo3",
       "type": "li",
       "amount": 35000,
-      "remainingAmount": 35000,
+      "remainingAmount": 0,
       "dueDate": "2026-06-30",
       "note": "",
-      "paid": false,
-      "createdAt": "2026-06-30T16:53:36.961Z"
+      "paid": true,
+      "createdAt": "2026-06-30T16:53:36.961Z",
+      "paidAt": "2026-06-30T17:59:23.709Z"
     },
     {
       "id": "mr0mn4hg71om",
@@ -1575,9 +1576,10 @@
       "amount": 35000,
       "dueDate": "2026-06-27",
       "note": "",
-      "paid": false,
+      "paid": true,
       "createdAt": "2026-06-27T14:19:04.078Z",
-      "remainingAmount": 35000
+      "remainingAmount": 0,
+      "paidAt": "2026-06-30T17:59:23.709Z"
     },
     {
       "id": "mqwg46jcn0c8",
