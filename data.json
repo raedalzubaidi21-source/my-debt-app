@@ -1509,9 +1509,10 @@
       "amount": 35000,
       "dueDate": "2026-06-27",
       "note": "",
-      "paid": false,
+      "paid": true,
       "createdAt": "2026-06-27T14:21:15.006Z",
-      "remainingAmount": 35000
+      "remainingAmount": 0,
+      "paidAt": "2026-07-01T19:40:38.222Z"
     },
     {
       "id": "mqwg715w5fb0",
