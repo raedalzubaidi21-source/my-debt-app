@@ -1091,11 +1091,12 @@
       "customerId": "mqwdxmqlyaop",
       "type": "li",
       "amount": 35000,
-      "remainingAmount": 35000,
+      "remainingAmount": 0,
       "dueDate": "2026-06-29",
       "note": "",
-      "paid": false,
-      "createdAt": "2026-06-29T17:40:57.055Z"
+      "paid": true,
+      "createdAt": "2026-06-29T17:40:57.055Z",
+      "paidAt": "2026-07-02T16:31:47.717Z"
     },
     {
       "id": "mqze9xbc7rgc",
