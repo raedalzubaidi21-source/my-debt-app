@@ -878,11 +878,12 @@
       "customerId": "mqwdxmqlkibn",
       "type": "li",
       "amount": 35000,
-      "remainingAmount": 35000,
+      "remainingAmount": 0,
       "dueDate": "2026-07-03",
       "note": "",
-      "paid": false,
-      "createdAt": "2026-07-03T16:25:40.149Z"
+      "paid": true,
+      "createdAt": "2026-07-03T16:25:40.149Z",
+      "paidAt": "2026-07-03T17:04:05.348Z"
     },
     {
       "id": "mr555tgi46cw",
