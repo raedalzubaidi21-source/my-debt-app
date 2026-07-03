@@ -874,7 +874,7 @@
   ],
   "debts": [
     {
-      "id": "mr5572ypz513",
+      "id": "mr55a8txmnsl",
       "customerId": "mqwdxmqlkibn",
       "type": "li",
       "amount": 35000,
@@ -882,7 +882,7 @@
       "dueDate": "2026-07-03",
       "note": "",
       "paid": false,
-      "createdAt": "2026-07-03T16:23:12.578Z"
+      "createdAt": "2026-07-03T16:25:40.149Z"
     },
     {
       "id": "mr555tgi46cw",
