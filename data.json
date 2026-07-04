@@ -880,6 +880,17 @@
   ],
   "debts": [
     {
+      "id": "mr6cucqm3ewy",
+      "customerId": "mqwdxmql9srd",
+      "type": "li",
+      "amount": 35000,
+      "remainingAmount": 35000,
+      "dueDate": "2026-07-04",
+      "note": "",
+      "paid": false,
+      "createdAt": "2026-07-04T12:45:01.822Z"
+    },
+    {
       "id": "mr5h94tzzo75",
       "customerId": "mqwdxmqli433",
       "type": "li",
