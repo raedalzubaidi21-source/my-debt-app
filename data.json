@@ -1046,11 +1046,12 @@
       "customerId": "mqwdxmqluuoe",
       "type": "li",
       "amount": 35000,
-      "remainingAmount": 35000,
+      "remainingAmount": 0,
       "dueDate": "2026-07-02",
       "note": "",
-      "paid": false,
-      "createdAt": "2026-07-02T12:14:53.322Z"
+      "paid": true,
+      "createdAt": "2026-07-02T12:14:53.322Z",
+      "paidAt": "2026-07-06T16:10:51.078Z"
     },
     {
       "id": "mr2kjv2hh1t2",
