@@ -2424,6 +2424,17 @@
       "note": "",
       "paid": false,
       "createdAt": "2026-07-06T20:50:05.600Z"
+    },
+    {
+      "id": "mrajgbx3navo",
+      "customerId": "mqwdxmqlda2g",
+      "type": "li",
+      "amount": 60000,
+      "remainingAmount": 60000,
+      "dueDate": "2026-07-07",
+      "note": "",
+      "paid": false,
+      "createdAt": "2026-07-07T11:01:09.591Z"
     }
   ],
   "payments": [
