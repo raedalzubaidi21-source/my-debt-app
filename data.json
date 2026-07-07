@@ -919,18 +919,6 @@
       "createdAt": "2026-07-05T13:31:37.821Z"
     },
     {
-      "id": "mr6w8pngyo6w",
-      "customerId": "mqwdxmqls68v",
-      "type": "li",
-      "amount": 35000,
-      "remainingAmount": 0,
-      "dueDate": "2026-07-04",
-      "note": "",
-      "paid": true,
-      "createdAt": "2026-07-04T21:48:04.444Z",
-      "paidAt": "2026-07-07T16:23:10.111Z"
-    },
-    {
       "id": "mr6mtnqbypc0",
       "customerId": "mqwdxmqlar1d",
       "type": "li",
