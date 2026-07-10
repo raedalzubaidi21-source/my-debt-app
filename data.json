@@ -2473,6 +2473,17 @@
       "note": "",
       "paid": false,
       "createdAt": "2026-07-09T11:13:38.813Z"
+    },
+    {
+      "id": "mresg2dexvti",
+      "customerId": "mqwdxmqlw9qt",
+      "type": "li",
+      "amount": 35000,
+      "remainingAmount": 35000,
+      "dueDate": "2026-07-10",
+      "note": "",
+      "paid": false,
+      "createdAt": "2026-07-10T10:23:58.466Z"
     }
   ],
   "payments": [
