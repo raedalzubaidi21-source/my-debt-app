@@ -2589,6 +2589,17 @@
       "note": "",
       "paid": false,
       "createdAt": "2026-07-12T20:20:21.201Z"
+    },
+    {
+      "id": "mri8muelol6c",
+      "customerId": "mqwdxmqlr631",
+      "type": "li",
+      "amount": 35000,
+      "remainingAmount": 35000,
+      "dueDate": "2026-07-12",
+      "note": "",
+      "paid": false,
+      "createdAt": "2026-07-12T20:20:27.117Z"
     }
   ],
   "payments": [
