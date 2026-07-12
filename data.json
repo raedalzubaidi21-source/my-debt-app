@@ -2578,6 +2578,17 @@
       "note": "",
       "paid": false,
       "createdAt": "2026-07-12T17:53:52.070Z"
+    },
+    {
+      "id": "mri8mpu904a4",
+      "customerId": "mqwh4vtl325h",
+      "type": "li",
+      "amount": 35000,
+      "remainingAmount": 35000,
+      "dueDate": "2026-07-12",
+      "note": "",
+      "paid": false,
+      "createdAt": "2026-07-12T20:20:21.201Z"
     }
   ],
   "payments": [
