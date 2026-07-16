@@ -2222,7 +2222,7 @@
       "note": "",
       "paid": false,
       "createdAt": "2026-06-27T13:59:12.467Z",
-      "remainingAmount": 105000
+      "remainingAmount": 70000
     },
     {
       "id": "mqwfenlsopoq",
@@ -3200,6 +3200,14 @@
       "debtId": "mrnox822vi0u",
       "amount": 35000,
       "paidAt": "2026-07-16T15:55:18.931Z",
+      "note": "تسديد 35000 د.ع"
+    },
+    {
+      "id": "mrnpatyy5lor",
+      "customerId": "mqwdxmql8clu",
+      "debtId": "mqwfes7ns9i5",
+      "amount": 35000,
+      "paidAt": "2026-07-16T16:05:51.034Z",
       "note": "تسديد 35000 د.ع"
     }
   ]
