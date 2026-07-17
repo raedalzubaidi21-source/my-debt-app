@@ -2893,6 +2893,17 @@
       "paid": true,
       "createdAt": "2026-07-17T15:54:49.339Z",
       "paidAt": "2026-07-17T15:54:51.681Z"
+    },
+    {
+      "id": "mrp586z6gwpl",
+      "customerId": "mqwdxmql0s5h",
+      "type": "li",
+      "amount": 35000,
+      "remainingAmount": 35000,
+      "dueDate": "2026-07-17",
+      "note": "",
+      "paid": false,
+      "createdAt": "2026-07-17T16:19:27.954Z"
     }
   ],
   "payments": [
