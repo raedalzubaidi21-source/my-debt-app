@@ -3034,6 +3034,62 @@
   ],
   "payments": [
     {
+      "id": "mrp895fzzr50",
+      "customerId": "mqwdxmqluy5d",
+      "debtId": "mqwfdkbexodp",
+      "amount": 35000,
+      "paidAt": "2026-07-17T17:44:11.471Z",
+      "note": "تسديد 35000 د.ع"
+    },
+    {
+      "id": "mrp882m938mm",
+      "customerId": "mqwdxmqlj7l2",
+      "debtId": "mrdes3ctu7ql",
+      "amount": 35000,
+      "paidAt": "2026-07-17T17:43:21.153Z",
+      "note": "تسديد 35000 د.ع"
+    },
+    {
+      "id": "mrp76xx639fj",
+      "customerId": "mqwdxmqlqli0",
+      "debtId": "mrp76vy6oalb",
+      "amount": 35000,
+      "paidAt": "2026-07-17T17:14:28.794Z",
+      "note": "تسديد 35000 د.ع"
+    },
+    {
+      "id": "mrp588m254t4",
+      "customerId": "mqwdxmql0s5h",
+      "debtId": "mrp586z6gwpl",
+      "amount": 35000,
+      "paidAt": "2026-07-17T16:19:30.074Z",
+      "note": "تسديد 35000 د.ع"
+    },
+    {
+      "id": "mrp4cjvlni78",
+      "customerId": "mqwdxmqlq9yq",
+      "debtId": "mrp4ci2jbnrd",
+      "amount": 35000,
+      "paidAt": "2026-07-17T15:54:51.681Z",
+      "note": "تسديد 35000 د.ع"
+    },
+    {
+      "id": "mrp1g877f4ey",
+      "customerId": "mqwdxmql1fig",
+      "debtId": "mrjgs6rmklww",
+      "amount": 35000,
+      "paidAt": "2026-07-17T14:33:44.323Z",
+      "note": "تسديد 35000 د.ع"
+    },
+    {
+      "id": "mrnpv1yr4xy6",
+      "customerId": "mqwdxmqlj59c",
+      "debtId": "mr7ty4t9bw0x",
+      "amount": 35000,
+      "paidAt": "2026-07-16T16:21:34.515Z",
+      "note": "تسديد 35000 د.ع"
+    },
+    {
       "id": "mrnpatyy5lor",
       "customerId": "mqwdxmql8clu",
       "debtId": "mqwfes7ns9i5",
@@ -3359,62 +3415,6 @@
       "debtId": "mr2e4k5osixa",
       "amount": 35000,
       "paidAt": "2026-07-06T17:13:31.974Z",
-      "note": "تسديد 35000 د.ع"
-    },
-    {
-      "id": "mrnpv1yr4xy6",
-      "customerId": "mqwdxmqlj59c",
-      "debtId": "mr7ty4t9bw0x",
-      "amount": 35000,
-      "paidAt": "2026-07-16T16:21:34.515Z",
-      "note": "تسديد 35000 د.ع"
-    },
-    {
-      "id": "mrp1g877f4ey",
-      "customerId": "mqwdxmql1fig",
-      "debtId": "mrjgs6rmklww",
-      "amount": 35000,
-      "paidAt": "2026-07-17T14:33:44.323Z",
-      "note": "تسديد 35000 د.ع"
-    },
-    {
-      "id": "mrp4cjvlni78",
-      "customerId": "mqwdxmqlq9yq",
-      "debtId": "mrp4ci2jbnrd",
-      "amount": 35000,
-      "paidAt": "2026-07-17T15:54:51.681Z",
-      "note": "تسديد 35000 د.ع"
-    },
-    {
-      "id": "mrp588m254t4",
-      "customerId": "mqwdxmql0s5h",
-      "debtId": "mrp586z6gwpl",
-      "amount": 35000,
-      "paidAt": "2026-07-17T16:19:30.074Z",
-      "note": "تسديد 35000 د.ع"
-    },
-    {
-      "id": "mrp76xx639fj",
-      "customerId": "mqwdxmqlqli0",
-      "debtId": "mrp76vy6oalb",
-      "amount": 35000,
-      "paidAt": "2026-07-17T17:14:28.794Z",
-      "note": "تسديد 35000 د.ع"
-    },
-    {
-      "id": "mrp882m938mm",
-      "customerId": "mqwdxmqlj7l2",
-      "debtId": "mrdes3ctu7ql",
-      "amount": 35000,
-      "paidAt": "2026-07-17T17:43:21.153Z",
-      "note": "تسديد 35000 د.ع"
-    },
-    {
-      "id": "mrp895fzzr50",
-      "customerId": "mqwdxmqluy5d",
-      "debtId": "mqwfdkbexodp",
-      "amount": 35000,
-      "paidAt": "2026-07-17T17:44:11.471Z",
       "note": "تسديد 35000 د.ع"
     }
   ]
