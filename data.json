@@ -3068,6 +3068,17 @@
       "note": "",
       "paid": false,
       "createdAt": "2026-07-19T22:47:30.753Z"
+    },
+    {
+      "id": "mrse06suw7yv",
+      "customerId": "mqwdxmqldr6m",
+      "type": "li",
+      "amount": 35000,
+      "remainingAmount": 35000,
+      "dueDate": "2026-07-19",
+      "note": "",
+      "paid": false,
+      "createdAt": "2026-07-19T22:48:29.550Z"
     }
   ],
   "payments": [
