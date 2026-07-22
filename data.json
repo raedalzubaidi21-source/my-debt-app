@@ -3251,6 +3251,17 @@
       "note": "",
       "paid": false,
       "createdAt": "2026-07-22T09:46:40.001Z"
+    },
+    {
+      "id": "mrwco80w7970",
+      "customerId": "mqwdxmql25ec",
+      "type": "li",
+      "amount": 35000,
+      "remainingAmount": 35000,
+      "dueDate": "2026-07-22",
+      "note": "",
+      "paid": false,
+      "createdAt": "2026-07-22T17:22:16.353Z"
     }
   ],
   "payments": [
