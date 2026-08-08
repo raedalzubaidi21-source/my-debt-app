@@ -1385,7 +1385,7 @@
       "note": "",
       "paid": false,
       "createdAt": "2026-06-27T17:44:14.000Z",
-      "remainingAmount": 100000
+      "remainingAmount": 85000
     },
     {
       "id": "mqwmkj364td0",
@@ -4432,6 +4432,14 @@
       "amount": 30000,
       "paidAt": "2026-08-08T13:54:33.714Z",
       "note": "تسديد 30000 د.ع"
+    },
+    {
+      "id": "mskfr0i3ydkj",
+      "customerId": "mqwdxmqlgqsc",
+      "debtId": "mqwng6272otj",
+      "amount": 15000,
+      "paidAt": "2026-08-08T13:54:53.643Z",
+      "note": "تسديد 15000 د.ع"
     }
   ]
 }
