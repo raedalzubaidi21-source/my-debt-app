@@ -2164,9 +2164,10 @@
       "amount": 30000,
       "dueDate": "2026-06-27",
       "note": "",
-      "paid": false,
+      "paid": true,
       "createdAt": "2026-06-27T14:16:26.962Z",
-      "remainingAmount": 30000
+      "remainingAmount": 0,
+      "paidAt": "2026-08-08T13:54:33.714Z"
     },
     {
       "id": "mqwg0vqijgfv",
@@ -4423,6 +4424,14 @@
       "amount": 35000,
       "paidAt": "2026-08-08T13:51:18.566Z",
       "note": "تسديد 35000 د.ع"
+    },
+    {
+      "id": "mskfql4i88cv",
+      "customerId": "mqwdxmql56o0",
+      "debtId": "mqwg0yfm5e82",
+      "amount": 30000,
+      "paidAt": "2026-08-08T13:54:33.714Z",
+      "note": "تسديد 30000 د.ع"
     }
   ]
 }
