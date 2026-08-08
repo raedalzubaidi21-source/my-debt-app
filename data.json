@@ -3458,6 +3458,17 @@
       "note": "",
       "paid": false,
       "createdAt": "2026-08-08T13:38:59.282Z"
+    },
+    {
+      "id": "mskf6pensodn",
+      "customerId": "mqwdxmqluuoe",
+      "type": "li",
+      "amount": 35000,
+      "remainingAmount": 35000,
+      "dueDate": "2026-08-08",
+      "note": "",
+      "paid": false,
+      "createdAt": "2026-08-08T13:39:06.143Z"
     }
   ],
   "payments": [
