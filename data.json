@@ -3813,6 +3813,17 @@
       "note": "",
       "paid": false,
       "createdAt": "2026-08-15T10:36:48.135Z"
+    },
+    {
+      "id": "msu8rt0r8fsf",
+      "customerId": "mqwdxmqlodsr",
+      "type": "li",
+      "amount": 10000,
+      "remainingAmount": 10000,
+      "dueDate": "2026-08-15",
+      "note": "",
+      "paid": false,
+      "createdAt": "2026-08-15T10:37:15.051Z"
     }
   ],
   "payments": [
