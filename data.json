@@ -3982,6 +3982,46 @@
   ],
   "payments": [
     {
+      "id": "mssqtcivstli",
+      "customerId": "mqwdxmqlj7l2",
+      "debtId": "msnf9g2nlxfp",
+      "amount": 35000,
+      "paidAt": "2026-08-14T09:26:47.719Z",
+      "note": "تسديد 35000 د.ع"
+    },
+    {
+      "id": "msrdwe6bu8n7",
+      "customerId": "mqwh56ndgcfl",
+      "debtId": "mrncsfmlou5t",
+      "amount": 35000,
+      "paidAt": "2026-08-13T10:37:28.643Z",
+      "note": "تسديد 35000 د.ع"
+    },
+    {
+      "id": "msrdvedqh06l",
+      "customerId": "mqwdxmqlum0v",
+      "debtId": "mskfd5ahqxmd",
+      "amount": 35000,
+      "paidAt": "2026-08-13T10:36:42.254Z",
+      "note": "تسديد 35000 د.ع"
+    },
+    {
+      "id": "msrdux4a1pk9",
+      "customerId": "mqwdxmqla5fu",
+      "debtId": "mskf5m102yam",
+      "amount": 35000,
+      "paidAt": "2026-08-13T10:36:19.881Z",
+      "note": "تسديد 35000 د.ع"
+    },
+    {
+      "id": "msrdtowdzcjw",
+      "customerId": "mqwdxmqldwc5",
+      "debtId": "mqwfdpwuw09q",
+      "amount": 70000,
+      "paidAt": "2026-08-13T10:35:22.573Z",
+      "note": "تسديد 70000 د.ع"
+    },
+    {
       "id": "msnfr071itkt",
       "customerId": "mqwdxmql0mv0",
       "debtId": "ms0dejbjzyhx",
@@ -4915,46 +4955,6 @@
       "debtId": "mr2e4k5osixa",
       "amount": 35000,
       "paidAt": "2026-07-06T17:13:31.974Z",
-      "note": "تسديد 35000 د.ع"
-    },
-    {
-      "id": "msrdtowdzcjw",
-      "customerId": "mqwdxmqldwc5",
-      "debtId": "mqwfdpwuw09q",
-      "amount": 70000,
-      "paidAt": "2026-08-13T10:35:22.573Z",
-      "note": "تسديد 70000 د.ع"
-    },
-    {
-      "id": "msrdux4a1pk9",
-      "customerId": "mqwdxmqla5fu",
-      "debtId": "mskf5m102yam",
-      "amount": 35000,
-      "paidAt": "2026-08-13T10:36:19.881Z",
-      "note": "تسديد 35000 د.ع"
-    },
-    {
-      "id": "msrdvedqh06l",
-      "customerId": "mqwdxmqlum0v",
-      "debtId": "mskfd5ahqxmd",
-      "amount": 35000,
-      "paidAt": "2026-08-13T10:36:42.254Z",
-      "note": "تسديد 35000 د.ع"
-    },
-    {
-      "id": "msrdwe6bu8n7",
-      "customerId": "mqwh56ndgcfl",
-      "debtId": "mrncsfmlou5t",
-      "amount": 35000,
-      "paidAt": "2026-08-13T10:37:28.643Z",
-      "note": "تسديد 35000 د.ع"
-    },
-    {
-      "id": "mssqtcivstli",
-      "customerId": "mqwdxmqlj7l2",
-      "debtId": "msnf9g2nlxfp",
-      "amount": 35000,
-      "paidAt": "2026-08-14T09:26:47.719Z",
       "note": "تسديد 35000 د.ع"
     }
   ]
