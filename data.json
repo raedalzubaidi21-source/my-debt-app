@@ -4003,6 +4003,17 @@
       "note": "",
       "paid": false,
       "createdAt": "2026-08-17T18:23:24.271Z"
+    },
+    {
+      "id": "msxkbc4pna3f",
+      "customerId": "mqwdxmqlp11g",
+      "type": "li",
+      "amount": 30000,
+      "remainingAmount": 30000,
+      "dueDate": "2026-08-17",
+      "note": "",
+      "paid": false,
+      "createdAt": "2026-08-17T18:23:40.585Z"
     }
   ],
   "payments": [
