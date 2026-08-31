@@ -4273,6 +4273,17 @@
       "note": "",
       "paid": false,
       "createdAt": "2026-08-31T09:45:17.694Z"
+    },
+    {
+      "id": "mth1z8ciupna",
+      "customerId": "mqwdxmql56o0",
+      "type": "li",
+      "amount": 30000,
+      "remainingAmount": 30000,
+      "dueDate": "2026-08-31",
+      "note": "",
+      "paid": false,
+      "createdAt": "2026-08-31T09:45:46.242Z"
     }
   ],
   "payments": [
