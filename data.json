@@ -4410,6 +4410,17 @@
       "note": "",
       "paid": false,
       "createdAt": "2026-08-31T09:49:51.944Z"
+    },
+    {
+      "id": "mth2533vc8bp",
+      "customerId": "mqwh4vtl325h",
+      "type": "li",
+      "amount": 35000,
+      "remainingAmount": 35000,
+      "dueDate": "2026-08-31",
+      "note": "",
+      "paid": false,
+      "createdAt": "2026-08-31T09:50:19.387Z"
     }
   ],
   "payments": [
