@@ -4249,6 +4249,17 @@
       "note": "",
       "paid": false,
       "createdAt": "2026-08-24T18:27:44.896Z"
+    },
+    {
+      "id": "mth1y1mm3cbh",
+      "customerId": "mqwdxmqlnqc2",
+      "type": "li",
+      "amount": 35000,
+      "remainingAmount": 35000,
+      "dueDate": "2026-08-31",
+      "note": "",
+      "paid": false,
+      "createdAt": "2026-08-31T09:44:50.878Z"
     }
   ],
   "payments": [
