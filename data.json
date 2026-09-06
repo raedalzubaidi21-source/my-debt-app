@@ -4609,6 +4609,17 @@
       "note": "",
       "paid": false,
       "createdAt": "2026-09-06T11:50:30.691Z"
+    },
+    {
+      "id": "mtpr34w29155",
+      "customerId": "mqwdxmqla5fu",
+      "type": "li",
+      "amount": 35000,
+      "remainingAmount": 35000,
+      "dueDate": "2026-09-06",
+      "note": "",
+      "paid": false,
+      "createdAt": "2026-09-06T11:50:48.194Z"
     }
   ],
   "payments": [
