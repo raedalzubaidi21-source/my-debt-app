@@ -4598,6 +4598,17 @@
       "note": "",
       "paid": false,
       "createdAt": "2026-09-06T11:41:08.754Z"
+    },
+    {
+      "id": "mtpr2rdvsanw",
+      "customerId": "mqwdxmqlbv6l",
+      "type": "li",
+      "amount": 35000,
+      "remainingAmount": 35000,
+      "dueDate": "2026-09-06",
+      "note": "",
+      "paid": false,
+      "createdAt": "2026-09-06T11:50:30.691Z"
     }
   ],
   "payments": [
