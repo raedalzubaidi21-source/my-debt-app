@@ -4714,6 +4714,39 @@
       "note": "",
       "paid": false,
       "createdAt": "2026-09-13T09:30:08.178Z"
+    },
+    {
+      "id": "mtzm5chqtljh",
+      "customerId": "mqwdxmqlirym",
+      "type": "li",
+      "amount": 35000,
+      "remainingAmount": 35000,
+      "dueDate": "2026-09-13",
+      "note": "",
+      "paid": false,
+      "createdAt": "2026-09-13T09:30:15.038Z"
+    },
+    {
+      "id": "mtzm5kyc4gvo",
+      "customerId": "mqwdxmqlvvpi",
+      "type": "li",
+      "amount": 35000,
+      "remainingAmount": 35000,
+      "dueDate": "2026-09-13",
+      "note": "",
+      "paid": false,
+      "createdAt": "2026-09-13T09:30:26.004Z"
+    },
+    {
+      "id": "mtzm5s8u740z",
+      "customerId": "mqwdxmqlar1d",
+      "type": "li",
+      "amount": 35000,
+      "remainingAmount": 35000,
+      "dueDate": "2026-09-13",
+      "note": "",
+      "paid": false,
+      "createdAt": "2026-09-13T09:30:35.454Z"
     }
   ],
   "payments": [
