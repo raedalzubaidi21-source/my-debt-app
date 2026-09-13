@@ -4574,11 +4574,12 @@
       "customerId": "mqwdxmqleq6b",
       "type": "li",
       "amount": 35000,
-      "remainingAmount": 35000,
+      "remainingAmount": 0,
       "dueDate": "2026-09-05",
       "note": "",
-      "paid": false,
-      "createdAt": "2026-09-05T14:54:59.112Z"
+      "paid": true,
+      "createdAt": "2026-09-05T14:54:59.112Z",
+      "paidAt": "2026-09-13T09:25:08.214Z"
     },
     {
       "id": "mtoi8b2xjysy",
@@ -6075,6 +6076,14 @@
       "debtId": "mt7k68myx5z0",
       "amount": 35000,
       "paidAt": "2026-09-13T09:24:44.968Z",
+      "note": "تسديد 35000 د.ع"
+    },
+    {
+      "id": "mtzlyrquebyz",
+      "customerId": "mqwdxmqleq6b",
+      "debtId": "mtoi8560126y",
+      "amount": 35000,
+      "paidAt": "2026-09-13T09:25:08.214Z",
       "note": "تسديد 35000 د.ع"
     }
   ]
