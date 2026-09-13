@@ -4761,6 +4761,17 @@
       "note": "",
       "paid": false,
       "createdAt": "2026-09-13T09:30:53.466Z"
+    },
+    {
+      "id": "mtzm75vahon9",
+      "customerId": "mqwh4vtl325h",
+      "type": "li",
+      "amount": 35000,
+      "remainingAmount": 35000,
+      "dueDate": "2026-09-13",
+      "note": "",
+      "paid": false,
+      "createdAt": "2026-09-13T09:31:39.766Z"
     }
   ],
   "payments": [
