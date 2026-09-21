@@ -4846,6 +4846,17 @@
       "note": "",
       "paid": false,
       "createdAt": "2026-09-13T11:17:57.096Z"
+    },
+    {
+      "id": "mubefomi43s2",
+      "customerId": "mqwdxmqlsa9d",
+      "type": "li",
+      "amount": 35000,
+      "remainingAmount": 35000,
+      "dueDate": "2026-09-21",
+      "note": "",
+      "paid": false,
+      "createdAt": "2026-09-21T15:27:34.506Z"
     }
   ],
   "payments": [
