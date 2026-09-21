@@ -4928,6 +4928,17 @@
       "note": "",
       "paid": false,
       "createdAt": "2026-09-21T15:30:04.724Z"
+    },
+    {
+      "id": "mubej30opthu",
+      "customerId": "mqwdxmqlp11g",
+      "type": "li",
+      "amount": 30000,
+      "remainingAmount": 30000,
+      "dueDate": "2026-09-21",
+      "note": "",
+      "paid": false,
+      "createdAt": "2026-09-21T15:30:13.128Z"
     }
   ],
   "payments": [
