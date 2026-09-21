@@ -5063,6 +5063,17 @@
       "note": "",
       "paid": false,
       "createdAt": "2026-09-21T15:35:13.269Z"
+    },
+    {
+      "id": "mubepnx9t36d",
+      "customerId": "mqwh56ndgcfl",
+      "type": "li",
+      "amount": 35000,
+      "remainingAmount": 35000,
+      "dueDate": "2026-09-21",
+      "note": "",
+      "paid": false,
+      "createdAt": "2026-09-21T15:35:20.157Z"
     }
   ],
   "payments": [
