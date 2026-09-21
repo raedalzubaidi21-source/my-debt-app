@@ -4974,6 +4974,17 @@
       "note": "",
       "paid": false,
       "createdAt": "2026-09-21T15:31:12.459Z"
+    },
+    {
+      "id": "muben49fc211",
+      "customerId": "mqwdxmqlrhwq",
+      "type": "li",
+      "amount": 35000,
+      "remainingAmount": 35000,
+      "dueDate": "2026-09-21",
+      "note": "",
+      "paid": false,
+      "createdAt": "2026-09-21T15:33:21.363Z"
     }
   ],
   "payments": [
