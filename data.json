@@ -4950,6 +4950,17 @@
       "note": "",
       "paid": false,
       "createdAt": "2026-09-21T15:30:30.343Z"
+    },
+    {
+      "id": "mubejk92c2h7",
+      "customerId": "mqwdxmqllezb",
+      "type": "li",
+      "amount": 35000,
+      "remainingAmount": 35000,
+      "dueDate": "2026-09-21",
+      "note": "",
+      "paid": false,
+      "createdAt": "2026-09-21T15:30:35.462Z"
     }
   ],
   "payments": [
