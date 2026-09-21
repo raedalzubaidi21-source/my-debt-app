@@ -4905,6 +4905,17 @@
       "note": "",
       "paid": false,
       "createdAt": "2026-09-21T15:29:45.392Z"
+    },
+    {
+      "id": "mubeil45byj9",
+      "customerId": "mqwdxmql8uqy",
+      "type": "li",
+      "amount": 30000,
+      "remainingAmount": 30000,
+      "dueDate": "2026-09-21",
+      "note": "",
+      "paid": false,
+      "createdAt": "2026-09-21T15:29:49.926Z"
     }
   ],
   "payments": [
