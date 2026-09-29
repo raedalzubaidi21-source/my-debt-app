@@ -5298,6 +5298,28 @@
       "note": "",
       "paid": false,
       "createdAt": "2026-09-29T12:06:30.215Z"
+    },
+    {
+      "id": "mummsg350pbt",
+      "customerId": "mqwdxmqli47s",
+      "type": "li",
+      "amount": 35000,
+      "remainingAmount": 35000,
+      "dueDate": "2026-09-29",
+      "note": "",
+      "paid": false,
+      "createdAt": "2026-09-29T12:06:54.833Z"
+    },
+    {
+      "id": "mummsmmhtesb",
+      "customerId": "mqwdxmqlfbxt",
+      "type": "li",
+      "amount": 35000,
+      "remainingAmount": 35000,
+      "dueDate": "2026-09-29",
+      "note": "",
+      "paid": false,
+      "createdAt": "2026-09-29T12:07:03.305Z"
     }
   ],
   "payments": [
