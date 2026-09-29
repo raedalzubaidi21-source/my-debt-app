@@ -5098,6 +5098,17 @@
       "note": "",
       "paid": false,
       "createdAt": "2026-09-29T12:00:43.237Z"
+    },
+    {
+      "id": "mummkqzm98am",
+      "customerId": "mqwdxmqluffa",
+      "type": "li",
+      "amount": 35000,
+      "remainingAmount": 35000,
+      "dueDate": "2026-09-29",
+      "note": "",
+      "paid": false,
+      "createdAt": "2026-09-29T12:00:55.714Z"
     }
   ],
   "payments": [
