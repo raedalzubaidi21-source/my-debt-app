@@ -5247,6 +5247,17 @@
       "note": "",
       "paid": false,
       "createdAt": "2026-09-29T12:04:40.192Z"
+    },
+    {
+      "id": "mummpsbo52ez",
+      "customerId": "mqwdxmqlgna2",
+      "type": "li",
+      "amount": 35000,
+      "remainingAmount": 35000,
+      "dueDate": "2026-09-29",
+      "note": "",
+      "paid": false,
+      "createdAt": "2026-09-29T12:04:50.724Z"
     }
   ],
   "payments": [
