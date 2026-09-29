@@ -5213,6 +5213,17 @@
       "note": "",
       "paid": false,
       "createdAt": "2026-09-29T12:03:38.847Z"
+    },
+    {
+      "id": "mummogcgsudo",
+      "customerId": "mqwdxmql4047",
+      "type": "li",
+      "amount": 35000,
+      "remainingAmount": 35000,
+      "dueDate": "2026-09-29",
+      "note": "",
+      "paid": false,
+      "createdAt": "2026-09-29T12:03:48.544Z"
     }
   ],
   "payments": [
