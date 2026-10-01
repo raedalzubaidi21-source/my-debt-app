@@ -5337,6 +5337,17 @@
       "note": "",
       "paid": false,
       "createdAt": "2026-10-01T09:35:38.350Z"
+    },
+    {
+      "id": "mupcbbf7tlho",
+      "customerId": "mqwdxmqly1hm",
+      "type": "li",
+      "amount": 35000,
+      "remainingAmount": 35000,
+      "dueDate": "2026-10-01",
+      "note": "",
+      "paid": false,
+      "createdAt": "2026-10-01T09:36:58.004Z"
     }
   ],
   "payments": [
