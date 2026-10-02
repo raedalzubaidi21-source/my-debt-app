@@ -5420,6 +5420,17 @@
       "note": "",
       "paid": false,
       "createdAt": "2026-10-02T10:06:54.693Z"
+    },
+    {
+      "id": "muqsucjhtil9",
+      "customerId": "mqwdxmqlenam",
+      "type": "li",
+      "amount": 35000,
+      "remainingAmount": 35000,
+      "dueDate": "2026-10-02",
+      "note": "",
+      "paid": false,
+      "createdAt": "2026-10-02T10:07:25.949Z"
     }
   ],
   "payments": [
