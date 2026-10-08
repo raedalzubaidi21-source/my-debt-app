@@ -5502,6 +5502,17 @@
       "note": "",
       "paid": false,
       "createdAt": "2026-10-08T09:52:49.668Z"
+    },
+    {
+      "id": "muzczv47svrh",
+      "customerId": "mqwdxmqldnup",
+      "type": "li",
+      "amount": 35000,
+      "remainingAmount": 35000,
+      "dueDate": "2026-10-08",
+      "note": "",
+      "paid": false,
+      "createdAt": "2026-10-08T09:53:45.032Z"
     }
   ],
   "payments": [
