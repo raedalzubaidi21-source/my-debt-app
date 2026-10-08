@@ -5566,6 +5566,17 @@
       "note": "",
       "paid": false,
       "createdAt": "2026-10-08T10:05:02.709Z"
+    },
+    {
+      "id": "muzic00g59qp",
+      "customerId": "mqwdxmqlb1n2",
+      "type": "li",
+      "amount": 35000,
+      "remainingAmount": 35000,
+      "dueDate": "2026-10-08",
+      "note": "",
+      "paid": false,
+      "createdAt": "2026-10-08T12:23:09.328Z"
     }
   ],
   "payments": [
