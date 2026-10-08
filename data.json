@@ -4813,7 +4813,7 @@
       "customerId": "mqwwcb8mbris",
       "type": "li",
       "amount": 30000,
-      "remainingAmount": 30000,
+      "remainingAmount": 5000,
       "dueDate": "2026-09-13",
       "note": "",
       "paid": false,
@@ -7468,6 +7468,14 @@
       "amount": 35000,
       "paidAt": "2026-10-08T09:55:29.364Z",
       "note": "تسديد 35000 د.ع"
+    },
+    {
+      "id": "muzd2khmfwje",
+      "customerId": "mqwwcb8mbris",
+      "debtId": "mtzm7d7wwpxh",
+      "amount": 25000,
+      "paidAt": "2026-10-08T09:55:51.226Z",
+      "note": "تسديد 25000 د.ع"
     }
   ]
 }
