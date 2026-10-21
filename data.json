@@ -6023,6 +6023,17 @@
       "note": "",
       "paid": false,
       "createdAt": "2026-10-21T13:26:58.995Z"
+    },
+    {
+      "id": "mvi5cd5g3ui1",
+      "customerId": "mqwh4pswwr97",
+      "type": "li",
+      "amount": 35000,
+      "remainingAmount": 35000,
+      "dueDate": "2026-10-21",
+      "note": "",
+      "paid": false,
+      "createdAt": "2026-10-21T13:27:08.693Z"
     }
   ],
   "payments": [
