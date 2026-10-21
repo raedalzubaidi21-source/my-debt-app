@@ -5900,6 +5900,17 @@
       "note": "",
       "paid": false,
       "createdAt": "2026-10-16T13:08:18.193Z"
+    },
+    {
+      "id": "mvi55glfsdth",
+      "customerId": "mqwdxmqlkg8w",
+      "type": "li",
+      "amount": 35000,
+      "remainingAmount": 35000,
+      "dueDate": "2026-10-21",
+      "note": "",
+      "paid": false,
+      "createdAt": "2026-10-21T13:21:46.563Z"
     }
   ],
   "payments": [
