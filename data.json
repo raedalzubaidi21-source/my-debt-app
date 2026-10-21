@@ -3452,11 +3452,12 @@
       "customerId": "mqwdxmql3q15",
       "type": "li",
       "amount": 60000,
-      "remainingAmount": 60000,
+      "remainingAmount": 0,
       "dueDate": "2026-08-08",
       "note": "",
-      "paid": false,
-      "createdAt": "2026-08-08T13:36:07.453Z"
+      "paid": true,
+      "createdAt": "2026-08-08T13:36:07.453Z",
+      "paidAt": "2026-10-21T13:25:17.813Z"
     },
     {
       "id": "mskf4byxra81",
@@ -4632,11 +4633,12 @@
       "customerId": "mqwdxmql3q15",
       "type": "li",
       "amount": 60000,
-      "remainingAmount": 60000,
+      "remainingAmount": 0,
       "dueDate": "2026-09-06",
       "note": "",
-      "paid": false,
-      "createdAt": "2026-09-06T11:41:08.754Z"
+      "paid": true,
+      "createdAt": "2026-09-06T11:41:08.754Z",
+      "paidAt": "2026-10-21T13:25:17.813Z"
     },
     {
       "id": "mtpr2rdvsanw",
@@ -8086,6 +8088,14 @@
       "amount": 35000,
       "paidAt": "2026-10-21T13:24:45.071Z",
       "note": "تسديد 35000 د.ع"
+    },
+    {
+      "id": "mvi59zlhclau",
+      "customerId": "mqwdxmql3q15",
+      "debtId": "mskf2vj1p3ki",
+      "amount": 120000,
+      "paidAt": "2026-10-21T13:25:17.813Z",
+      "note": "تسديد 120000 د.ع"
     }
   ]
 }
