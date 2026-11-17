@@ -1042,7 +1042,7 @@
       "customerId": "mqwdxmqlr63i",
       "type": "li",
       "amount": 20000,
-      "remainingAmount": 20000,
+      "remainingAmount": 5000,
       "dueDate": "2026-07-03",
       "note": "",
       "paid": false,
@@ -9264,6 +9264,14 @@
       "amount": 35000,
       "paidAt": "2026-11-17T13:49:39.825Z",
       "note": "تسديد 35000 د.ع"
+    },
+    {
+      "id": "mwkr1qunk9fy",
+      "customerId": "mqwdxmqlr63i",
+      "debtId": "mr555tgi46cw",
+      "amount": 15000,
+      "paidAt": "2026-11-17T13:49:59.471Z",
+      "note": "تسديد 15000 د.ع"
     }
   ]
 }
