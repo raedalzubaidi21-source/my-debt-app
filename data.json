@@ -6563,6 +6563,17 @@
       "note": "",
       "paid": false,
       "createdAt": "2026-11-17T13:44:41.199Z"
+    },
+    {
+      "id": "mwkqvo1awqyj",
+      "customerId": "mqwdxmqla2iq",
+      "type": "li",
+      "amount": 35000,
+      "remainingAmount": 35000,
+      "dueDate": "2026-11-17",
+      "note": "",
+      "paid": false,
+      "createdAt": "2026-11-17T13:45:15.886Z"
     }
   ],
   "payments": [
