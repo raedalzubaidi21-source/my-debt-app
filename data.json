@@ -6712,6 +6712,17 @@
       "note": "",
       "paid": false,
       "createdAt": "2026-11-17T13:49:31.469Z"
+    },
+    {
+      "id": "mwkr31prtdmm",
+      "customerId": "mqwdxmqllrb9",
+      "type": "li",
+      "amount": 30000,
+      "remainingAmount": 30000,
+      "dueDate": "2026-11-17",
+      "note": "",
+      "paid": false,
+      "createdAt": "2026-11-17T13:51:00.207Z"
     }
   ],
   "payments": [
